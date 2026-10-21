@@ -161,25 +161,26 @@
     </div>
 
     <!-- タップしたときに声を出すための大事なプログラム -->
-    <script>
-        function speak(word, furigana, langCode) {
-            // 1. 画面のふりがなと現地の文字を書き換える
-            document.getElementById('text-sub').innerText = furigana;
-            document.getElementById('text-main').innerText = word;
+  <script>
+    function speak(word, furigana, langCode) {
+        // 1. 画面の文字を書き換える
+        document.getElementById('text-sub').innerText = furigana;
+        document.getElementById('text-main').innerText = word;
 
-            // 2. 音声再生の処理
-            // 連打された時のために、今しゃべっている音声を一旦ストップする
-            window.speechSynthesis.cancel();
-            
-            // しゃべる内容と言語を設定する
+        // 2. 音声再生の処理
+        // Macで音声が詰まるのを防ぐため、確実に一旦リセットする
+        window.speechSynthesis.cancel();
+        
+        // わずかに（0.05秒）待ってから再生を開始する処理（Macのバグ対策）
+        setTimeout(function() {
             let utterance = new SpeechSynthesisUtterance(word);
             utterance.lang = langCode;
-            utterance.rate = 0.85; // 聞き取りやすいように少しだけゆっくりに設定
+            utterance.rate = 0.85; 
 
-            // 実際にスマホにしゃべらせる
             window.speechSynthesis.speak(utterance);
-        }
-    </script>
+        }, 50);
+    }
+</script>
 </body>
 </html>
 
