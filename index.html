@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✈️ もちもち旅行フレーズ集 🦫</title>
+    <title>15言語トラベルナビ</title>
     <style>
         body { font-family: sans-serif; background-color: #f0f4f8; padding: 15px; color: #333; margin-bottom: 140px; }
         h2 { text-align: center; color: #0056b3; margin-top: 10px; }
         
-        /* 検索ボックスのエリア */
-        .search-container { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
-        .search-box { width: 80%; max-width: 400px; padding: 10px; font-size: 1.1rem; border: 2px solid #0056b3; border-radius: 8px; outline: none; }
+        /* 検索ボックスとボタンのエリア */
+        .search-container { background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+        .search-box { width: 60%; max-width: 300px; padding: 10px; font-size: 1.1rem; border: 2px solid #0056b3; border-radius: 8px; outline: none; margin-right: 5px; }
+        .action-btn { padding: 10px 15px; font-size: 1rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .search-btn { background: #0056b3; color: white; }
+        .search-btn:hover { background: #004085; }
+        .clear-btn { background: #6c757d; color: white; margin-left: 5px; }
+        .clear-btn:hover { background: #5a6268; }
         .search-hint { font-size: 0.85rem; color: #666; margin-top: 8px; }
 
-        /* 独立した国旗アイコン選択エリア */
-        .global-flags-card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
-        .section-title { font-weight: bold; font-size: 1.05em; margin-bottom: 12px; color: #0056b3; }
-        .flag-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-        .flag-btn { font-size: 1.8rem; cursor: pointer; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; padding: 6px 12px; transition: transform 0.1s, background-color 0.2s; display: flex; align-items: center; justify-content: center; }
-        .flag-btn:active { transform: scale(1.1); background-color: #e9ecef; }
-
-        /* タブのスタイル（従来のフレーズ別タブ） */
+        /* タブのスタイル */
         .tab-container { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
         .tab-btn { background: #fff; border: 1px solid #0056b3; color: #0056b3; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.2s; }
         .tab-btn.active { background: #0056b3; color: #fff; }
 
         .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .phrase-title { font-weight: bold; font-size: 1.1em; margin-bottom: 10px; color: #333; border-left: 4px solid #0056b3; padding-left: 8px; }
+        .flag-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        .flag-btn { font-size: 1.8rem; cursor: pointer; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; padding: 6px 12px; transition: transform 0.1s, background-color 0.2s; display: flex; align-items: center; justify-content: center; }
+        .flag-btn:active { transform: scale(1.1); background-color: #e9ecef; }
         
         #display-panel { position: fixed; bottom: 0; left: 0; right: 0; background: #222; color: white; padding: 20px; text-align: center; border-radius: 15px 15px 0 0; box-shadow: 0 -3px 10px rgba(0,0,0,0.2); z-index: 1000; }
         #text-sub { font-size: 1rem; color: #ffca28; margin-bottom: 8px; font-weight: bold; min-height: 1.2em; white-space: pre-line; }
@@ -35,37 +36,20 @@
 </head>
 <body>
 
-    <h2>✈️ もちもち旅行フレーズ集 🦫</h2>
+    <h2>✈️ 15言語トラベルナビ</h2>
 
-    <!-- 🔍 1. 自由に入力できる検索窓エリア -->
+    <!-- 🔍 検索＆クリアボタンエリア -->
     <div class="search-container">
-        <input type="text" id="customInput" class="search-box" placeholder="ここに言葉を入力（例：ありがとう）">
-        <div class="search-hint">💡 言葉を入力してから、下の「好きな国の国旗」をポチッと押してね！</div>
+        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: ビール）">
+        <button class="action-btn search-btn" onclick="generateSearchCard()">検索</button>
+        <button class="action-btn clear-btn" onclick="clearSearchCard()">クリア</button>
+        <div class="search-hint">💡 言語を入力して「検索」を押すと、その言葉の15カ国語カードがその場で作られます！</div>
     </div>
 
-    <!-- 🌍 2. 検索窓の下に独立させた「各国アイコン一覧」エリア -->
-    <div class="global-flags-card">
-        <div class="section-title">🌐 国を選んで発音する</div>
-        <div class="flag-container">
-            <button class="flag-btn" title="英語" onclick="speakGlobal('en-US')">🇺🇸 英語</button>
-            <button class="flag-btn" title="スペイン語" onclick="speakGlobal('es-ES')">🇪🇸 スペイン</button>
-            <button class="flag-btn" title="イタリア語" onclick="speakGlobal('it-IT')">🇮🇹 イタリア</button>
-            <button class="flag-btn" title="フランス語" onclick="speakGlobal('fr-FR')">🇫🇷 フランス</button>
-            <button class="flag-btn" title="ドイツ語" onclick="speakGlobal('de-DE')">🇩🇪 ドイツ</button>
-            <button class="flag-btn" title="ポルトガル語" onclick="speakGlobal('pt-PT')">🇵🇹 ポルトガル</button>
-            <button class="flag-btn" title="トルコ語" onclick="speakGlobal('tr-TR')">🇹🇷 トルコ</button>
-            <button class="flag-btn" title="韓国語" onclick="speakGlobal('ko-KR')">🇰🇷 韓国</button>
-            <button class="flag-btn" title="中国語" onclick="speakGlobal('zh-CN')">🇨🇳 中国</button>
-            <button class="flag-btn" title="ヒンドゥー語" onclick="speakGlobal('hi-IN')">🇮🇳 インド</button>
-            <button class="flag-btn" title="タイ語" onclick="speakGlobal('th-TH')">🇹🇭 タイ</button>
-            <button class="flag-btn" title="スウェーデン語" onclick="speakGlobal('sv-SE')">🇸🇪 スウェーデン</button>
-            <button class="flag-btn" title="クロアチア語" onclick="speakGlobal('hr-HR')">🇭🇷 クロアチア</button>
-            <button class="flag-btn" title="ノルウェー語" onclick="speakGlobal('no-NO')">🇳🇴 ノルウェー</button>
-            <button class="flag-btn" title="フィンランド語" onclick="speakGlobal('fi-FI')">🇫🇮 フィンランド</button>
-        </div>
-    </div>
+    <!-- 🔍 検索結果が表示される専用エリア（最初は空っぽ） -->
+    <div id="dynamicSearchResult"></div>
 
-    <!-- カテゴリー切り替えタブ（従来のフレーズ集） -->
+    <!-- カテゴリー切り替えタブ -->
     <div class="tab-container">
         <button class="tab-btn active" onclick="filterCategory('all', this)">すべて</button>
         <button class="tab-btn" onclick="filterCategory('greeting', this)">挨拶</button>
@@ -324,37 +308,15 @@
             });
         }
 
-        // 従来のフレーズ別ボタンを押したとき
+        // 音声再生関数
         function speak(word, furigana, langCode) {
             document.getElementById('text-sub').innerText = furigana;
             document.getElementById('text-main').innerText = word;
 
-            playSpeech(word, langCode);
-        }
-
-        // 検索窓の下にある「国旗アイコン」を押したとき
-        function speakGlobal(langCode) {
-            let userInput = document.getElementById('customInput').value.trim();
-            
-            if (userInput === "") {
-                document.getElementById('text-sub').innerText = "検索窓に言葉を入れてね";
-                document.getElementById('text-main').innerText = "⚠️ 言葉が未入力です";
-                return;
-            }
-
-            // 入力された日本語をそのまま音声合成に渡す（または翻訳風に喋らせる）
-            document.getElementById('text-sub').innerText = "自由入力の音声再生";
-            document.getElementById('text-main').innerText = userInput;
-
-            playSpeech(userInput, langCode);
-        }
-
-        // 共通の音声再生エンジン（Macバグ対策込み）
-        function playSpeech(text, langCode) {
             window.speechSynthesis.cancel();
             
             setTimeout(() => {
-                let utterance = new SpeechSynthesisUtterance(text);
+                let utterance = new SpeechSynthesisUtterance(word);
                 utterance.lang = langCode;
                 utterance.rate = 0.85;
 
@@ -366,6 +328,50 @@
                     window.speechSynthesis.speak(utterance);
                 }
             }, 50);
+        }
+
+        // 🔍 検索ボタンを押したときに、検索窓の言葉で新しいカードを自動生成する関数
+        function generateSearchCard() {
+            let query = document.getElementById('searchInput').value.trim();
+            if (query === "") {
+                alert("言葉を入力してください");
+                return;
+            }
+
+            let container = document.getElementById('dynamicSearchResult');
+            
+            // すでに検索結果が出ていれば、一度きれいにしてから新しいものを作る
+            container.innerHTML = `
+                <div class="card" style="border: 2px dashed #0056b3;">
+                    <div class="phrase-title">🔍 検索: ${query}</div>
+                    <div class="flag-container">
+                        <button class="flag-btn" title="英語" onclick="speak('${query}', '英語（音声読上）', 'en-US')">🇺🇸</button>
+                        <button class="flag-btn" title="スペイン語" onclick="speak('${query}', 'スペイン語（音声読上）', 'es-ES')">🇪🇸</button>
+                        <button class="flag-btn" title="イタリア語" onclick="speak('${query}', 'イタリア語（音声読上）', 'it-IT')">🇮🇹</button>
+                        <button class="flag-btn" title="フランス語" onclick="speak('${query}', 'フランス語（音声読上）', 'fr-FR')">🇫🇷</button>
+                        <button class="flag-btn" title="ドイツ語" onclick="speak('${query}', 'ドイツ語（音声読上）', 'de-DE')">🇩🇪</button>
+                        <button class="flag-btn" title="ポルトガル語" onclick="speak('${query}', 'ポルトガル語（音声読上）', 'pt-PT')">🇵🇹</button>
+                        <button class="flag-btn" title="トルコ語" onclick="speak('${query}', 'トルコ語（音声読上）', 'tr-TR')">🇹🇷</button>
+                        <button class="flag-btn" title="韓国語" onclick="speak('${query}', '韓国語（音声読上）', 'ko-KR')">🇰🇷</button>
+                        <button class="flag-btn" title="中国語" onclick="speak('${query}', '中国語（音声読上）', 'zh-CN')">🇨🇳</button>
+                        <button class="flag-btn" title="ヒンドゥー語" onclick="speak('${query}', 'ヒンドゥー語（音声読上）', 'hi-IN')">🇮🇳</button>
+                        <button class="flag-btn" title="タイ語" onclick="speak('${query}', 'タイ語（音声読上）', 'th-TH')">🇹🇭</button>
+                        <button class="flag-btn" title="スウェーデン語" onclick="speak('${query}', 'スウェーデン語（音声読上）', 'sv-SE')">🇸🇪</button>
+                        <button class="flag-btn" title="クロアチア語" onclick="speak('${query}', 'クロアチア語（音声読上）', 'hr-HR')">🇭🇷</button>
+                        <button class="flag-btn" title="ノルウェー語" onclick="speak('${query}', 'ノルウェー語（音声読上）', 'no-NO')">🇳🇴</button>
+                        <button class="flag-btn" title="フィンランド語" onclick="speak('${query}', 'フィンランド語（音声読上）', 'fi-FI')">🇫🇮</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 🧹 クリアボタンを押したときに、生成した検索カードを非表示（消去）にする関数
+        function clearSearchCard() {
+            document.getElementById('searchInput').value = "";
+            document.getElementById('dynamicSearchResult.innerHTML = ""'; // クリア
+            document.getElementById('dynamicSearchResult').innerHTML = "";
+            document.getElementById('text-sub').innerText = "国旗をタップしてね";
+            document.getElementById('text-main').innerText = "---";
         }
     </script>
 </body>
