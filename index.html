@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅行用言語アプリ</title>
+    <style>
+        /* アプリっぽい見た目にするためのシンプルなデザイン */
+        body { font-family: sans-serif; background-color: #f0f4f8; padding: 20px; color: #333; }
+        .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .phrase-title { font-weight: bold; font-size: 1.1em; margin-bottom: 10px; color: #0056b3; }
+        .flag-container { display: flex; gap: 15px; }
+        /* 国旗の代わりに絵文字を使うことで画像の手間をパス */
+        .flag-btn { font-size: 2rem; cursor: pointer; background: none; border: none; padding: 5px; transition: transform 0.1s; }
+        .flag-btn:active { transform: scale(1.2); }
+        /* 画面下部に固定される表示エリア */
+        #display-panel { position: fixed; bottom: 0; left: 0; right: 0; background: #333; color: white; padding: 20px; text-align: center; border-radius: 15px 15px 0 0; }
+        #text-sub { font-size: 0.9em; color: #ccc; margin-bottom: 5px; }
+        #text-main { font-size: 1.5em; font-weight: bold; margin: 0; }
+    </style>
+</head>
+<body>
+
+    <h2>✈️ トラベル言語ナビ</h2>
+
+    <!-- フレーズカード1 -->
+    <div class="card">
+        <div class="phrase-title">① はじめまして</div>
+        <div class="flag-container">
+            <!-- ボタンをタップすると、引数（言葉, ふりがな, 言語コード）を次のプログラムに送る -->
+            <button class="flag-btn" onclick="speak('Nice to meet you', 'ナイス トゥ ミーチュー', 'en-US')">🇺🇸</button>
+            <button class="flag-btn" onclick="speak('Enchanté', 'アンシャンテ', 'fr-FR')">🇫🇷</button>
+            <button class="flag-btn" onclick="speak('처음 뵙겠습니다', 'チョウム ベッゲスミダ', 'ko-KR')">🇰🇷</button>
+        </div>
+    </div>
+
+    <!-- フレーズカード2 -->
+    <div class="card">
+        <div class="phrase-title">② 日本から来ました</div>
+        <div class="flag-container">
+            <button class="flag-btn" onclick="speak('I am from Japan', 'アイ アム フロム ジャパン', 'en-US')">🇺🇸</button>
+            <button class="flag-btn" onclick="speak('Je viens du Japon', 'ジュ ヴィヤン デュ ジャポン', 'fr-FR')">🇫🇷</button>
+            <button class="flag-btn" onclick="speak('일본에서 왔습니다', 'イルボネソ ワッスミダ', 'ko-KR')">🇰🇷</button>
+        </div>
+    </div>
+
+    <!-- 結果表示パネル -->
+    <div id="display-panel">
+        <div id="text-sub">国旗をタップしてね</div>
+        <p id="text-main">---</p>
+    </div>
+
+    <script>
+        // 国旗を押したときに動くプログラム
+        function speak(word, furigana, langCode) {
+            // 1. 画面の文字を書き換える
+            document.getElementById('text-sub').innerText = furigana;
+            document.getElementById('text-main').innerText = word;
+
+            // 2. スマホ・PCの機能で声を再生する（完全無料）
+            // すでに喋っている音声を止める
+            window.speechSynthesis.cancel();
+            
+            // 喋る内容を設定
+            let utterance = new SpeechSynthesisUtterance(word);
+            utterance.lang = langCode; // 英語なら 'en-US'、フランス語なら 'fr-FR' を指定
+            utterance.rate = 0.9;      // 少しゆっくり再生（1.0が標準）
+
+            // 実際に喋らせる
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
