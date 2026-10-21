@@ -58,7 +58,7 @@
         <button class="tab-btn active" onclick="filterCategory('all', this)">すべて</button>
         <button class="tab-btn" onclick="filterCategory('greeting', this)">挨拶</button>
         <button class="tab-btn" onclick="filterCategory('profile', this)">自己紹介</button>
-        <button class="tab-btn" onclick="filterCategory('food', this)">食事</button>
+        <button class="tab-btn" onclick="filterCategory('food', this)">食事・買い物</button>
     </div>
 
     <!-- 一覧カード描画エリア -->
@@ -72,18 +72,106 @@
 
     <!-- プログラム部分 -->
     <script>
-        // 1〜10までの厳選フレーズデータベース
+        // 1〜14までのデータベース（インドネシア語追加＆男女言い回し対応版）
         const phraseDatabase = [
-            { id: 1, cat: "greeting", jp: "ありがとう", data: { "en-US": ["Thank you", "サンキュー"], "es-ES": ["Gracias", "グラシアス"], "it-IT": ["Grazie", "グラッツィエ"], "fr-FR": ["Merci", "メルスィ"], "de-DE": ["Danke", "ダンケ"], "pt-PT": ["Obrigado", "オブリガード"], "tr-TR": ["Teşekkürler", "テシェッキュルレル"], "ko-KR": ["감사합니다", "カムサハムニダ"], "zh-CN": ["谢谢", "シエシエ"], "hi-IN": ["धन्यवाद", "ダンニャワード"], "th-TH": ["ขอบคุณ", "コープクン"], "sv-SE": ["Tack", "タック"], "hr-HR": ["Hvala", "ファラ"], "no-NO": ["Takk", "タック"], "fi-FI": ["Kiitos", "キイトス"] } },
-            { id: 2, cat: "greeting", jp: "はじめまして", data: { "en-US": ["Nice to meet you", "ナイス トゥ ミート ユー"], "es-ES": ["Mucho gusto", "ムーチョ グスト"], "it-IT": ["Piacere", "ピアチェーレ"], "fr-FR": ["Enchante", "アンシャンテ"], "de-DE": ["Freut mich", "フロイト ミッヒ"], "pt-PT": ["Prazer", "プラゼール"], "tr-TR": ["Memnun oldum", "メムヌン オルドゥム"], "ko-KR": ["처음 뵙겠습니다", "チョウム ペプケッスムニダ"], "zh-CN": ["很高兴认识你", "ヘン ガオシン"], "hi-IN": ["नमस्ते", "ナマステ"], "th-TH": ["ยินดีที่ได้รู้จัก", "インディー"], "sv-SE": ["Trevligt", "トレーヴリクト"], "hr-HR": ["Drago mi je", "ドラゴ ミ イェ"], "no-NO": ["Hyggelig", "ヒュゲリグ"], "fi-FI": ["Hauska", "ハウスカ"] } },
-            { id: 3, cat: "greeting", jp: "さようなら", data: { "en-US": ["Goodbye", "グッドバイ"], "es-ES": ["Adiós", "アディオス"], "it-IT": ["Arrivederci", "アッリヴェデルチ"], "fr-FR": ["Au revoir", "オ ルヴォワール"], "de-DE": ["Auf Wiedersehen", "アウフ ヴィーダーゼーエン"], "pt-PT": ["Tchau", "チャウ"], "tr-TR": ["Hoşça kal", "ホシュチャ カル"], "ko-KR": ["안녕히 가세요", "アンニョンヒ カセヨ"], "zh-CN": ["再见", "ザイ ジエン"], "hi-IN": ["अलविदा", "アルヴィダー"], "th-TH": ["ลา, ก่อน", "ラーゴーン"], "sv-SE": ["Hej då", "ヘイ ドー"], "hr-HR": ["Doviđenja", "ドヴィジェニャ"], "no-NO": ["Ha det bra", "ハー デ ブラ"], "fi-FI": ["Näkemiin", "ナケミーン"] } },
-            { id: 4, cat: "greeting", jp: "YES", data: { "en-US": ["Yes", "イエス"], "es-ES": ["Sí", "スィー"], "it-IT": ["Sì", "スィー"], "fr-FR": ["Oui", "ウィ"], "de-DE": ["Ja", "ヤー"], "pt-PT": ["Sim", "シン"], "tr-TR": ["Evet", "エヴェット"], "ko-KR": ["네", "ネ"], "zh-CN": ["是", "シー"], "hi-IN": ["हाँ", "ハーン"], "th-TH": ["ใช่", "チャイ"], "sv-SE": ["Ja", "ヤー"], "hr-HR": ["Da", "ダ"], "no-NO": ["Ja", "ヤー"], "fi-FI": ["Kyllä", "キュッラ"] } },
-            { id: 5, cat: "greeting", jp: "NO", data: { "en-US": ["No", "ノー"], "es-ES": ["No", "ノ"], "it-IT": ["No", "ノ"], "fr-FR": ["Non", "ノン"], "de-DE": ["Nein", "ナイン"], "pt-PT": ["Não", "ナウン"], "tr-TR": ["Hayır", "ハユル"], "ko-KR": ["아니요", "アニヨ"], "zh-CN": ["不", "ブー"], "hi-IN": ["नहीं", "ナヒーン"], "th-TH": ["ไม่ใช่", "マイ チャイ"], "sv-SE": ["Nej", "ネイ"], "hr-HR": ["Ne", "ネ"], "no-NO": ["Nei", "ネイ"], "fi-FI": ["Ei", "エイ"] } },
-            { id: 6, cat: "greeting", jp: "こんにちわ", data: { "en-US": ["Hello", "ハロー"], "es-ES": ["Hola", "オラ"], "it-IT": ["Buongiorno", "ブオンジョルノ"], "fr-FR": ["Bonjour", "ボンジュール"], "de-DE": ["Guten Tag", "グーテン ターク"], "pt-PT": ["Olá", "オラ"], "tr-TR": ["Merhaba", "メルハバ"], "ko-KR": ["안녕하세요", "アンニョンハセヨ"], "zh-CN": ["你好", "ニーハオ"], "hi-IN": ["नमस्ते", "ナマステ"], "th-TH": ["สวัสดี", "サワッディー"], "sv-SE": ["Hej", "ヘイ"], "hr-HR": ["Dobar dan", "ドバル ダン"], "no-NO": ["Hallo", "ハロー"], "fi-FI": ["Hei", "ヘイ"] } },
-            { id: 7, cat: "profile", jp: "私は日本から来ました", data: { "en-US": ["I'm from Japan", "アイム フロム ジャパン"], "es-ES": ["Soy de Japón", "ソイ デ ハポン"], "it-IT": ["Vengo dal Giappone", "ヴェンゴ ダル ジャッポーネ"], "fr-FR": ["Je viens du Japon", "ジュ ヴィアン デュ ジャポン"], "de-DE": ["Ich komme aus Japan", "イッヒ コメ アウス ヤーパン"], "pt-PT": ["Sou do Japão", "ソウ ドゥ ジャパォン"], "tr-TR": ["Japonya'dan geliyorum", "ジャポンヤダン ゲリヨルム"], "ko-KR": ["저는 일본에서 왔어요", "チョヌン イルボネソ ワッソヨ"], "zh-CN": ["我来自日本", "ウォー ライズー リーベン"], "hi-IN": ["मैं जापान से हूँ", "मैं जापान से हूँ"], "th-TH": ["มาจากญี่ปุ่น", "マー ジャーク イープン"], "sv-SE": ["Jag kommer från Japan", "コンメル フロン ヤーパン"], "hr-HR": ["Dolazim iz Japana", "ドラジム イズ ジャパナ"], "no-NO": ["Jeg kommer fra Japan", "コンメル フラ ヤーパン"], "fi-FI": ["Olen kotoisin Japanista", "オレン コトイシン"] } },
-            { id: 8, cat: "profile", jp: "私の名前はサトシです", data: { "en-US": ["My name is Satoshi", "マイ ネーム イズ サトシ"], "es-ES": ["Me llamo Satoshi", "メ リャモ サトシ"], "it-IT": ["Mi chiamo Satoshi", "ミ キアーモ サトシ"], "fr-FR": ["Je m appelle Satoshi", "ジュ マペル サトシ"], "de-DE": ["Ich heiße Satoshi", "イッヒ ハイセ サトシ"], "pt-PT": ["Chamo me Satoshi", "シャモ メ サトシ"], "tr-TR": ["Benim adım Satoshi", "ベニム アドゥム サトシ"], "ko-KR": ["제 이름은 사토시입니다", "チェ イロムン サトシイムニダ"], "zh-CN": ["我叫Satoshi", "ウォー ジァオ サトシ"], "hi-IN": ["मेरा नाम सातोशी है", "メーラー ナーム サトシ"], "th-TH": ["ผมชื่อซาโตชิ", "ポム チュー サトシ"], "sv-SE": ["Jag heter Satoshi", "ヤーグ ヘーテル サトシ"], "hr-HR": ["Zovem se Satoshi", "ゾヴェム セ サトシ"], "no-NO": ["Jeg heter Satoshi", "イェイ ヘーテル サトシ"], "fi-FI": ["Nimeni on Satoshi", "ニメニ オン サトシ"] } },
-            { id: 9, cat: "profile", jp: "私の名前はヒトミです", data: { "en-US": ["My name is Hitomi", "マイ ネーム イズ ヒトミ"], "es-ES": ["Me llamo Hitomi", "メ リャモ ヒトミ"], "it-IT": ["Mi chiamo Hitomi", "ミ キアーモ ヒトミ"], "fr-FR": ["Je m appelle Hitomi", "ジュ マペル ヒトミ"], "de-DE": ["Ich heiße Hitomi", "イッヒ ハイセ ヒトミ"], "pt-PT": ["Chamo me Hitomi", "シャモ メ ヒトミ"], "tr-TR": ["Benim adım Hitomi", "ベニム アドゥム ヒトミ"], "ko-KR": ["제 이름은 히토미입니다", "チェ イロムン ヒトミイムニダ"], "zh-CN": ["我叫Hitomi", "ウォー ジァオ ヒトミ"], "hi-IN": ["मेरा नाम हितomi है", "メーラー ナーム ヒトミ"], "th-TH": ["ดิฉันชื่อฮิโตมิ", "ディチャン チュー ヒトミ"], "sv-SE": ["Jag heter Hitomi", "ヤーグ ヘーテル ヒトミ"], "hr-HR": ["Zovem se Hitomi", "ゾヴェム セ ヒトミ"], "no-NO": ["Jeg heter Hitomi", "イェイ ヘーテル ヒトミ"], "fi-FI": ["Nimeni on Hitomi", "ニメニ オン ヒトミ"] } },
-            { id: 10, cat: "food", jp: "美味しいです", data: { "en-US": ["It is delicious", "イット イズ ディリシャス"], "es-ES": ["Está muy rico", "エスタ ムイ リコ"], "it-IT": ["È delizioso", "エ デリツィオーゾ"], "fr-FR": ["C est delicieux", "セ デリシユー"], "de-DE": ["Es ist lecker", "エス イスト レッカー"], "pt-PT": ["Está delicioso", "エスタ デリシオゾ"], "tr-TR": ["Çok lezzetli", "チョク レッツェッティ"], "ko-KR": ["맛있어요", "マシッソヨ"], "zh-CN": ["很好吃", "ヘン ハオ チー"], "hi-IN": ["यह स्वादिष्ट है", "यह स्वादिष्ट है"], "th-TH": ["อร่อยมาก", "アロイ マーク"], "sv-SE": ["Det är gott", "デ アー ゴット"], "hr-HR": ["Ukusno je", "ウクスノ イェ"], "no-NO": ["Det er godt", "デ エア ゴット"], "fi-FI": ["Hyvää", "ヒュヴァー"] } }
+            { id: 1, cat: "greeting", jp: "ありがとう", data: { 
+                "en-US": ["Thank you", "サンキュー"], "es-ES": ["Gracias", "グラシアス"], "it-IT": ["Grazie", "グラッツィエ"], 
+                "fr-FR": ["Merci", "メルスィ"], "de-DE": ["Danke", "ダンケ"], "pt-PT": ["Obrigado (男) / Obrigada (女)", "オブリガード（男性）\nオブリガーダ（女性）"], 
+                "tr-TR": ["Teşekkürler", "テシェッキュルレル"], "ko-KR": ["감사합니다", "カムサハムニダ"], "zh-CN": ["谢谢", "シエシエ"], 
+                "hi-IN": ["धन्यवाद", "ダンニャワード"], "th-TH": ["ขอบคุณ", "コープクン"], "sv-SE": ["Tack", "タック"], 
+                "hr-HR": ["Hvala", "ファラ"], "no-NO": ["Takk", "タック"], "fi-FI": ["Kiitos", "キイトス"], "id-ID": ["Terima kasih", "テリマ カシ"] 
+            } },
+            { id: 2, cat: "greeting", jp: "はじめまして", data: { 
+                "en-US": ["Nice to meet you", "ナイス トゥ ミート ユー"], "es-ES": ["Mucho gusto", "ムーチョ グスト"], "it-IT": ["Piacere", "ピアチェーレ"], 
+                "fr-FR": ["Enchante", "アンシャンテ"], "de-DE": ["Freut mich", "フロイト ミッヒ"], "pt-PT": ["Prazer", "プラゼール"], 
+                "tr-TR": ["Memnun oldum", "メムヌン オルドゥム"], "ko-KR": ["처음 뵙겠습니다", "チョウム ペプケッスムニダ"], "zh-CN": ["很高兴认识你", "ヘン ガオシン"], 
+                "hi-IN": ["नमस्ते", "ナマステ"], "th-TH": ["ยินดีที่ได้รู้จัก", "インディー"], "sv-SE": ["Trevligt", "トレーヴリクト"], 
+                "hr-HR": ["Drago mi je", "ドラゴ ミ イェ"], "no-NO": ["Hyggelig", "ヒュゲリグ"], "fi-FI": ["Hauska", "ハウスカ"], "id-ID": ["Salam kenal", "サラム クナル"] 
+            } },
+            { id: 3, cat: "greeting", jp: "さようなら", data: { 
+                "en-US": ["Goodbye", "グッドバイ"], "es-ES": ["Adiós", "アディオス"], "it-IT": ["Arrivederci", "アッリヴェデルチ"], 
+                "fr-FR": ["Au revoir", "オ ルヴォワール"], "de-DE": ["Auf Wiedersehen", "アウフ ヴィーダーゼーエン"], "pt-PT": ["Tchau", "チャウ"], 
+                "tr-TR": ["Hoşça kal", "ホシュチャ カル"], "ko-KR": ["안녕히 가세요", "アンニョンヒ カセヨ"], "zh-CN": ["再见", "ザイ ジエン"], 
+                "hi-IN": ["अलविदा", "アルヴィダー"], "th-TH": ["ลา, ก่อน", "ラーゴーン"], "sv-SE": ["Hej då", "ヘイ ドー"], 
+                "hr-HR": ["Doviđenja", "ドヴィジェニャ"], "no-NO": ["Ha det bra", "ハー デ ブラ"], "fi-FI": ["Näkemiin", "ナケミーン"], "id-ID": ["Sampai jumpa", "サンパイ ジュンパ"] 
+            } },
+            { id: 4, cat: "greeting", jp: "YES", data: { 
+                "en-US": ["Yes", "イエス"], "es-ES": ["Sí", "スィー"], "it-IT": ["Sì", "スィー"], 
+                "fr-FR": ["Oui", "ウィ"], "de-DE": ["Ja", "ヤー"], "pt-PT": ["Sim", "シン"], 
+                "tr-TR": ["Evet", "エヴェット"], "ko-KR": ["네", "ネ"], "zh-CN": ["是", "シー"], 
+                "hi-IN": ["हाँ", "ハーン"], "th-TH": ["ใช่", "チャイ"], "sv-SE": ["Ja", "ヤー"], 
+                "hr-HR": ["Da", "ダ"], "no-NO": ["Ja", "ヤー"], "fi-FI": ["Kyllä", "キュッラ"], "id-ID": ["Ya", "ヤ"] 
+            } },
+            { id: 5, cat: "greeting", jp: "NO", data: { 
+                "en-US": ["No", "ノー"], "es-ES": ["No", "ノ"], "it-IT": ["No", "ノ"], 
+                "fr-FR": ["Non", "ノン"], "de-DE": ["Nein", "ナイン"], "pt-PT": ["Não", "ナウン"], 
+                "tr-TR": ["Hayır", "ハユル"], "ko-KR": ["아니요", "アニヨ"], "zh-CN": ["不", "ブー"], 
+                "hi-IN": ["नहीं", "ナヒーン"], "th-TH": ["ไม่ใช่", "マイ チャイ"], "sv-SE": ["Nej", "ネイ"], 
+                "hr-HR": ["Ne", "ネ"], "no-NO": ["Nei", "ネイ"], "fi-FI": ["Ei", "エイ"], "id-ID": ["Tidak", "ティダック"] 
+            } },
+            { id: 6, cat: "greeting", jp: "こんにちわ", data: { 
+                "en-US": ["Hello", "ハロー"], "es-ES": ["Hola", "オラ"], "it-IT": ["Buongiorno", "ブオンジョルノ"], 
+                "fr-FR": ["Bonjour", "ボンジュール"], "de-DE": ["Guten Tag", "グーテン ターク"], "pt-PT": ["Olá", "オラ"], 
+                "tr-TR": ["Merhaba", "メルハバ"], "ko-KR": ["안녕하세요", "アンニョンハセヨ"], "zh-CN": ["你好", "ニーハオ"], 
+                "hi-IN": ["नमस्ते", "ナマステ"], "th-TH": ["สวัสดี", "サワッディー"], "sv-SE": ["Hej", "ヘイ"], 
+                "hr-HR": ["Dobar dan", "ドバル ダン"], "no-NO": ["Hallo", "ハロー"], "fi-FI": ["Hei", "ヘイ"], "id-ID": ["Selamat siang", "スラマッ シアン"] 
+            } },
+            { id: 7, cat: "profile", jp: "私は日本から来ました", data: { 
+                "en-US": ["I'm from Japan", "アイム フロム ジャパン"], "es-ES": ["Soy de Japón", "ソイ デ ハポン"], "it-IT": ["Vengo dal Giappone", "ヴェンゴ ダル ジャッポーネ"], 
+                "fr-FR": ["Je viens du Japon", "ジュ ヴィアン デュ ジャポン"], "de-DE": ["Ich komme aus Japan", "イッヒ コメ アウス ヤーパン"], "pt-PT": ["Sou do Japão", "ソウ ドゥ ジャパォン"], 
+                "tr-TR": ["Japonya'dan geliyorum", "ジャポンヤダン ゲリヨルム"], "ko-KR": ["저는 일본에서 왔어요", "チョヌン イルボネソ ワッソヨ"], "zh-CN": ["我来自日本", "ウォー ライズー リーベン"], 
+                "hi-IN": ["मैं जापान से हूँ (आया हूँ/आई हूँ)", "男性：アーヤー フーン\n女性：アーイー フーン"], "th-TH": ["มาจากญี่ปุ่น (ครับ/ค่ะ)", "男性：ポム マー ジャーク イープン\n女性：チャン マー ジャーク イープン"], "sv-SE": ["Jag kommer från Japan", "コンメル フロン ヤーパン"], 
+                "hr-HR": ["Dolazim iz Japana", "ドラジム イズ ジャパナ"], "no-NO": ["Jeg kommer fra Japan", "コンメル フラ ヤーパン"], "fi-FI": ["Olen kotoisin Japanista", "オレン コトイシン"], "id-ID": ["Saya dari Jepang", "サヤ ダリ ジェパン"] 
+            } },
+            { id: 8, cat: "profile", jp: "私の名前はサトシです", data: { 
+                "en-US": ["My name is Satoshi", "マイ ネーム イズ サトシ"], "es-ES": ["Me llamo Satoshi", "メ リャモ サトシ"], "it-IT": ["Mi chiamo Satoshi", "ミ キアーモ サトシ"], 
+                "fr-FR": ["Je m appelle Satoshi", "ジュ マペル サトシ"], "de-DE": ["Ich heiße Satoshi", "イッヒ ハイセ サトシ"], "pt-PT": ["Chamo me Satoshi", "シャモ メ サトシ"], 
+                "tr-TR": ["Benim adım Satoshi", "ベニム アドゥム サトシ"], "ko-KR": ["제 이름은 사토시입니다", "チェ イロムン サトシイムニダ"], "zh-CN": ["我叫Satoshi", "ウォー ジァオ サトシ"], 
+                "hi-IN": ["मेरा नाम सातोशी है", "メーラー ナーム サトシ"], "th-TH": ["ผมชื่อซาโตชิ", "ポム チュー サトシ"], "sv-SE": ["Jag heter Satoshi", "ヤーグ ヘーテル サトシ"], 
+                "hr-HR": ["Zovem se Satoshi", "ゾヴェム セ サトシ"], "no-NO": ["Jeg heter Satoshi", "イェイ ヘーテル サトシ"], "fi-FI": ["Nimeni on Satoshi", "ニメニ オン サトシ"], "id-ID": ["Nama saya Satoshi", "ナマ サヤ サトシ"] 
+            } },
+            { id: 9, cat: "profile", jp: "私の名前はヒトミです", data: { 
+                "en-US": ["My name is Hitomi", "マイ ネーム イズ ヒトミ"], "es-ES": ["Me llamo Hitomi", "メ リャモ ヒトミ"], "it-IT": ["Mi chiamo Hitomi", "ミ キアーモ ヒトミ"], 
+                "fr-FR": ["Je m appelle Hitomi", "ジュ マペル ヒトミ"], "de-DE": ["Ich heiße Hitomi", "イッヒ ハイセ ヒトミ"], "pt-PT": ["Chamo me Hitomi", "シャモ メ ヒトミ"], 
+                "tr-TR": ["Benim adım Hitomi", "ベニム アドゥム ヒトミ"], "ko-KR": ["제 이름은 히토미입니다", "チェ イロムン ヒ토미イムニダ"], "zh-CN": ["我叫Hitomi", "ウォー ジァオ ヒトミ"], 
+                "hi-IN": ["मेरा नाम हितomi है", "メーラー ナーム ヒトミ"], "th-TH": ["ดิฉันชื่อฮิโตมิ", "ディチャン チュー ヒトミ"], "sv-SE": ["Jag heter Hitomi", "ヤーグ ヘーテル ヒトミ"], 
+                "hr-HR": ["Zovem se Hitomi", "ゾヴェム セ ヒトミ"], "no-NO": ["Jeg heter Hitomi", "イェイ ヘーテル ヒトミ"], "fi-FI": ["Nimeni on Hitomi", "ニメニ オン ヒトミ"], "id-ID": ["Nama saya Hitomi", "ナマ サヤ ヒトミ"] 
+            } },
+            { id: 10, cat: "food", jp: "美味しいです", data: { 
+                "en-US": ["It is delicious", "イット イズ ディリシャス"], "es-ES": ["Está muy rico", "エスタ ムイ リコ"], "it-IT": ["È delizioso", "エ デリツィオーゾ"], 
+                "fr-FR": ["C est delicieux", "セ デリシユー"], "de-DE": ["Es ist lecker", "エス イスト レッカー"], "pt-PT": ["Está delicioso", "エスタ デリシオゾ"], 
+                "tr-TR": ["Çok lezzetli", "チョク レッツェッティ"], "ko-KR": ["맛있어요", "マシッソヨ"], "zh-CN": ["很好吃", "ヘン ハオ チー"], 
+                "hi-IN": ["यह स्वादिष्ट है", "यह स्वादिष्ट है"], "th-TH": ["อร่อยมาก", "アロイ マーク"], "sv-SE": ["Det är gott", "デ アー ゴット"], 
+                "hr-HR": ["Ukusno je", "ウクスノ イェ"], "no-NO": ["Det er godt", "デ エア ゴット"], "fi-FI": ["Hyvää", "ヒュヴァー"], "id-ID": ["Enak sekali", "エナッ スカリ"] 
+            } },
+            { id: 11, cat: "food", jp: "お会計をお願いします", data: { 
+                "en-US": ["Check, please", "チェック プリーズ"], "es-ES": ["La cuenta, por favor", "ラ クエンタ"], "it-IT": ["Il conto, per favore", "イル コント"], 
+                "fr-FR": ["L addition s il vous plait", "ラディシオン"], "de-DE": ["Die Rechnung, bitte", "ディー レフヌング"], "pt-PT": ["A conta, por favor", "ア コンタ"], 
+                "tr-TR": ["Hesap lütfen", "ヘサプ"], "ko-KR": ["계산해주세요", "ケサネジュセヨ"], "zh-CN": ["买单", "マイダン"], 
+                "hi-IN": ["बिल कृपया", "ビル"], "th-TH": ["เก็บเงินด้วย", "ゲップ ガイン"], "sv-SE": ["Notan, tack", "ノータン タック"], 
+                "hr-HR": ["Račun, molim", "ラチュン モリム"], "no-NO": ["Regningen, takk", "レイニンゲン"], "fi-FI": ["Lasku kiitos", "ラスク キイトス"], "id-ID": ["Tolong minta bon", "トロン ミンタ ボン"] 
+            } },
+            { id: 12, cat: "greeting", jp: "良い1日を", data: { 
+                "en-US": ["Have a nice day", "ハヴ ア ナイス デー"], "es-ES": ["Que tenga un buen dia", "ケ テンガ ウン ブエン ディア"], "it-IT": ["Buona giornata", "ブオナ ジョルナータ"], 
+                "fr-FR": ["Bonne journee", "ボン ジョルネ"], "de-DE": ["Schönen Tag noch", "ショーネン ターク ノッホ"], "pt-PT": ["Tenha um bom dia", "テニャ ウン ボン ディア"], 
+                "tr-TR": ["İyi günler", "イイ ギュンレル"], "ko-KR": ["좋은 하루 보내세요", "ジョウン ハル ボネセヨ"], "zh-CN": ["祝你有个好的一天", "ジュ ニ ヨウ ゲ ハオ デ ティエン"], 
+                "hi-IN": ["आपका दिन शुभ ہو", "아프카 딘 슈브"], "th-TH": ["ขอให้เป็นวันที่ดี", "コー ハイ ペン ワン ティ ディー"], "sv-SE": ["Ha en bra dag", "ハー エン ブラ ダーグ"], 
+                "hr-HR": ["Ugodan dan", "ウゴダン ダン"], "no-NO": ["Ha en fin dag", "ハー エン フィン ダーグ"], "fi-FI": ["Hyvää päivänjatkoa", "ヒュヴァー パイヴァンジャトコア"], "id-ID": ["Semoga harimu menyenangkan", "スモガ ハリム ムニナンカン"] 
+            } },
+            { id: 13, cat: "greeting", jp: "すみません（ぶつかって謝る時など）", data: { 
+                "en-US": ["Pardon me / Sorry", "パードン ミー / ソリー"], "es-ES": ["Perdón", "ペルドン"], "it-IT": ["Mi scusi", "ミ スクージ"], 
+                "fr-FR": ["Pardon", "パルドン"], "de-DE": ["Entschuldigung", "エントシュルディグング"], "pt-PT": ["Desculpa", "デスクルパ"], 
+                "tr-TR": ["Pardon", "パルドン"], "ko-KR": ["죄송합니다", "チェソンハムニダ"], "zh-CN": ["对不起", "ドゥイブチ"], 
+                "hi-IN": ["माف कीजिए", "マフ キジイェ"], "th-TH": ["ขอโทษครับ", "コートーク"], "sv-SE": ["Ursäkta", "ウーシェクタ"], 
+                "hr-HR": ["Pardon", "パルドン"], "no-NO": ["Beklager", "ベクラゲル"], "fi-FI": ["Hups / Anteeksi", "フプスク / アンテエクスィ"], "id-ID": ["Maaf", "マアフ"] 
+            } },
+            { id: 14, cat: "food", jp: "これください", data: { 
+                "en-US": ["This one, please", "ディス ワン プリーズ"], "es-ES": ["Esto, por favor", "エスト"], "it-IT": ["Questo, per favore", "クエスト"], 
+                "fr-FR": ["C ceci s il vous plait", "スシー"], "de-DE": ["Das bitte", "ダス ビッテ"], "pt-PT": ["Isto, por favor", "イスト"], 
+                "tr-TR": ["Bunu lütfen", "ブヌ"], "ko-KR": ["이거 주세요", "イゴ ジュセヨ"], "zh-CN": ["我要这个", "ウォ ヤオ ジージェ"], 
+                "hi-IN": ["यह दीजिए", "यह"], "th-TH": ["เอาอันนี้", "アオ アンニー"], "sv-SE": ["Den här, tack", "デン ヘール"], 
+                "hr-HR": ["Ovo, molim", "オヴォ モリム"], "no-NO": ["Denne, takk", "デンネ"], "fi-FI": ["Tämä kiitos", "タマ キイトス"], "id-ID": ["Tolong ini", "トロン イニ"] 
+            } }
         ];
 
         // Mac/iOSの音声対策
@@ -120,6 +208,7 @@
                                 <button class="flag-btn" title="クロアチア語" onclick="speak('${item.data['hr-HR'][0]}', '${item.data['hr-HR'][1]}', 'hr-HR')">🇭🇷</button>
                                 <button class="flag-btn" title="ノルウェー語" onclick="speak('${item.data['no-NO'][0]}', '${item.data['no-NO'][1]}', 'no-NO')">🇳🇴</button>
                                 <button class="flag-btn" title="フィンランド語" onclick="speak('${item.data['fi-FI'][0]}', '${item.data['fi-FI'][1]}', 'fi-FI')">🇫🇮</button>
+                                <button class="flag-btn" title="インドネシア語" onclick="speak('${item.data['id-ID'][0]}', '${item.data['id-ID'][1]}', 'id-ID')">🇮🇩</button>
                             </div>
                         </div>
                     `;
@@ -185,7 +274,7 @@
                     container.innerHTML = `
                         <div class="card" style="text-align: center; padding: 20px; color: #d9534f; font-weight: bold; background-color: #fffdfd; border: 2px solid #d9534f;">
                             ⚠️ 「${query}」に一致するフレーズは見つかりませんでした。<br>
-                            <span style="font-size: 0.85rem; color: #666; font-weight: normal; margin-top: 5px; display: inline-block;">（「ありがとう」「はじめまして」「美味しい」などで検索してみてください）</span>
+                            <span style="font-size: 0.85rem; color: #666; font-weight: normal; margin-top: 5px; display: inline-block;">（「お会計」「ありがとう」「良い1日」などで検索してみてください）</span>
                         </div>
                     `;
                     return;
@@ -212,6 +301,7 @@
                                 <button class="flag-btn" title="クロアチア語" onclick="speak('${foundItem.data['hr-HR'][0]}', '${foundItem.data['hr-HR'][1]}', 'hr-HR')">🇭🇷</button>
                                 <button class="flag-btn" title="ノルウェー語" onclick="speak('${foundItem.data['no-NO'][0]}', '${foundItem.data['no-NO'][1]}', 'no-NO')">🇳🇴</button>
                                 <button class="flag-btn" title="フィンランド語" onclick="speak('${foundItem.data['fi-FI'][0]}', '${foundItem.data['fi-FI'][1]}', 'fi-FI')">🇫🇮</button>
+                                <button class="flag-btn" title="インドネシア語" onclick="speak('${foundItem.data['id-ID'][0]}', '${foundItem.data['id-ID'][1]}', 'id-ID')">🇮🇩</button>
                             </div>
                         </div>
                     `;
