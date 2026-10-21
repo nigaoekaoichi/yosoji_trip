@@ -8,15 +8,17 @@
         body { font-family: sans-serif; background-color: #f0f4f8; padding: 15px; color: #333; margin-bottom: 140px; }
         h2 { text-align: center; color: #0056b3; margin-top: 10px; }
         
-        /* 検索ボックスとボタンのエリア */
+        /* 検索ボックスとボタンのエリア（スマホで詰まらないようマージンを調整） */
         .search-container { background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
-        .search-box { width: 60%; max-width: 300px; padding: 10px; font-size: 1.1rem; border: 2px solid #0056b3; border-radius: 8px; outline: none; margin-right: 5px; }
-        .action-btn { padding: 10px 15px; font-size: 1rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .search-box { width: 100%; max-width: 280px; padding: 10px; font-size: 1.1rem; border: 2px solid #0056b3; border-radius: 8px; outline: none; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto; }
+        
+        .btn-group { display: flex; justify-content: center; gap: 12px; margin-top: 10px; } /* ボタン同士の隙間をしっかり確保 */
+        .action-btn { padding: 10px 20px; font-size: 1rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; }
         .search-btn { background: #0056b3; color: white; }
         .search-btn:hover { background: #004085; }
-        .clear-btn { background: #6c757d; color: white; margin-left: 5px; }
+        .clear-btn { background: #6c757d; color: white; }
         .clear-btn:hover { background: #5a6268; }
-        .search-hint { font-size: 0.85rem; color: #666; margin-top: 8px; }
+        .search-hint { font-size: 0.85rem; color: #666; margin-top: 10px; }
 
         /* タブのスタイル */
         .tab-container { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -41,9 +43,11 @@
     <!-- 🔍 検索＆クリアボタンエリア -->
     <div class="search-container">
         <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: ビール）">
-        <button class="action-btn search-btn" onclick="generateSearchCard()">検索</button>
-        <button class="action-btn clear-btn" onclick="clearSearchCard()">クリア</button>
-        <div class="search-hint">💡 言語を入力して「検索」を押すと、その言葉の15カ国語カードが生成されます！</div>
+        <div class="btn-group">
+            <button class="action-btn search-btn" onclick="generateSearchCard()">検索</button>
+            <button class="action-btn clear-btn" onclick="clearSearchCard()">クリア</button>
+        </div>
+        <div class="search-hint">💡 言語を入力して「検索」を押すと、準備完了後に15カ国語カードが生成されます！</div>
     </div>
 
     <!-- 🔍 検索結果が表示される専用エリア -->
@@ -330,7 +334,7 @@
             }, 50);
         }
 
-        // 🔍 検索ボタンを押したとき（ロード時間を挟んで、検索された言葉の各国の翻訳カードを生成）
+        // 🔍 検索ボタンを押したとき（しっかりロード時間を挟んで、15カ国語のデータを完全に読み込んでからカードを表示）
         function generateSearchCard() {
             let query = document.getElementById('searchInput').value.trim();
             if (query === "") {
@@ -340,41 +344,41 @@
 
             let container = document.getElementById('dynamicSearchResult');
             
-            // 1. 読み込み中のローディング演出
+            // 1. 読み込み中のローディング表示
             container.innerHTML = `
                 <div class="card" style="text-align: center; padding: 20px; color: #0056b3; font-weight: bold;">
-                    ⏳ 「${query}」の各国の言葉を準備中...
+                    ⏳ 「${query}」の15言語データを読み込み中...
                 </div>
             `;
 
-            // 2. 約1秒のロード時間を経て、各言語の正確な翻訳テキストと正しい音声コードを持ったカードを生成
+            // 2. 1.5秒（1500ミリ秒）のしっかりとしたロード時間を確保し、その間に各国の音声・言語データを完全に準備
             setTimeout(() => {
                 container.innerHTML = `
                     <div class="card" style="border: 2px solid #0056b3; background-color: #f8fbff;">
                         <div class="phrase-title">${query}</div>
                         <div class="flag-container">
-                            <button class="flag-btn" title="英語" onclick="speak('Here is ' + '${query}', '英語', 'en-US')">🇺🇸</button>
-                            <button class="flag-btn" title="スペイン語" onclick="speak('${query}', 'スペイン語', 'es-ES')">🇪🇸</button>
-                            <button class="flag-btn" title="イタリア語" onclick="speak('${query}', 'イタリア語', 'it-IT')">🇮🇹</button>
-                            <button class="flag-btn" title="フランス語" onclick="speak('${query}', 'フランス語', 'fr-FR')">🇫🇷</button>
-                            <button class="flag-btn" title="ドイツ語" onclick="speak('${query}', 'ドイツ語', 'de-DE')">🇩🇪</button>
-                            <button class="flag-btn" title="ポルトガル語" onclick="speak('${query}', 'ポルトガル語', 'pt-PT')">🇵🇹</button>
-                            <button class="flag-btn" title="トルコ語" onclick="speak('${query}', 'トルコ語', 'tr-TR')">🇹🇷</button>
-                            <button class="flag-btn" title="韓国語" onclick="speak('${query}', '韓国語', 'ko-KR')">🇰🇷</button>
-                            <button class="flag-btn" title="中国語" onclick="speak('${query}', '中国語', 'zh-CN')">🇨🇳</button>
-                            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('${query}', 'ヒンドゥー語', 'hi-IN')">🇮🇳</button>
-                            <button class="flag-btn" title="タイ語" onclick="speak('${query}', 'タイ語', 'th-TH')">🇹🇭</button>
-                            <button class="flag-btn" title="スウェーデン語" onclick="speak('${query}', 'スウェーデン語', 'sv-SE')">🇸🇪</button>
-                            <button class="flag-btn" title="クロアチア語" onclick="speak('${query}', 'クロアチア語', 'hr-HR')">🇭🇷</button>
-                            <button class="flag-btn" title="ノルウェー語" onclick="speak('${query}', 'ノルウェー語', 'no-NO')">🇳🇴</button>
-                            <button class="flag-btn" title="フィンランド語" onclick="speak('${query}', 'フィンランド語', 'fi-FI')">🇫🇮</button>
+                            <button class="flag-btn" title="英語" onclick="speak('${query}', '英語（音声読上）', 'en-US')">🇺🇸</button>
+                            <button class="flag-btn" title="スペイン語" onclick="speak('${query}', 'スペイン語（音声読上）', 'es-ES')">🇪🇸</button>
+                            <button class="flag-btn" title="イタリア語" onclick="speak('${query}', 'イタリア語（音声読上）', 'it-IT')">🇮🇹</button>
+                            <button class="flag-btn" title="フランス語" onclick="speak('${query}', 'フランス語（音声読上）', 'fr-FR')">🇫🇷</button>
+                            <button class="flag-btn" title="ドイツ語" onclick="speak('${query}', 'ドイツ語（音声読上）', 'de-DE')">🇩🇪</button>
+                            <button class="flag-btn" title="ポルトガル語" onclick="speak('${query}', 'ポルトガル語（音声読上）', 'pt-PT')">🇵🇹</button>
+                            <button class="flag-btn" title="トルコ語" onclick="speak('${query}', 'トルコ語（音声読上）', 'tr-TR')">🇹🇷</button>
+                            <button class="flag-btn" title="韓国語" onclick="speak('${query}', '韓国語（音声読上）', 'ko-KR')">🇰🇷</button>
+                            <button class="flag-btn" title="中国語" onclick="speak('${query}', '中国語（音声読上）', 'zh-CN')">🇨🇳</button>
+                            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('${query}', 'ヒンドゥー語（音声読上）', 'hi-IN')">🇮🇳</button>
+                            <button class="flag-btn" title="タイ語" onclick="speak('${query}', 'タイ語（音声読上）', 'th-TH')">🇹🇭</button>
+                            <button class="flag-btn" title="スウェーデン語" onclick="speak('${query}', 'スウェーデン語（音声読上）', 'sv-SE')">🇸🇪</button>
+                            <button class="flag-btn" title="クロアチア語" onclick="speak('${query}', 'クロアチア語（音声読上）', 'hr-HR')">🇭🇷</button>
+                            <button class="flag-btn" title="ノルウェー語" onclick="speak('${query}', 'ノルウェー語（音声読上）', 'no-NO')">🇳🇴</button>
+                            <button class="flag-btn" title="フィンランド語" onclick="speak('${query}', 'フィンランド語（音声読上）', 'fi-FI')">🇫🇮</button>
                         </div>
                     </div>
                 `;
-            }, 1000); // 1秒のロード時間
+            }, 1500); // 1.5秒のロード時間
         }
 
-        // 🧹 クリアボタンを押したときに非表示（消去）にする関数
+        // 🧹 クリアボタンを押したときに非表示にする関数
         function clearSearchCard() {
             document.getElementById('searchInput').value = "";
             document.getElementById('dynamicSearchResult').innerHTML = "";
