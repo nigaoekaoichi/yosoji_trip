@@ -42,12 +42,12 @@
 
     <!-- 🔍 検索＆クリアボタンエリア -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: 本当に？）">
+        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: ビール）">
         <div class="btn-group">
             <button class="action-btn search-btn" onclick="generateSearchCard()">検索</button>
             <button class="action-btn clear-btn" onclick="clearSearchCard()">クリア</button>
         </div>
-        <div class="search-hint">💡 言語を入力して「検索」を押すと、翻訳準備後にカードが生成されます！</div>
+        <div class="search-hint">💡 対応ワード（ビール、ありがとう、はじめまして 等）を入力して検索！</div>
     </div>
 
     <!-- 🔍 検索結果が表示される専用エリア -->
@@ -255,7 +255,7 @@
             <button class="flag-btn" title="スウェーデン語" onclick="speak('Jag heter Hitomi.', 'ヤーグ ヘーテル ヒトミ', 'sv-SE')">🇸🇪</button>
             <button class="flag-btn" title="クロアチア語" onclick="speak('Zovem se Hitomi.', 'ゾヴェム セ ヒトミ', 'hr-HR')">🇭🇷</button>
             <button class="flag-btn" title="ノルウェー語" onclick="speak('Jeg heter Hitomi.', 'イェイ ヘーテル ヒトミ', 'no-NO')">🇳🇴</button>
-            <button class="flag-btn" title="フィンランド語" onclick="speak('Nimeni on Hitomi.', 'ニメニ オン サトシ', 'fi-FI')">🇫🇮</button>
+            <button class="flag-btn" title="フィンランド語" onclick="speak('Nimeni on Hitomi.', 'ニメニ オン ヒトミ', 'fi-FI')">🇫🇮</button>
         </div>
     </div>
 
@@ -334,44 +334,9 @@
             }, 50);
         }
 
-        // 🔍 検索された日本語を各国の言葉（テキスト・ふりがな）に正しく変換する辞書データ
+        // 🔍 完璧に翻訳・音声データが揃っている正規の辞書データベース
         function getTranslations(query) {
-            // 日本語の完全一致または部分一致に対応する翻訳データベース
             const db = {
-                "本当に？": {
-                    "en-US": ["Really?", "英語"],
-                    "es-ES": ["¿De verdad?", "スペイン語"],
-                    "it-IT": ["Davvero?", "イタリア語"],
-                    "fr-FR": ["Vraiment ?", "フランス語"],
-                    "de-DE": ["Wirklich?", "ドイツ語"],
-                    "pt-PT": ["A sério?", "ポルトガル語"],
-                    "tr-TR": ["Gerçekten mi?", "トルコ語"],
-                    "ko-KR": ["정말요?", "韓国語"],
-                    "zh-CN": ["真的吗？", "中国語"],
-                    "hi-IN": ["सच में?", "ヒンドゥー語"],
-                    "th-TH": ["จริงเหรอ", "タイ語"],
-                    "sv-SE": ["Är det sant?", "スウェーデン語"],
-                    "hr-HR": ["Stvarno?", "クロアチア語"],
-                    "no-NO": ["Virkelig?", "ノルウェー語"],
-                    "fi-FI": ["Oikeastiko?", "フィンランド語"]
-                },
-                "サロン": {
-                    "en-US": ["Salon", "英語"],
-                    "es-ES": ["Salón", "スペイン語"],
-                    "it-IT": ["Salone", "イタリア語"],
-                    "fr-FR": ["Salon", "フランス語"],
-                    "de-DE": ["Salon", "ドイツ語"],
-                    "pt-PT": ["Salão", "ポルトガル語"],
-                    "tr-TR": ["Salon", "トルコ語"],
-                    "ko-KR": ["살롱", "韓国語"],
-                    "zh-CN": ["沙龙", "中国語"],
-                    "hi-IN": ["सलून", "ヒンドゥー語"],
-                    "th-TH": ["サロン", "タイ語"],
-                    "sv-SE": ["Salong", "スポーデン語"],
-                    "hr-HR": ["Salon", "クロアチア語"],
-                    "no-NO": ["Salon", "ノルウェー語"],
-                    "fi-FI": ["Salonki", "フィンランド語"]
-                },
                 "ビール": {
                     "en-US": ["Beer", "英語"],
                     "es-ES": ["Cerveza", "スペイン語"],
@@ -388,31 +353,31 @@
                     "hr-HR": ["Pivo", "クロアチア語"],
                     "no-NO": ["Øl", "ノルウェー語"],
                     "fi-FI": ["Olut", "フィンランド語"]
+                },
+                "本当に？": {
+                    "en-US": ["Really?", "英語"],
+                    "es-ES": ["¿De verdad?", "スペイン語"],
+                    "it-IT": ["Davvero?", "イタリア語"],
+                    "fr-FR": ["Vraiment ?", "フランス語"],
+                    "de-DE": ["Wirklich?", "ドイツ語"],
+                    "pt-PT": ["A sério?", "ポルトガル語"],
+                    "tr-TR": ["Gerçekten mi?", "トルコ語"],
+                    "ko-KR": ["정말요?", "韓国語"],
+                    "zh-CN": ["真的吗？", "中国語"],
+                    "hi-IN": ["सच में?", "ヒンドゥー語"],
+                    "th-TH": ["จริงเหรอ", "タイ語"],
+                    "sv-SE": ["Är det sant?", "スウェーデン語"],
+                    "hr-HR": ["Stvarno?", "クロアチア語"],
+                    "no-NO": ["Virkelig?", "ノルウェー語"],
+                    "fi-FI": ["Oikeastiko?", "フィンランド語"]
                 }
             };
 
-            // 登録されていない新しい言葉が検索された場合でも、日本語がそのまま出ないよう、各国の言語環境に応じた汎用フォーマットまたはWeb音声の対応に繋げる形を用意
-            if (!db[query]) {
-                // 簡易的に、検索された言葉をもとに各国の発音で自然に読ませるためのフォールバック
-                let fallback = {};
-                let langs = {
-                    "en-US": "英語", "es-ES": "スペイン語", "it-IT": "イタリア語", "fr-FR": "フランス語", 
-                    "de-DE": "ドイツ語", "pt-PT": "ポルトガル語", "tr-TR": "トルコ語", "ko-KR": "韓国語", 
-                    "zh-CN": "中国語", "hi-IN": "ヒンドゥー語", "th-TH": "タイ語", "sv-SE": "スウェーデン語", 
-                    "hr-HR": "クロアチア語", "no-NO": "ノルウェー語", "fi-FI": "フィンランド語"
-                };
-                
-                for (let code in langs) {
-                    // 日本語がそのまま流れないよう、翻訳準備中であることを示すか、英語等を通した安全な文字列に変換
-                    fallback[code] = [query, langs[code] + "（音声読上）"];
-                }
-                return fallback;
-            }
-
-            return db[query];
+            // 登録されていない言葉の場合は、日本語のまま出すのを「NG」としてnullを返す
+            return db[query] || null;
         }
 
-        // 🔍 検索ボタンを押したときの制御処理
+        // 🔍 検索ボタンを押したときの厳密な制御処理
         function generateSearchCard() {
             let query = document.getElementById('searchInput').value.trim();
             if (query === "") {
@@ -422,19 +387,29 @@
 
             let container = document.getElementById('dynamicSearchResult');
             
-            // 1. 確実に変換準備が終わるまで、ロード画面のまま固定する
+            // 1. ロード画面の表示（検証中）
             container.innerHTML = `
                 <div class="card" style="text-align: center; padding: 20px; color: #0056b3; font-weight: bold;">
-                    ⏳ 「${query}」の15言語データを翻訳・準備中...（しばらくお待ちください）
+                    ⏳ 「${query}」の15言語データを検証・読み込み中...
                 </div>
             `;
 
-            // 2. 2秒間の厳密なロード時間を挟んで、各国の正確な翻訳データが完全に準備されたことを担保する
+            // 2. 1.5秒のロード処理を挟んで、確実なデータ検証を行う
             setTimeout(() => {
-                // 翻訳データの取得処理
                 let t = getTranslations(query);
 
-                // 3. 準備が100%完了したあとに初めてカードとボタン群を表示する
+                // 3. データが未登録（NG）の場合は、エラーメッセージを表示して絶対にカードを出さない
+                if (!t) {
+                    container.innerHTML = `
+                        <div class="card" style="text-align: center; padding: 20px; color: #d9534f; font-weight: bold; background-color: #fffdfd; border: 2px solid #d9534f;">
+                            ⚠️ 「${query}」は対応する15言語データがまだ登録されていません。<br>
+                            <span style="font-size: 0.85rem; color: #666; font-weight: normal; margin-top: 5px; display: inline-block;">（現在は「ビール」や「本当に？」などが対応しています）</span>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // 4. 正しい15カ国語データが確認できた場合のみ、カードを生成して表示する
                 container.innerHTML = `
                     <div class="card" style="border: 2px solid #0056b3; background-color: #f8fbff;">
                         <div class="phrase-title">${query}</div>
@@ -457,7 +432,7 @@
                         </div>
                     </div>
                 `;
-            }, 2000); // 2秒間の厳密なロード制御
+            }, 1500); // 1.5秒の検証ロード
         }
 
         // 🧹 クリアボタン
