@@ -181,26 +181,42 @@
     </div>
 
     <!-- タップしたときに声を出すための大事なプログラム -->
-  <script>
-    function speak(word, furigana, langCode) {
-        // 1. 画面の文字を書き換える
-        document.getElementById('text-sub').innerText = furigana;
-        document.getElementById('text-main').innerText = word;
+    <script>
+        // Macのバグ対策：ページが開いた瞬間に、一度空の音声を出してシステムを起こす
+        window.addEventListener('DOMContentLoaded', () => {
+            window.speechSynthesis.cancel();
+            let wakeUp = new SpeechSynthesisUtterance('');
+            window.speechSynthesis.speak(wakeUp);
+        });
 
-        // 2. 音声再生の処理
-        // Macで音声が詰まるのを防ぐため、確実に一旦リセットする
-        window.speechSynthesis.cancel();
-        
-        // わずかに（0.05秒）待ってから再生を開始する処理（Macのバグ対策）
-        setTimeout(function() {
-            let utterance = new SpeechSynthesisUtterance(word);
-            utterance.lang = langCode;
-            utterance.rate = 0.85; 
+        function speak(word, furigana, langCode) {
+            // 1. 画面のふりがなと現地の文字を書き換える
+            document.getElementById('text-sub').innerText = furigana;
+            document.getElementById('text-main').innerText = word;
 
-            window.speechSynthesis.speak(utterance);
-        }, 50);
-    }
-</script>
+            // 2. 音声再生の処理
+            // Macのバグ対策：しゃべっている途中、または詰まっている音声を完全にリセット
+            window.speechSynthesis.cancel();
+            
+            // Macのバグ対策：完全にキャンセルされるまで、ほんの一瞬（0.05秒）待ってから再生する
+            setTimeout(() => {
+                let utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = langCode;
+                utterance.rate = 0.85; // 聞き取りやすいように少しゆっくり
+
+                // 3. Mac/iOSのバグ対策：声のデータ（Voices）が正しくセットされているか強制確認する
+                if (window.speechSynthesis.getVoices().length === 0) {
+                    // まだ音声リストが読み込まれていない場合は、読み込み完了を待つイベントを仕込む
+                    window.speechSynthesis.onvoiceschanged = () => {
+                        window.speechSynthesis.speak(utterance);
+                    };
+                } else {
+                    // すでに準備ができていればそのまましゃべらせる
+                    window.speechSynthesis.speak(utterance);
+                }
+            }, 50);
+        }
+    </script>
 </body>
 </html>
 
