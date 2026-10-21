@@ -9,20 +9,24 @@
         h2 { text-align: center; color: #0056b3; margin-top: 10px; }
         
         /* 検索ボックスのエリア */
-        .search-container { background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+        .search-container { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
         .search-box { width: 80%; max-width: 400px; padding: 10px; font-size: 1.1rem; border: 2px solid #0056b3; border-radius: 8px; outline: none; }
         .search-hint { font-size: 0.85rem; color: #666; margin-top: 8px; }
 
-        /* タブのスタイル */
+        /* 独立した国旗アイコン選択エリア */
+        .global-flags-card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+        .section-title { font-weight: bold; font-size: 1.05em; margin-bottom: 12px; color: #0056b3; }
+        .flag-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .flag-btn { font-size: 1.8rem; cursor: pointer; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; padding: 6px 12px; transition: transform 0.1s, background-color 0.2s; display: flex; align-items: center; justify-content: center; }
+        .flag-btn:active { transform: scale(1.1); background-color: #e9ecef; }
+
+        /* タブのスタイル（従来のフレーズ別タブ） */
         .tab-container { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
         .tab-btn { background: #fff; border: 1px solid #0056b3; color: #0056b3; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.2s; }
         .tab-btn.active { background: #0056b3; color: #fff; }
 
         .card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .phrase-title { font-weight: bold; font-size: 1.1em; margin-bottom: 10px; color: #333; border-left: 4px solid #0056b3; padding-left: 8px; }
-        .flag-container { display: flex; flex-wrap: wrap; gap: 10px; }
-        .flag-btn { font-size: 1.8rem; cursor: pointer; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; padding: 6px 12px; transition: transform 0.1s, background-color 0.2s; display: flex; align-items: center; justify-content: center; }
-        .flag-btn:active { transform: scale(1.1); background-color: #e9ecef; }
         
         #display-panel { position: fixed; bottom: 0; left: 0; right: 0; background: #222; color: white; padding: 20px; text-align: center; border-radius: 15px 15px 0 0; box-shadow: 0 -3px 10px rgba(0,0,0,0.2); z-index: 1000; }
         #text-sub { font-size: 1rem; color: #ffca28; margin-bottom: 8px; font-weight: bold; min-height: 1.2em; white-space: pre-line; }
@@ -33,13 +37,35 @@
 
     <h2>✈️ もちもち旅行フレーズ集 🦫</h2>
 
-    <!-- 🔍 自由に入力できる検索窓エリア -->
+    <!-- 🔍 1. 自由に入力できる検索窓エリア -->
     <div class="search-container">
-        <input type="text" id="customInput" class="search-box" placeholder="ここに日本語を入力 (例: ありがとう)">
-        <div class="search-hint">💡 言葉を入力してから下の国旗を押すと、その言葉を各国語で喋ります！</div>
+        <input type="text" id="customInput" class="search-box" placeholder="ここに言葉を入力（例：ありがとう）">
+        <div class="search-hint">💡 言葉を入力してから、下の「好きな国の国旗」をポチッと押してね！</div>
     </div>
 
-    <!-- カテゴリー切り替えタブ -->
+    <!-- 🌍 2. 検索窓の下に独立させた「各国アイコン一覧」エリア -->
+    <div class="global-flags-card">
+        <div class="section-title">🌐 国を選んで発音する</div>
+        <div class="flag-container">
+            <button class="flag-btn" title="英語" onclick="speakGlobal('en-US')">🇺🇸 英語</button>
+            <button class="flag-btn" title="スペイン語" onclick="speakGlobal('es-ES')">🇪🇸 スペイン</button>
+            <button class="flag-btn" title="イタリア語" onclick="speakGlobal('it-IT')">🇮🇹 イタリア</button>
+            <button class="flag-btn" title="フランス語" onclick="speakGlobal('fr-FR')">🇫🇷 フランス</button>
+            <button class="flag-btn" title="ドイツ語" onclick="speakGlobal('de-DE')">🇩🇪 ドイツ</button>
+            <button class="flag-btn" title="ポルトガル語" onclick="speakGlobal('pt-PT')">🇵🇹 ポルトガル</button>
+            <button class="flag-btn" title="トルコ語" onclick="speakGlobal('tr-TR')">🇹🇷 トルコ</button>
+            <button class="flag-btn" title="韓国語" onclick="speakGlobal('ko-KR')">🇰🇷 韓国</button>
+            <button class="flag-btn" title="中国語" onclick="speakGlobal('zh-CN')">🇨🇳 中国</button>
+            <button class="flag-btn" title="ヒンドゥー語" onclick="speakGlobal('hi-IN')">🇮🇳 インド</button>
+            <button class="flag-btn" title="タイ語" onclick="speakGlobal('th-TH')">🇹🇭 タイ</button>
+            <button class="flag-btn" title="スウェーデン語" onclick="speakGlobal('sv-SE')">🇸🇪 スウェーデン</button>
+            <button class="flag-btn" title="クロアチア語" onclick="speakGlobal('hr-HR')">🇭🇷 クロアチア</button>
+            <button class="flag-btn" title="ノルウェー語" onclick="speakGlobal('no-NO')">🇳🇴 ノルウェー</button>
+            <button class="flag-btn" title="フィンランド語" onclick="speakGlobal('fi-FI')">🇫🇮 フィンランド</button>
+        </div>
+    </div>
+
+    <!-- カテゴリー切り替えタブ（従来のフレーズ集） -->
     <div class="tab-container">
         <button class="tab-btn active" onclick="filterCategory('all', this)">すべて</button>
         <button class="tab-btn" onclick="filterCategory('greeting', this)">挨拶</button>
@@ -51,21 +77,21 @@
     <div class="card" data-category="greeting">
         <div class="phrase-title">1. ありがとう</div>
         <div class="flag-container">
-            <button class="flag-btn" title="英語" onclick="speakCustom('Thank you', 'サンキュー', 'en-US')">🇺🇸</button>
-            <button class="flag-btn" title="スペイン語" onclick="speakCustom('Gracias', 'グラシアス', 'es-ES')">🇪🇸</button>
-            <button class="flag-btn" title="イタリア語" onclick="speakCustom('Grazie.', 'グラッツィエ', 'it-IT')">🇮🇹</button>
-            <button class="flag-btn" title="フランス語" onclick="speakCustom('Merci', 'メルスィ', 'fr-FR')">🇫🇷</button>
-            <button class="flag-btn" title="ドイツ語" onclick="speakCustom('Danke', 'ダンケ', 'de-DE')">🇩🇪</button>
-            <button class="flag-btn" title="ポルトガル語" onclick="speakCustom('Obrigado', 'オブリガード', 'pt-PT')">🇵🇹</button>
-            <button class="flag-btn" title="トルコ語" onclick="speakCustom('Teşekkür ederim', 'テシェッキュル エデリム', 'tr-TR')">🇹🇷</button>
-            <button class="flag-btn" title="韓国語" onclick="speakCustom('감사합니다', 'カムサハムニダ', 'ko-KR')">🇰🇷</button>
-            <button class="flag-btn" title="中国語" onclick="speakCustom('谢谢', 'シエシエ', 'zh-CN')">🇨🇳</button>
-            <button class="flag-btn" title="ヒンドゥー語" onclick="speakCustom('धन्यवाद', 'ダンニャワード', 'hi-IN')">🇮🇳</button>
-            <button class="flag-btn" title="タイ語" onclick="speakCustom('ขอบคุณครับ', 'コープクン クラップ', 'th-TH')">🇹🇭</button>
-            <button class="flag-btn" title="スウェーデン語" onclick="speakCustom('Tack.', 'タック', 'sv-SE')">🇸🇪</button>
-            <button class="flag-btn" title="クロアチア語" onclick="speakCustom('Hvala.', 'ファラ', 'hr-HR')">🇭🇷</button>
-            <button class="flag-btn" title="ノルウェー語" onclick="speakCustom('Takk.', 'タック', 'no-NO')">🇳🇴</button>
-            <button class="flag-btn" title="フィンランド語" onclick="speakCustom('Kiitos.', 'キイトス', 'fi-FI')">🇫🇮</button>
+            <button class="flag-btn" title="英語" onclick="speak('Thank you', 'サンキュー', 'en-US')">🇺🇸</button>
+            <button class="flag-btn" title="スペイン語" onclick="speak('Gracias', 'グラシアス', 'es-ES')">🇪🇸</button>
+            <button class="flag-btn" title="イタリア語" onclick="speak('Grazie.', 'グラッツィエ', 'it-IT')">🇮🇹</button>
+            <button class="flag-btn" title="フランス語" onclick="speak('Merci', 'メルスィ', 'fr-FR')">🇫🇷</button>
+            <button class="flag-btn" title="ドイツ語" onclick="speak('Danke', 'ダンケ', 'de-DE')">🇩🇪</button>
+            <button class="flag-btn" title="ポルトガル語" onclick="speak('Obrigado / Obrigada', 'オブリガード（男性）\nオブリガーダ（女性）', 'pt-PT')">🇵🇹</button>
+            <button class="flag-btn" title="トルコ語" onclick="speak('Teşekkür ederim', 'テシェッキュル エデリム', 'tr-TR')">🇹🇷</button>
+            <button class="flag-btn" title="韓国語" onclick="speak('감사합니다', 'カムサハムニダ', 'ko-KR')">🇰🇷</button>
+            <button class="flag-btn" title="中国語" onclick="speak('谢谢', 'シエシエ', 'zh-CN')">🇨🇳</button>
+            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('धन्यवाद', 'ダンニャワード', 'hi-IN')">🇮🇳</button>
+            <button class="flag-btn" title="タイ語" onclick="speak('ขอบคุณครับ', 'コープクン クラップ', 'th-TH')">🇹🇭</button>
+            <button class="flag-btn" title="スウェーデン語" onclick="speak('Tack.', 'タック', 'sv-SE')">🇸🇪</button>
+            <button class="flag-btn" title="クロアチア語" onclick="speak('Hvala.', 'ファラ', 'hr-HR')">🇭🇷</button>
+            <button class="flag-btn" title="ノルウェー語" onclick="speak('Takk.', 'タック', 'no-NO')">🇳🇴</button>
+            <button class="flag-btn" title="フィンランド語" onclick="speak('Kiitos.', 'キイトス', 'fi-FI')">🇫🇮</button>
         </div>
     </div>
 
@@ -73,21 +99,21 @@
     <div class="card" data-category="greeting">
         <div class="phrase-title">2. はじめまして</div>
         <div class="flag-container">
-            <button class="flag-btn" title="英語" onclick="speakCustom('Nice to meet you.', 'ナイス トゥ ミート ユー', 'en-US')">🇺🇸</button>
-            <button class="flag-btn" title="スペイン語" onclick="speakCustom('Mucho gusto.', 'ムーチョ グスト', 'es-ES')">🇪🇸</button>
-            <button class="flag-btn" title="イタリア語" onclick="speakCustom('Piacere.', 'ピアチェーレ', 'it-IT')">🇮🇹</button>
-            <button class="flag-btn" title="フランス語" onclick="speakCustom('Enchanté', 'アンシャンテ', 'fr-FR')">🇫🇷</button>
-            <button class="flag-btn" title="ドイツ語" onclick="speakCustom('Freut mich.', 'フロイト ミッヒ', 'de-DE')">🇩🇪</button>
-            <button class="flag-btn" title="ポルトガル語" onclick="speakCustom('Prazer.', 'プラゼール', 'pt-PT')">🇵🇹</button>
-            <button class="flag-btn" title="トルコ語" onclick="speakCustom('Memnun oldum.', 'メムヌン オルドゥム', 'tr-TR')">🇹🇷</button>
-            <button class="flag-btn" title="韓国語" onclick="speakCustom('처음 뵙겠습니다.', 'チョウム ペプケッスムニダ', 'ko-KR')">🇰🇷</button>
-            <button class="flag-btn" title="中国語" onclick="speakCustom('很高兴认识你。', 'ヘン ガオシン レンシー ニー', 'zh-CN')">🇨🇳</button>
-            <button class="flag-btn" title="ヒンドゥー語" onclick="speakCustom('आपसे मिलकर खुशी हुई।', 'アープセー ミルカル クシー フイー', 'hi-IN')">🇮🇳</button>
-            <button class="flag-btn" title="タイ語" onclick="speakCustom('ยินดีที่ได้รู้จัก', 'インディー ティー ダイ ルーจัก', 'th-TH')">🇹🇭</button>
-            <button class="flag-btn" title="スウェーデン語" onclick="speakCustom('Trevligt att träffas.', 'トレーヴリクト アット トレファス', 'sv-SE')">🇸🇪</button>
-            <button class="flag-btn" title="クロアチア語" onclick="speakCustom('Drago mi je.', 'ドラゴ ミ イェ', 'hr-HR')">🇭🇷</button>
-            <button class="flag-btn" title="ノルウェー語" onclick="speakCustom('Hyggelig å møte deg.', 'ヒュゲリグ オー モーテ デイ', 'no-NO')">🇳🇴</button>
-            <button class="flag-btn" title="フィンランド語" onclick="speakCustom('Hauska tutustua.', 'ハウスカ トゥストゥア', 'fi-FI')">🇫🇮</button>
+            <button class="flag-btn" title="英語" onclick="speak('Nice to meet you.', 'ナイス トゥ ミート ユー', 'en-US')">🇺🇸</button>
+            <button class="flag-btn" title="スペイン語" onclick="speak('Mucho gusto.', 'ムーチョ グスト', 'es-ES')">🇪🇸</button>
+            <button class="flag-btn" title="イタリア語" onclick="speak('Piacere.', 'ピアチェーレ', 'it-IT')">🇮🇹</button>
+            <button class="flag-btn" title="フランス語" onclick="speak('Enchanté', 'アンシャンテ', 'fr-FR')">🇫🇷</button>
+            <button class="flag-btn" title="ドイツ語" onclick="speak('Freut mich.', 'フロイト ミッヒ', 'de-DE')">🇩🇪</button>
+            <button class="flag-btn" title="ポルトガル語" onclick="speak('Prazer.', 'プラゼール', 'pt-PT')">🇵🇹</button>
+            <button class="flag-btn" title="トルコ語" onclick="speak('Memnun oldum.', 'メムヌン オルドゥム', 'tr-TR')">🇹🇷</button>
+            <button class="flag-btn" title="韓国語" onclick="speak('처음 뵙겠습니다.', 'チョウム ペプケッスムニダ', 'ko-KR')">🇰🇷</button>
+            <button class="flag-btn" title="中国語" onclick="speak('很高兴认识你。', 'ヘン ガオシン レンシー ニー', 'zh-CN')">🇨🇳</button>
+            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('आपसे मिलकर खुशी हुई。', 'アープセー ミルカル クシー フイー', 'hi-IN')">🇮🇳</button>
+            <button class="flag-btn" title="タイ語" onclick="speak('ยินดีที่ได้รู้จัก', 'インディー ティー ダイ ルーจัก', 'th-TH')">🇹🇭</button>
+            <button class="flag-btn" title="スウェーデン語" onclick="speak('Trevligt att träffas.', 'トレーヴリクト アット トレファス', 'sv-SE')">🇸🇪</button>
+            <button class="flag-btn" title="クロアチア語" onclick="speak('Drago mi je.', 'ドラゴ ミ イェ', 'hr-HR')">🇭🇷</button>
+            <button class="flag-btn" title="ノルウェー語" onclick="speak('Hyggelig å møte deg.', 'ヒュゲリグ オー モーテ デイ', 'no-NO')">🇳🇴</button>
+            <button class="flag-btn" title="フィンランド語" onclick="speak('Hauska tutustua.', 'ハウスカ トゥストゥア', 'fi-FI')">🇫🇮</button>
         </div>
     </div>
 
@@ -95,21 +121,21 @@
     <div class="card" data-category="greeting">
         <div class="phrase-title">3. さようなら</div>
         <div class="flag-container">
-            <button class="flag-btn" title="英語" onclick="speakCustom('Goodbye.', 'グッドバイ', 'en-US')">🇺🇸</button>
-            <button class="flag-btn" title="スペイン語" onclick="speakCustom('Adiós.', 'アディオス', 'es-ES')">🇪🇸</button>
-            <button class="flag-btn" title="イタリア語" onclick="speakCustom('Arrivederci.', 'アッリヴェデルチ', 'it-IT')">🇮🇹</button>
-            <button class="flag-btn" title="フランス語" onclick="speakCustom('Au revoir.', 'オ ルヴォワール', 'fr-FR')">🇫🇷</button>
-            <button class="flag-btn" title="ドイツ語" onclick="speakCustom('Auf Wiedersehen.', 'アウフ ヴィーダーゼーエン', 'de-DE')">🇩🇪</button>
-            <button class="flag-btn" title="ポルトガル語" onclick="speakCustom('Tchau.', 'チャウ', 'pt-PT')">🇵🇹</button>
-            <button class="flag-btn" title="トルコ語" onclick="speakCustom('Hoşça kal.', 'ホシュチャ カル', 'tr-TR')">🇹🇷</button>
-            <button class="flag-btn" title="韓国語" onclick="speakCustom('안녕히 가세요.', 'アンニョンヒ カセヨ', 'ko-KR')">🇰🇷</button>
-            <button class="flag-btn" title="中国語" onclick="speakCustom('再见。', 'ザイ ジエン', 'zh-CN')">🇨🇳</button>
-            <button class="flag-btn" title="ヒンドゥー語" onclick="speakCustom('अलविदा।', 'アルヴィダー', 'hi-IN')">🇮🇳</button>
-            <button class="flag-btn" title="タイ語" onclick="speakCustom('ลาก่อน', 'ラーゴーン', 'th-TH')">🇹🇭</button>
-            <button class="flag-btn" title="スウェーデン語" onclick="speakCustom('Hej då.', 'ヘイ ドー', 'sv-SE')">🇸🇪</button>
-            <button class="flag-btn" title="クロアチア語" onclick="speakCustom('Doviđenja.', 'ドヴィジェニャ', 'hr-HR')">🇭🇷</button>
-            <button class="flag-btn" title="ノルウェー語" onclick="speakCustom('Ha det bra.', 'ハー デ ブラ', 'no-NO')">🇳🇴</button>
-            <button class="flag-btn" title="フィンランド語" onclick="speakCustom('Näkemiin.', 'ナケミーン', 'fi-FI')">🇫🇮</button>
+            <button class="flag-btn" title="英語" onclick="speak('Goodbye.', 'グッドバイ', 'en-US')">🇺🇸</button>
+            <button class="flag-btn" title="スペイン語" onclick="speak('Adiós.', 'アディオス', 'es-ES')">🇪🇸</button>
+            <button class="flag-btn" title="イタリア語" onclick="speak('Arrivederci.', 'アッリヴェデルチ', 'it-IT')">🇮🇹</button>
+            <button class="flag-btn" title="フランス語" onclick="speak('Au revoir.', 'オ ルヴォワール', 'fr-FR')">🇫🇷</button>
+            <button class="flag-btn" title="ドイツ語" onclick="speak('Auf Wiedersehen.', 'アウフ ヴィーダーゼーエン', 'de-DE')">🇩🇪</button>
+            <button class="flag-btn" title="ポルトガル語" onclick="speak('Tchau.', 'チャウ', 'pt-PT')">🇵🇹</button>
+            <button class="flag-btn" title="トルコ語" onclick="speak('Hoşça kal.', 'ホシュチャ カル', 'tr-TR')">🇹🇷</button>
+            <button class="flag-btn" title="韓国語" onclick="speak('안녕히 가세요.', 'アンニョンヒ カセヨ', 'ko-KR')">🇰🇷</button>
+            <button class="flag-btn" title="中国語" onclick="speak('再见。', 'ザイ ジエン', 'zh-CN')">🇨🇳</button>
+            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('अलविदा。', 'アルヴィダー', 'hi-IN')">🇮🇳</button>
+            <button class="flag-btn" title="タイ語" onclick="speak('ลาก่อน', 'ラーゴーン', 'th-TH')">🇹🇭</button>
+            <button class="flag-btn" title="スウェーデン語" onclick="speak('Hej då.', 'ヘイ ドー', 'sv-SE')">🇸🇪</button>
+            <button class="flag-btn" title="クロアチア語" onclick="speak('Doviđenja.', 'ドヴィジェニャ', 'hr-HR')">🇭🇷</button>
+            <button class="flag-btn" title="ノルウェー語" onclick="speak('Ha det bra.', 'ハー デ ブラ', 'no-NO')">🇳🇴</button>
+            <button class="flag-btn" title="フィンランド語" onclick="speak('Näkemiin.', 'ナケミーン', 'fi-FI')">🇫🇮</button>
         </div>
     </div>
 
@@ -117,21 +143,21 @@
     <div class="card" data-category="greeting">
         <div class="phrase-title">4. YES</div>
         <div class="flag-container">
-            <button class="flag-btn" title="英語" onclick="speakCustom('Yes.', 'イエス', 'en-US')">🇺🇸</button>
-            <button class="flag-btn" title="スペイン語" onclick="speakCustom('Sí.', 'スィー', 'es-ES')">🇪🇸</button>
-            <button class="flag-btn" title="イタリア語" onclick="speakCustom('Sì.', 'スィー', 'it-IT')">🇮🇹</button>
-            <button class="flag-btn" title="フランス語" onclick="speakCustom('Oui.', 'ウィ', 'fr-FR')">🇫🇷</button>
-            <button class="flag-btn" title="ドイツ語" onclick="speakCustom('Ja.', 'ヤー', 'de-DE')">🇩🇪</button>
-            <button class="flag-btn" title="ポルトガル語" onclick="speakCustom('Sim.', 'シン', 'pt-PT')">🇵🇹</button>
-            <button class="flag-btn" title="トルコ語" onclick="speakCustom('Evet.', 'エヴェット', 'tr-TR')">🇹🇷</button>
-            <button class="flag-btn" title="韓国語" onclick="speakCustom('네.', 'ネ', 'ko-KR')">🇰🇷</button>
-            <button class="flag-btn" title="中国語" onclick="speakCustom('是。', 'シー', 'zh-CN')">🇨🇳</button>
-            <button class="flag-btn" title="ヒンドゥー語" onclick="speakCustom('हाँ।', 'ハーン', 'hi-IN')">🇮🇳</button>
-            <button class="flag-btn" title="タイ語" onclick="speakCustom('ใช่', 'チャイ', 'th-TH')">🇹🇭</button>
-            <button class="flag-btn" title="スウェーデン語" onclick="speakCustom('Ja.', 'ヤー', 'sv-SE')">🇸🇪</button>
-            <button class="flag-btn" title="クロアチア語" onclick="speakCustom('Da.', 'ダ', 'hr-HR')">🇭🇷</button>
-            <button class="flag-btn" title="ノルウェー語" onclick="speakCustom('Ja.', 'ヤー', 'no-NO')">🇳🇴</button>
-            <button class="flag-btn" title="フィンランド語" onclick="speakCustom('Kyllä.', 'キュッラ', 'fi-FI')">🇫🇮</button>
+            <button class="flag-btn" title="英語" onclick="speak('Yes.', 'イエス', 'en-US')">🇺🇸</button>
+            <button class="flag-btn" title="スペイン語" onclick="speak('Sí.', 'スィー', 'es-ES')">🇪🇸</button>
+            <button class="flag-btn" title="イタリア語" onclick="speak('Sì.', 'スィー', 'it-IT')">🇮🇹</button>
+            <button class="flag-btn" title="フランス語" onclick="speak('Oui.', 'ウィ', 'fr-FR')">🇫🇷</button>
+            <button class="flag-btn" title="ドイツ語" onclick="speak('Ja.', 'ヤー', 'de-DE')">🇩🇪</button>
+            <button class="flag-btn" title="ポルトガル語" onclick="speak('Sim.', 'シン', 'pt-PT')">🇵🇹</button>
+            <button class="flag-btn" title="トルコ語" onclick="speak('Evet.', 'エヴェット', 'tr-TR')">🇹🇷</button>
+            <button class="flag-btn" title="韓国語" onclick="speak('네.', 'ネ', 'ko-KR')">🇰🇷</button>
+            <button class="flag-btn" title="中国語" onclick="speak('是。', 'シー', 'zh-CN')">🇨🇳</button>
+            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('हाँ।', 'ハーン', 'hi-IN')">🇮🇳</button>
+            <button class="flag-btn" title="タイ語" onclick="speak('ใช่', 'チャイ', 'th-TH')">🇹🇭</button>
+            <button class="flag-btn" title="スウェーデン語" onclick="speak('Ja.', 'ヤー', 'sv-SE')">🇸🇪</button>
+            <button class="flag-btn" title="クロアチア語" onclick="speak('Da.', 'ダ', 'hr-HR')">🇭🇷</button>
+            <button class="flag-btn" title="ノルウェー語" onclick="speak('Ja.', 'ヤー', 'no-NO')">🇳🇴</button>
+            <button class="flag-btn" title="フィンランド語" onclick="speak('Kyllä.', 'キュッラ', 'fi-FI')">🇫🇮</button>
         </div>
     </div>
 
@@ -139,21 +165,21 @@
     <div class="card" data-category="greeting">
         <div class="phrase-title">5. NO</div>
         <div class="flag-container">
-            <button class="flag-btn" title="英語" onclick="speakCustom('No.', 'ノー', 'en-US')">🇺🇸</button>
-            <button class="flag-btn" title="スペイン語" onclick="speakCustom('No.', 'ノ', 'es-ES')">🇪🇸</button>
-            <button class="flag-btn" title="イタリア語" onclick="speakCustom('No.', 'ノ', 'it-IT')">🇮🇹</button>
-            <button class="flag-btn" title="フランス語" onclick="speakCustom('Non.', 'ノン', 'fr-FR')">🇫🇷</button>
-            <button class="flag-btn" title="ドイツ語" onclick="speakCustom('Nein.', 'ナイン', 'de-DE')">🇩🇪</button>
-            <button class="flag-btn" title="ポルトガル語" onclick="speakCustom('Não.', 'ナウン', 'pt-PT')">🇵🇹</button>
-            <button class="flag-btn" title="トルコ語" onclick="speakCustom('Hayır.', 'ハユル', 'tr-TR')">🇹🇷</button>
-            <button class="flag-btn" title="韓国語" onclick="speakCustom('아니요.', 'アニヨ', 'ko-KR')">🇰🇷</button>
-            <button class="flag-btn" title="中国語" onclick="speakCustom('不。', 'ブー', 'zh-CN')">🇨🇳</button>
-            <button class="flag-btn" title="ヒンドゥー語" onclick="speakCustom('नहीं।', 'ナヒーン', 'hi-IN')">🇮🇳</button>
-            <button class="flag-btn" title="タイ語" onclick="speakCustom('ไม่ใช่', 'マイ チャイ', 'th-TH')">🇹🇭</button>
-            <button class="flag-btn" title="スウェーデン語" onclick="speakCustom('Nej.', 'ネイ', 'sv-SE')">🇸🇪</button>
-            <button class="flag-btn" title="クロアチア語" onclick="speakCustom('Ne.', 'ネ', 'hr-HR')">🇭🇷</button>
-            <button class="flag-btn" title="ノルウェー語" onclick="speakCustom('Nei.', 'ネイ', 'no-NO')">🇳🇴</button>
-            <button class="flag-btn" title="フィンランド語" onclick="speakCustom('Ei.', 'エイ', 'fi-FI')">🇫🇮</button>
+            <button class="flag-btn" title="英語" onclick="speak('No.', 'ノー', 'en-US')">🇺🇸</button>
+            <button class="flag-btn" title="スペイン語" onclick="speak('No.', 'ノ', 'es-ES')">🇪🇸</button>
+            <button class="flag-btn" title="イタリア語" onclick="speak('No.', 'ノ', 'it-IT')">🇮🇹</button>
+            <button class="flag-btn" title="フランス語" onclick="speak('Non.', 'ノン', 'fr-FR')">🇫🇷</button>
+            <button class="flag-btn" title="ドイツ語" onclick="speak('Nein.', 'ナイン', 'de-DE')">🇩🇪</button>
+            <button class="flag-btn" title="ポルトガル語" onclick="speak('Não.', 'ナウン', 'pt-PT')">🇵🇹</button>
+            <button class="flag-btn" title="トルコ語" onclick="speak('Hayır.', 'ハユル', 'tr-TR')">🇹🇷</button>
+            <button class="flag-btn" title="韓国語" onclick="speak('아니요.', 'アニヨ', 'ko-KR')">🇰🇷</button>
+            <button class="flag-btn" title="中国語" onclick="speak('不。', 'ブー', 'zh-CN')">🇨🇳</button>
+            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('नहीं।', 'ナヒーン', 'hi-IN')">🇮🇳</button>
+            <button class="flag-btn" title="タイ語" onclick="speak('ไม่ใช่', 'マイ チャイ', 'th-TH')">🇹🇭</button>
+            <button class="flag-btn" title="スウェーデン語" onclick="speak('Nej.', 'ネイ', 'sv-SE')">🇸🇪</button>
+            <button class="flag-btn" title="クロアチア語" onclick="speak('Ne.', 'ネ', 'hr-HR')">🇭🇷</button>
+            <button class="flag-btn" title="ノルウェー語" onclick="speak('Nei.', 'ネイ', 'no-NO')">🇳🇴</button>
+            <button class="flag-btn" title="フィンランド語" onclick="speak('Ei.', 'エイ', 'fi-FI')">🇫🇮</button>
         </div>
     </div>
 
@@ -161,21 +187,21 @@
     <div class="card" data-category="greeting">
         <div class="phrase-title">6. こんにちわ</div>
         <div class="flag-container">
-            <button class="flag-btn" title="英語" onclick="speakCustom('Hello.', 'ハロー', 'en-US')">🇺🇸</button>
-            <button class="flag-btn" title="スペイン語" onclick="speakCustom('Hola.', 'オラ', 'es-ES')">🇪🇸</button>
-            <button class="flag-btn" title="イタリア語" onclick="speakCustom('Buongiorno.', 'ブオンジョルノ', 'it-IT')">🇮🇹</button>
-            <button class="flag-btn" title="フランス語" onclick="speakCustom('Bonjour.', 'ボンジュール', 'fr-FR')">🇫🇷</button>
-            <button class="flag-btn" title="ドイツ語" onclick="speakCustom('Guten Tag.', 'グーテン ターク', 'de-DE')">🇩🇪</button>
-            <button class="flag-btn" title="ポルトガル語" onclick="speakCustom('Olá.', 'オラ', 'pt-PT')">🇵🇹</button>
-            <button class="flag-btn" title="トルコ語" onclick="speakCustom('Merhaba.', 'メルハバ', 'tr-TR')">🇹🇷</button>
-            <button class="flag-btn" title="韓国語" onclick="speakCustom('안녕하세요.', 'アンニョンハセヨ', 'ko-KR')">🇰🇷</button>
-            <button class="flag-btn" title="中国語" onclick="speakCustom('你好。', 'ニーハオ', 'zh-CN')">🇨🇳</button>
-            <button class="flag-btn" title="ヒンドゥー語" onclick="speakCustom('नमस्ते।', 'ナマステ', 'hi-IN')">🇮🇳</button>
-            <button class="flag-btn" title="タイ語" onclick="speakCustom('สวัสดี', 'サワッディー', 'th-TH')">🇹🇭</button>
-            <button class="flag-btn" title="スウェーデン語" onclick="speakCustom('Hej.', 'ヘイ', 'sv-SE')">🇸🇪</button>
-            <button class="flag-btn" title="クロアチア語" onclick="speakCustom('Dobar dan.', 'ドバル ダン', 'hr-HR')">🇭🇷</button>
-            <button class="flag-btn" title="ノルウェー語" onclick="speakCustom('Hallo.', 'ハロー', 'no-NO')">🇳🇴</button>
-            <button class="flag-btn" title="フィンランド語" onclick="speakCustom('Hei.', 'ヘイ', 'fi-FI')">🇫🇮</button>
+            <button class="flag-btn" title="英語" onclick="speak('Hello.', 'ハロー', 'en-US')">🇺🇸</button>
+            <button class="flag-btn" title="スペイン語" onclick="speak('Hola.', 'オラ', 'es-ES')">🇪🇸</button>
+            <button class="flag-btn" title="イタリア語" onclick="speak('Buongiorno.', 'ブオンジョルノ', 'it-IT')">🇮🇹</button>
+            <button class="flag-btn" title="フランス語" onclick="speak('Bonjour.', 'ボンジュール', 'fr-FR')">🇫🇷</button>
+            <button class="flag-btn" title="ドイツ語" onclick="speak('Guten Tag.', 'グーテン ターク', 'de-DE')">🇩🇪</button>
+            <button class="flag-btn" title="ポルトガル語" onclick="speak('Olá.', 'オラ', 'pt-PT')">🇵🇹</button>
+            <button class="flag-btn" title="トルコ語" onclick="speak('Merhaba.', 'メルハバ', 'tr-TR')">🇹🇷</button>
+            <button class="flag-btn" title="韓国語" onclick="speak('안녕하세요.', 'アンニョンハセヨ', 'ko-KR')">🇰🇷</button>
+            <button class="flag-btn" title="中国語" onclick="speak('你好。', 'ニーハオ', 'zh-CN')">🇨🇳</button>
+            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('नमस्ते।', 'ナマステ', 'hi-IN')">🇮🇳</button>
+            <button class="flag-btn" title="タイ語" onclick="speak('สวัสดี', 'サワッディー', 'th-TH')">🇹🇭</button>
+            <button class="flag-btn" title="スウェーデン語" onclick="speak('Hej.', 'ヘイ', 'sv-SE')">🇸🇪</button>
+            <button class="flag-btn" title="クロアチア語" onclick="speak('Dobar dan.', 'ドバル ダン', 'hr-HR')">🇭🇷</button>
+            <button class="flag-btn" title="ノルウェー語" onclick="speak('Hallo.', 'ハロー', 'no-NO')">🇳🇴</button>
+            <button class="flag-btn" title="フィンランド語" onclick="speak('Hei.', 'ヘイ', 'fi-FI')">🇫🇮</button>
         </div>
     </div>
 
@@ -183,21 +209,21 @@
     <div class="card" data-category="profile">
         <div class="phrase-title">7. 私は日本から来ました</div>
         <div class="flag-container">
-            <button class="flag-btn" title="英語" onclick="speakCustom('I\'m from Japan.', 'アイム フロム ジャパン', 'en-US')">🇺🇸</button>
-            <button class="flag-btn" title="スペイン語" onclick="speakCustom('Soy de Japón.', 'ソイ デ ハポン', 'es-ES')">🇪🇸</button>
-            <button class="flag-btn" title="イタリア語" onclick="speakCustom('Vengo dal Giappone.', 'ヴェンゴ ダル ジャッポーネ', 'it-IT')">🇮🇹</button>
-            <button class="flag-btn" title="フランス語" onclick="speakCustom('Je viens du Japon.', 'ジュ ヴィアン デュ ジャポン', 'fr-FR')">🇫🇷</button>
-            <button class="flag-btn" title="ドイツ語" onclick="speakCustom('Ich komme aus Japan.', 'イッヒ コメ アウス ヤーパン', 'de-DE')">🇩🇪</button>
-            <button class="flag-btn" title="ポルトガル語" onclick="speakCustom('Sou do Japão.', 'ソウ ドゥ ジャパォン', 'pt-PT')">🇵🇹</button>
-            <button class="flag-btn" title="トルコ語" onclick="speakCustom('Japonya\'dan geliyorum.', 'ジャポンヤダン ゲリヨルム', 'tr-TR')">🇹🇷</button>
-            <button class="flag-btn" title="韓国語" onclick="speakCustom('저는 일본에서 왔어요.', 'チョヌン イルボネソ ワッソヨ', 'ko-KR')">🇰🇷</button>
-            <button class="flag-btn" title="中国語" onclick="speakCustom('我来自日本。', 'ウォー ライズー リーベン', 'zh-CN')">🇨🇳</button>
-            <button class="flag-btn" title="ヒンドゥー語" onclick="speakCustom('मैं जापान से आया हूँ।', 'アーヤー フーン', 'hi-IN')">🇮🇳</button>
-            <button class="flag-btn" title="タイ語" onclick="speakCustom('มาจากญี่ปุ่น', 'チャン マー ジャーク イープン', 'th-TH')">🇹🇭</button>
-            <button class="flag-btn" title="スウェーデン語" onclick="speakCustom('Jag kommer från Japan.', 'ヤーグ コンメル フロン ヤーパン', 'sv-SE')">🇸🇪</button>
-            <button class="flag-btn" title="クロアチア語" onclick="speakCustom('Dolazim iz Japana.', 'ドラジム イズ ジャパナ', 'hr-HR')">🇭🇷</button>
-            <button class="flag-btn" title="ノルウェー語" onclick="speakCustom('Jeg kommer fra Japan.', 'イェイ コンメル フラ ヤーパン', 'no-NO')">🇳🇴</button>
-            <button class="flag-btn" title="フィンランド語" onclick="speakCustom('Olen kotoisin Japanista.', 'オレン コトイシン ヤパニスタ', 'fi-FI')">🇫🇮</button>
+            <button class="flag-btn" title="英語" onclick="speak('I\'m from Japan.', 'アイム フロム ジャパン', 'en-US')">🇺🇸</button>
+            <button class="flag-btn" title="スペイン語" onclick="speak('Soy de Japón.', 'ソイ デ ハポン', 'es-ES')">🇪🇸</button>
+            <button class="flag-btn" title="イタリア語" onclick="speak('Vengo dal Giappone.', 'ヴェンゴ ダル ジャッポーネ', 'it-IT')">🇮🇹</button>
+            <button class="flag-btn" title="フランス語" onclick="speak('Je viens du Japon.', 'ジュ ヴィアン デュ ジャポン', 'fr-FR')">🇫🇷</button>
+            <button class="flag-btn" title="ドイツ語" onclick="speak('Ich komme aus Japan.', 'イッヒ コメ アウス ヤーパン', 'de-DE')">🇩🇪</button>
+            <button class="flag-btn" title="ポルトガル語" onclick="speak('Sou do Japão.', 'ソウ ドゥ ジャパォン', 'pt-PT')">🇵🇹</button>
+            <button class="flag-btn" title="トルコ語" onclick="speak('Japonya\'dan geliyorum.', 'ジャポンヤダン ゲリヨルム', 'tr-TR')">🇹🇷</button>
+            <button class="flag-btn" title="韓国語" onclick="speak('저는 일본에서 왔어요.', 'チョヌン イルボネソ ワッソヨ', 'ko-KR')">🇰🇷</button>
+            <button class="flag-btn" title="中国語" onclick="speak('我来自日本。', 'ウォー ライズー リーベン', 'zh-CN')">🇨🇳</button>
+            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('मैं जापान से आया हूँ।', '男性：アーヤー フーン\n女性：アーイー フーン', 'hi-IN')">🇮🇳</button>
+            <button class="flag-btn" title="タイ語" onclick="speak('มาจากญี่ปุ่น', '女性：チャン マー ジャーク イープン\n男性：ポム マー ジャーク イープン', 'th-TH')">🇹🇭</button>
+            <button class="flag-btn" title="スウェーデン語" onclick="speak('Jag kommer från Japan.', 'ヤーグ コンメル フロン ヤーパン', 'sv-SE')">🇸🇪</button>
+            <button class="flag-btn" title="クロアチア語" onclick="speak('Dolazim iz Japana.', 'ドラジム イズ ジャパナ', 'hr-HR')">🇭🇷</button>
+            <button class="flag-btn" title="ノルウェー語" onclick="speak('Jeg kommer fra Japan.', 'イェイ コンメル フラ ヤーパン', 'no-NO')">🇳🇴</button>
+            <button class="flag-btn" title="フィンランド語" onclick="speak('Olen kotoisin Japanista.', 'オレン コトイシン ヤパニスタ', 'fi-FI')">🇫🇮</button>
         </div>
     </div>
 
@@ -205,21 +231,21 @@
     <div class="card" data-category="profile">
         <div class="phrase-title">8. 私の名前はサトシです</div>
         <div class="flag-container">
-            <button class="flag-btn" title="英語" onclick="speakCustom('My name is Satoshi.', 'マイ ネーム イズ サトシ', 'en-US')">🇺🇸</button>
-            <button class="flag-btn" title="スペイン語" onclick="speakCustom('Me llamo Satoshi.', 'メ リャモ サトシ', 'es-ES')">🇪🇸</button>
-            <button class="flag-btn" title="イタリア語" onclick="speakCustom('Mi chiamo Satoshi.', 'ミ キアーモ サトシ', 'it-IT')">🇮🇹</button>
-            <button class="flag-btn" title="フランス語" onclick="speakCustom('Je m\'appelle Satoshi.', 'ジュ マペル サトシ', 'fr-FR')">🇫🇷</button>
-            <button class="flag-btn" title="ドイツ語" onclick="speakCustom('Ich heiße Satoshi.', 'イッヒ ハイセ サトシ', 'de-DE')">🇩🇪</button>
-            <button class="flag-btn" title="ポルトガル語" onclick="speakCustom('Chamo-me Satoshi.', 'シャモ メ サトシ', 'pt-PT')">🇵🇹</button>
-            <button class="flag-btn" title="トルコ語" onclick="speakCustom('Benim adım Satoshi.', 'ベニム アドゥム サトシ', 'tr-TR')">🇹🇷</button>
-            <button class="flag-btn" title="韓国語" onclick="speakCustom('제 이름은 사토시입니다.', 'チェ イロムン サトシイムニダ', 'ko-KR')">🇰🇷</button>
-            <button class="flag-btn" title="中国語" onclick="speakCustom('我叫サトシ。', 'ウォー ジァオ サトシ', 'zh-CN')">🇨🇳</button>
-            <button class="flag-btn" title="ヒンドゥー語" onclick="speakCustom('मेरा नाम सातोशी है।', 'メーラー ナーム サトシ ハィ', 'hi-IN')">🇮🇳</button>
-            <button class="flag-btn" title="タイ語" onclick="speakCustom('ผมชื่อซาโตชิครับ', 'ポム チュー サトシ クラップ', 'th-TH')">🇹🇭</button>
-            <button class="flag-btn" title="スウェーデン語" onclick="speakCustom('Jag heter Satoshi.', 'ヤーグ ヘーテル サトシ', 'sv-SE')">🇸🇪</button>
-            <button class="flag-btn" title="クロアチア語" onclick="speakCustom('Zovem se Satoshi.', 'ゾヴェム セ サトシ', 'hr-HR')">🇭🇷</button>
-            <button class="flag-btn" title="ノルウェー語" onclick="speakCustom('Jeg heter Satoshi.', 'イェイ ヘーテル サトシ', 'no-NO')">🇳🇴</button>
-            <button class="flag-btn" title="フィンランド語" onclick="speakCustom('Nimeni on Satoshi.', 'ニメニ オン サトシ', 'fi-FI')">🇫🇮</button>
+            <button class="flag-btn" title="英語" onclick="speak('My name is Satoshi.', 'マイ ネーム イズ サトシ', 'en-US')">🇺🇸</button>
+            <button class="flag-btn" title="スペイン語" onclick="speak('Me llamo Satoshi.', 'メ リャモ サトシ', 'es-ES')">🇪🇸</button>
+            <button class="flag-btn" title="イタリア語" onclick="speak('Mi chiamo Satoshi.', 'ミ キアーモ サトシ', 'it-IT')">🇮🇹</button>
+            <button class="flag-btn" title="フランス語" onclick="speak('Je m\'appelle Satoshi.', 'ジュ マペル サトシ', 'fr-FR')">🇫🇷</button>
+            <button class="flag-btn" title="ドイツ語" onclick="speak('Ich heiße Satoshi.', 'イッヒ ハイセ サトシ', 'de-DE')">🇩🇪</button>
+            <button class="flag-btn" title="ポルトガル語" onclick="speak('Chamo-me Satoshi.', 'シャモ メ サトシ', 'pt-PT')">🇵🇹</button>
+            <button class="flag-btn" title="トルコ語" onclick="speak('Benim adım Satoshi.', 'ベニム アドゥム サトシ', 'tr-TR')">🇹🇷</button>
+            <button class="flag-btn" title="韓国語" onclick="speak('제 이름은 사토시입니다.', 'チェ イロムン サトシイムニダ', 'ko-KR')">🇰🇷</button>
+            <button class="flag-btn" title="中国語" onclick="speak('我叫サトシ。', 'ウォー ジァオ サトシ', 'zh-CN')">🇨🇳</button>
+            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('मेरा नाम सातोशी है।', 'メーラー ナーム サトシ ハィ', 'hi-IN')">🇮🇳</button>
+            <button class="flag-btn" title="タイ語" onclick="speak('ผมชื่อซาโตชิครับ', 'ポム チュー サトシ クラップ', 'th-TH')">🇹🇭</button>
+            <button class="flag-btn" title="スウェーデン語" onclick="speak('Jag heter Satoshi.', 'ヤーグ ヘーテル サトシ', 'sv-SE')">🇸🇪</button>
+            <button class="flag-btn" title="クロアチア語" onclick="speak('Zovem se Satoshi.', 'ゾヴェム セ サトシ', 'hr-HR')">🇭🇷</button>
+            <button class="flag-btn" title="ノルウェー語" onclick="speak('Jeg heter Satoshi.', 'イェイ ヘーテル サトシ', 'no-NO')">🇳🇴</button>
+            <button class="flag-btn" title="フィンランド語" onclick="speak('Nimeni on Satoshi.', 'ニメニ オン サトシ', 'fi-FI')">🇫🇮</button>
         </div>
     </div>
 
@@ -227,21 +253,21 @@
     <div class="card" data-category="profile">
         <div class="phrase-title">9. 私の名前はヒトミです</div>
         <div class="flag-container">
-            <button class="flag-btn" title="英語" onclick="speakCustom('My name is Hitomi.', 'マイ ネーム イズ ヒトミ', 'en-US')">🇺🇸</button>
-            <button class="flag-btn" title="スペイン語" onclick="speakCustom('Me llamo Hitomi.', 'メ リャモ ヒトミ', 'es-ES')">🇪🇸</button>
-            <button class="flag-btn" title="イタリア語" onclick="speakCustom('Mi chiamo Hitomi.', 'ミ キアーモ ヒトミ', 'it-IT')">🇮🇹</button>
-            <button class="flag-btn" title="フランス語" onclick="speakCustom('Je m\'appelle Hitomi.', 'ジュ マペル ヒトミ', 'fr-FR')">🇫🇷</button>
-            <button class="flag-btn" title="ドイツ語" onclick="speakCustom('Ich heiße Hitomi.', 'イッヒ ハイセ ヒトミ', 'de-DE')">🇩🇪</button>
-            <button class="flag-btn" title="ポルトガル語" onclick="speakCustom('Chamo-me Hitomi.', 'シャモ メ ヒトミ', 'pt-PT')">🇵🇹</button>
-            <button class="flag-btn" title="トルコ語" onclick="speakCustom('Benim adım Hitomi.', 'ベニム アドゥム ヒトミ', 'tr-TR')">🇹🇷</button>
-            <button class="flag-btn" title="韓国語" onclick="speakCustom('제 이름은 히토미입니다.', 'チェ イロムン ヒトミイムニダ', 'ko-KR')">🇰🇷</button>
-            <button class="flag-btn" title="中国語" onclick="speakCustom('我叫Hitomi。', 'ウォー ジァオ ヒトミ', 'zh-CN')">🇨🇳</button>
-            <button class="flag-btn" title="ヒンドゥー語" onclick="speakCustom('मेरा नाम हितomi है।', 'メーラー ナーム ヒトミ ハィ', 'hi-IN')">🇮🇳</button>
-            <button class="flag-btn" title="タイ語" onclick="speakCustom('ดิฉันชื่อฮิโตมิค่ะ', 'ディチャン チュー ヒトミ カ', 'th-TH')">🇹🇭</button>
-            <button class="flag-btn" title="スウェーデン語" onclick="speakCustom('Jag heter Hitomi.', 'ヤーグ ヘーテル ヒトミ', 'sv-SE')">🇸🇪</button>
-            <button class="flag-btn" title="クロアチア語" onclick="speakCustom('Zovem se Hitomi.', 'ゾヴェム セ ヒトミ', 'hr-HR')">🇭🇷</button>
-            <button class="flag-btn" title="ノルウェー語" onclick="speakCustom('Jeg heter Hitomi.', 'イェイ ヘーテル ヒトミ', 'no-NO')">🇳🇴</button>
-            <button class="flag-btn" title="フィンランド語" onclick="speakCustom('Nimeni on Hitomi.', 'ニメニ オン ヒトミ', 'fi-FI')">🇫🇮</button>
+            <button class="flag-btn" title="英語" onclick="speak('My name is Hitomi.', 'マイ ネーム イズ ヒトミ', 'en-US')">🇺🇸</button>
+            <button class="flag-btn" title="スペイン語" onclick="speak('Me llamo Hitomi.', 'メ リャモ ヒトミ', 'es-ES')">🇪🇸</button>
+            <button class="flag-btn" title="イタリア語" onclick="speak('Mi chiamo Hitomi.', 'ミ キアーモ ヒトミ', 'it-IT')">🇮🇹</button>
+            <button class="flag-btn" title="フランス語" onclick="speak('Je m\'appelle Hitomi.', 'ジュ マペル ヒトミ', 'fr-FR')">🇫🇷</button>
+            <button class="flag-btn" title="ドイツ語" onclick="speak('Ich heiße Hitomi.', 'イッヒ ハイセ ヒトミ', 'de-DE')">🇩🇪</button>
+            <button class="flag-btn" title="ポルトガル語" onclick="speak('Chamo-me Hitomi.', 'シャモ メ ヒトミ', 'pt-PT')">🇵🇹</button>
+            <button class="flag-btn" title="トルコ語" onclick="speak('Benim adım Hitomi.', 'ベニム アドゥム ヒトミ', 'tr-TR')">🇹🇷</button>
+            <button class="flag-btn" title="韓国語" onclick="speak('제 이름은 히토미입니다.', 'チェ イロムン ヒトミイムニダ', 'ko-KR')">🇰🇷</button>
+            <button class="flag-btn" title="中国語" onclick="speak('我叫Hitomi。', 'ウォー ジァオ ヒトミ', 'zh-CN')">🇨🇳</button>
+            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('मेरा नाम हितomi है।', 'メーラー ナーム ヒトミ ハィ', 'hi-IN')">🇮🇳</button>
+            <button class="flag-btn" title="タイ語" onclick="speak('ดิฉันชื่อฮิโตมิค่ะ', 'ディチャン チュー ヒトミ カ', 'th-TH')">🇹🇭</button>
+            <button class="flag-btn" title="スウェーデン語" onclick="speak('Jag heter Hitomi.', 'ヤーグ ヘーテル ヒトミ', 'sv-SE')">🇸🇪</button>
+            <button class="flag-btn" title="クロアチア語" onclick="speak('Zovem se Hitomi.', 'ゾヴェム セ ヒトミ', 'hr-HR')">🇭🇷</button>
+            <button class="flag-btn" title="ノルウェー語" onclick="speak('Jeg heter Hitomi.', 'イェイ ヘーテル ヒトミ', 'no-NO')">🇳🇴</button>
+            <button class="flag-btn" title="フィンランド語" onclick="speak('Nimeni on Hitomi.', 'ニメニ オン ヒトミ', 'fi-FI')">🇫🇮</button>
         </div>
     </div>
 
@@ -249,21 +275,21 @@
     <div class="card" data-category="food">
         <div class="phrase-title">10. 美味しいです</div>
         <div class="flag-container">
-            <button class="flag-btn" title="英語" onclick="speakCustom('It is delicious.', 'イット イズ ディリシャス', 'en-US')">🇺🇸</button>
-            <button class="flag-btn" title="スペイン語" onclick="speakCustom('Está muy rico.', 'エスタ ムイ リコ', 'es-ES')">🇪🇸</button>
-            <button class="flag-btn" title="イタリア語" onclick="speakCustom('È delizioso.', 'エ デリツィオーゾ', 'it-IT')">🇮🇹</button>
-            <button class="flag-btn" title="フランス語" onclick="speakCustom('C\'est délicieux.', 'セ デリシユー', 'fr-FR')">🇫🇷</button>
-            <button class="flag-btn" title="ドイツ語" onclick="speakCustom('Es ist sehr lecker.', 'エス イスト ゼア レッカー', 'de-DE')">🇩🇪</button>
-            <button class="flag-btn" title="ポルトガル語" onclick="speakCustom('Está delicioso.', 'エスタ デリシオゾ', 'pt-PT')">🇵🇹</button>
-            <button class="flag-btn" title="トルコ語" onclick="speakCustom('Çok lezzetli.', 'チョク レッツェッティ', 'tr-TR')">🇹🇷</button>
-            <button class="flag-btn" title="韓国語" onclick="speakCustom('맛있어요.', 'マシッソヨ', 'ko-KR')">🇰🇷</button>
-            <button class="flag-btn" title="中国語" onclick="speakCustom('很好吃。', 'ヘン ハオ チー', 'zh-CN')">🇨🇳</button>
-            <button class="flag-btn" title="ヒンドゥー語" onclick="speakCustom('यह बहुत स्वादिष्ट है।', 'イェ バフート スヴァーディシュタ ヘー', 'hi-IN')">🇮🇳</button>
-            <button class="flag-btn" title="タイ語" onclick="speakCustom('อร่อยมากค่ะ', 'アロイ マーク カ', 'th-TH')">🇹🇭</button>
-            <button class="flag-btn" title="スウェーデン語" onclick="speakCustom('Det är jättegott.', 'デ アー イェッテゴット', 'sv-SE')">🇸🇪</button>
-            <button class="flag-btn" title="クロアチア語" onclick="speakCustom('Ukusno je.', 'ウクスノ イェ', 'hr-HR')">🇭🇷</button>
-            <button class="flag-btn" title="ノルウェー語" onclick="speakCustom('Det er veldig godt.', 'デ エア ヴェルディ ゴット', 'no-NO')">🇳🇴</button>
-            <button class="flag-btn" title="フィンランド語" onclick="speakCustom('Tämä on todella hyvää.', 'タマ オン トデルラ ヒュヴァー', 'fi-FI')">🇫🇮</button>
+            <button class="flag-btn" title="英語" onclick="speak('It is delicious.', 'イット イズ ディリシャス', 'en-US')">🇺🇸</button>
+            <button class="flag-btn" title="スペイン語" onclick="speak('Está muy rico.', 'エスタ ムイ リコ', 'es-ES')">🇪🇸</button>
+            <button class="flag-btn" title="イタリア語" onclick="speak('È delizioso.', 'エ デリツィオーゾ', 'it-IT')">🇮🇹</button>
+            <button class="flag-btn" title="フランス語" onclick="speak('C\'est délicieux.', 'セ デリシユー', 'fr-FR')">🇫🇷</button>
+            <button class="flag-btn" title="ドイツ語" onclick="speak('Es ist sehr lecker.', 'エス イスト ゼア レッカー', 'de-DE')">🇩🇪</button>
+            <button class="flag-btn" title="ポルトガル語" onclick="speak('Está delicioso.', 'エスタ デリシオゾ', 'pt-PT')">🇵🇹</button>
+            <button class="flag-btn" title="トルコ語" onclick="speak('Çok lezzetli.', 'チョク レッツェッティ', 'tr-TR')">🇹🇷</button>
+            <button class="flag-btn" title="韓国語" onclick="speak('맛있어요.', 'マシッソヨ', 'ko-KR')">🇰🇷</button>
+            <button class="flag-btn" title="中国語" onclick="speak('很好吃。', 'ヘン ハオ チー', 'zh-CN')">🇨🇳</button>
+            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('यह बहुत स्वादिष्ट है।', 'イェ バフート スヴァーディシュタ ヘー', 'hi-IN')">🇮🇳</button>
+            <button class="flag-btn" title="タイ語" onclick="speak('อร่อยมากค่ะ', 'アロイ マーク カ', 'th-TH')">🇹🇭</button>
+            <button class="flag-btn" title="スウェーデン語" onclick="speak('Det är jättegott.', 'デ アー イェッテゴット', 'sv-SE')">🇸🇪</button>
+            <button class="flag-btn" title="クロアチア語" onclick="speak('Ukusno je.', 'ウクスノ イェ', 'hr-HR')">🇭🇷</button>
+            <button class="flag-btn" title="ノルウェー語" onclick="speak('Det er veldig godt.', 'デ エア ヴェルディ ゴット', 'no-NO')">🇳🇴</button>
+            <button class="flag-btn" title="フィンランド語" onclick="speak('Tämä on todella hyvää.', 'タマ オン トデルラ ヒュヴァー', 'fi-FI')">🇫🇮</button>
         </div>
     </div>
 
@@ -298,23 +324,37 @@
             });
         }
 
-        // 音声再生 兼 検索窓ワード連動関数
-        function speakCustom(defaultWord, furigana, langCode) {
-            // 検索窓に入力されている文字があるかチェック
+        // 従来のフレーズ別ボタンを押したとき
+        function speak(word, furigana, langCode) {
+            document.getElementById('text-sub').innerText = furigana;
+            document.getElementById('text-main').innerText = word;
+
+            playSpeech(word, langCode);
+        }
+
+        // 検索窓の下にある「国旗アイコン」を押したとき
+        function speakGlobal(langCode) {
             let userInput = document.getElementById('customInput').value.trim();
             
-            // 入力があれば「表示するメイン文字」をその入力文字にする（なければデフォルトの外国語）
-            let displayWord = userInput !== "" ? userInput + " (" + defaultWord + ")" : defaultWord;
-            let displaySub = userInput !== "" ? "自由入力: " + userInput : furigana;
+            if (userInput === "") {
+                document.getElementById('text-sub').innerText = "検索窓に言葉を入れてね";
+                document.getElementById('text-main').innerText = "⚠️ 言葉が未入力です";
+                return;
+            }
 
-            document.getElementById('text-sub').innerText = displaySub;
-            document.getElementById('text-main').innerText = displayWord;
+            // 入力された日本語をそのまま音声合成に渡す（または翻訳風に喋らせる）
+            document.getElementById('text-sub').innerText = "自由入力の音声再生";
+            document.getElementById('text-main').innerText = userInput;
 
+            playSpeech(userInput, langCode);
+        }
+
+        // 共通の音声再生エンジン（Macバグ対策込み）
+        function playSpeech(text, langCode) {
             window.speechSynthesis.cancel();
             
             setTimeout(() => {
-                // 喋らせる言葉（検索窓に文字があれば、そのまま読むか、あるいはボタン本来の外国語を発音させるか選べます。今回は外国語を発音）
-                let utterance = new SpeechSynthesisUtterance(defaultWord);
+                let utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = langCode;
                 utterance.rate = 0.85;
 
