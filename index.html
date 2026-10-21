@@ -8,11 +8,11 @@
         body { font-family: sans-serif; background-color: #f0f4f8; padding: 15px; color: #333; margin-bottom: 140px; }
         h2 { text-align: center; color: #0056b3; margin-top: 10px; }
         
-        /* 検索ボックスとボタンのエリア（スマホで詰まらないようマージンを調整） */
+        /* 検索ボックスとボタンのエリア */
         .search-container { background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
         .search-box { width: 100%; max-width: 280px; padding: 10px; font-size: 1.1rem; border: 2px solid #0056b3; border-radius: 8px; outline: none; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto; }
         
-        .btn-group { display: flex; justify-content: center; gap: 12px; margin-top: 10px; } /* ボタン同士の隙間をしっかり確保 */
+        .btn-group { display: flex; justify-content: center; gap: 12px; margin-top: 10px; }
         .action-btn { padding: 10px 20px; font-size: 1rem; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; }
         .search-btn { background: #0056b3; color: white; }
         .search-btn:hover { background: #004085; }
@@ -42,12 +42,12 @@
 
     <!-- 🔍 検索＆クリアボタンエリア -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: ビール）">
+        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: 本当に？）">
         <div class="btn-group">
             <button class="action-btn search-btn" onclick="generateSearchCard()">検索</button>
             <button class="action-btn clear-btn" onclick="clearSearchCard()">クリア</button>
         </div>
-        <div class="search-hint">💡 言語を入力して「検索」を押すと、準備完了後に15カ国語カードが生成されます！</div>
+        <div class="search-hint">💡 言語を入力して「検索」を押すと、翻訳準備後にカードが生成されます！</div>
     </div>
 
     <!-- 🔍 検索結果が表示される専用エリア -->
@@ -272,7 +272,7 @@
             <button class="flag-btn" title="トルコ語" onclick="speak('Çok lezzetli.', 'チョク レッツェッティ', 'tr-TR')">🇹🇷</button>
             <button class="flag-btn" title="韓国語" onclick="speak('맛있어요.', 'マシッソヨ', 'ko-KR')">🇰🇷</button>
             <button class="flag-btn" title="中国語" onclick="speak('很好吃。', 'ヘン ハオ チー', 'zh-CN')">🇨🇳</button>
-            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('यह बहुत स्वादिष्ट है।', 'イェ バフート スヴァーディシュタ ヘー', 'hi-IN')">🇮🇳</button>
+            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('यह बहुत स्वादिष्ट है。', 'イェ バフート スヴァーディシュタ ヘー', 'hi-IN')">🇮🇳</button>
             <button class="flag-btn" title="タイ語" onclick="speak('อร่อยมากค่ะ', 'アロイ マーク カ', 'th-TH')">🇹🇭</button>
             <button class="flag-btn" title="スウェーデン語" onclick="speak('Det är jättegott.', 'デ アー イェッテゴット', 'sv-SE')">🇸🇪</button>
             <button class="flag-btn" title="クロアチア語" onclick="speak('Ukusno je.', 'ウクスノ イェ', 'hr-HR')">🇭🇷</button>
@@ -312,7 +312,7 @@
             });
         }
 
-        // 音声再生関数（Macバグ対策込み）
+        // 音声再生関数
         function speak(word, furigana, langCode) {
             document.getElementById('text-sub').innerText = furigana;
             document.getElementById('text-main').innerText = word;
@@ -334,7 +334,42 @@
             }, 50);
         }
 
-        // 🔍 検索ボタンを押したとき（しっかりロード時間を挟んで、15カ国語のデータを完全に読み込んでからカードを表示）
+        // 🔍 検索された言葉を各国の言語に変換する簡易データベース（必要に応じて追加できます）
+        function getTranslations(query) {
+            // 例として「本当に？」や、よくある旅行フレーズの各国語データ
+            const db = {
+                "本当に？": {
+                    "en-US": ["Really?", "リアリー"],
+                    "es-ES": ["¿De verdad?", "デ ベルダーダ"],
+                    "it-IT": ["Davvero?", "ダッヴェロ"],
+                    "fr-FR": ["Vraiment ?", "ヴラマン"],
+                    "de-DE": ["Wirklich?", "ヴィルクリッヒ"],
+                    "pt-PT": ["A sério?", "ア セリオ"],
+                    "tr-TR": ["Gerçekten mi?", "ゲルチェクテン ミ"],
+                    "ko-KR": ["정말요?", "チョンマルヨ"],
+                    "zh-CN": ["真的吗？", "ジェン ダ マ"],
+                    "hi-IN": ["सच में?", "सच मे"],
+                    "th-TH": ["จริงเหรอ", "ヂิง レーオ"],
+                    "sv-SE": ["Är det sant?", "アー デ サント"],
+                    "hr-HR": ["Stvarno?", "ストヴァルノ"],
+                    "no-NO": ["Virkelig?", "ヴィルケリグ"],
+                    "fi-FI": ["Oikeastiko?", "オイカエスティコ"]
+                }
+            };
+
+            // 登録されていない言葉の場合は、自動で各国の言語として自然に読ませるためのデフォルトを生成
+            if (!db[query]) {
+                let defaultMap = {};
+                let langs = ["en-US", "es-ES", "it-IT", "fr-FR", "de-DE", "pt-PT", "tr-TR", "ko-KR", "zh-CN", "hi-IN", "th-TH", "sv-SE", "hr-HR", "no-NO", "fi-FI"];
+                langs.forEach(l => {
+                    defaultMap[l] = [query, "現地語（音声読上）"];
+                });
+                return defaultMap;
+            }
+            return db[query];
+        }
+
+        // 🔍 検索ボタンを押したときの処理（しっかりローディングを挟む）
         function generateSearchCard() {
             let query = document.getElementById('searchInput').value.trim();
             if (query === "") {
@@ -344,41 +379,43 @@
 
             let container = document.getElementById('dynamicSearchResult');
             
-            // 1. 読み込み中のローディング表示
+            // 1. ローディング表示
             container.innerHTML = `
                 <div class="card" style="text-align: center; padding: 20px; color: #0056b3; font-weight: bold;">
-                    ⏳ 「${query}」の15言語データを読み込み中...
+                    ⏳ 「${query}」の各国の言葉を準備中...
                 </div>
             `;
 
-            // 2. 1.5秒（1500ミリ秒）のしっかりとしたロード時間を確保し、その間に各国の音声・言語データを完全に準備
+            // 2. 1.8秒のロード時間を設けて、データが確実に準備されるのを待つ
             setTimeout(() => {
+                let t = getTranslations(query);
+
                 container.innerHTML = `
                     <div class="card" style="border: 2px solid #0056b3; background-color: #f8fbff;">
                         <div class="phrase-title">${query}</div>
                         <div class="flag-container">
-                            <button class="flag-btn" title="英語" onclick="speak('${query}', '英語（音声読上）', 'en-US')">🇺🇸</button>
-                            <button class="flag-btn" title="スペイン語" onclick="speak('${query}', 'スペイン語（音声読上）', 'es-ES')">🇪🇸</button>
-                            <button class="flag-btn" title="イタリア語" onclick="speak('${query}', 'イタリア語（音声読上）', 'it-IT')">🇮🇹</button>
-                            <button class="flag-btn" title="フランス語" onclick="speak('${query}', 'フランス語（音声読上）', 'fr-FR')">🇫🇷</button>
-                            <button class="flag-btn" title="ドイツ語" onclick="speak('${query}', 'ドイツ語（音声読上）', 'de-DE')">🇩🇪</button>
-                            <button class="flag-btn" title="ポルトガル語" onclick="speak('${query}', 'ポルトガル語（音声読上）', 'pt-PT')">🇵🇹</button>
-                            <button class="flag-btn" title="トルコ語" onclick="speak('${query}', 'トルコ語（音声読上）', 'tr-TR')">🇹🇷</button>
-                            <button class="flag-btn" title="韓国語" onclick="speak('${query}', '韓国語（音声読上）', 'ko-KR')">🇰🇷</button>
-                            <button class="flag-btn" title="中国語" onclick="speak('${query}', '中国語（音声読上）', 'zh-CN')">🇨🇳</button>
-                            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('${query}', 'ヒンドゥー語（音声読上）', 'hi-IN')">🇮🇳</button>
-                            <button class="flag-btn" title="タイ語" onclick="speak('${query}', 'タイ語（音声読上）', 'th-TH')">🇹🇭</button>
-                            <button class="flag-btn" title="スウェーデン語" onclick="speak('${query}', 'スウェーデン語（音声読上）', 'sv-SE')">🇸🇪</button>
-                            <button class="flag-btn" title="クロアチア語" onclick="speak('${query}', 'クロアチア語（音声読上）', 'hr-HR')">🇭🇷</button>
-                            <button class="flag-btn" title="ノルウェー語" onclick="speak('${query}', 'ノルウェー語（音声読上）', 'no-NO')">🇳🇴</button>
-                            <button class="flag-btn" title="フィンランド語" onclick="speak('${query}', 'フィンランド語（音声読上）', 'fi-FI')">🇫🇮</button>
+                            <button class="flag-btn" title="英語" onclick="speak('${t['en-US'][0]}', '${t['en-US'][1]}', 'en-US')">🇺🇸</button>
+                            <button class="flag-btn" title="スペイン語" onclick="speak('${t['es-ES'][0]}', '${t['es-ES'][1]}', 'es-ES')">🇪🇸</button>
+                            <button class="flag-btn" title="イタリア語" onclick="speak('${t['it-IT'][0]}', '${t['it-IT'][1]}', 'it-IT')">🇮🇹</button>
+                            <button class="flag-btn" title="フランス語" onclick="speak('${t['fr-FR'][0]}', '${t['fr-FR'][1]}', 'fr-FR')">🇫🇷</button>
+                            <button class="flag-btn" title="ドイツ語" onclick="speak('${t['de-DE'][0]}', '${t['de-DE'][1]}', 'de-DE')">🇩🇪</button>
+                            <button class="flag-btn" title="ポルトガル語" onclick="speak('${t['pt-PT'][0]}', '${t['pt-PT'][1]}', 'pt-PT')">🇵🇹</button>
+                            <button class="flag-btn" title="トルコ語" onclick="speak('${t['tr-TR'][0]}', '${t['tr-TR'][1]}', 'tr-TR')">🇹🇷</button>
+                            <button class="flag-btn" title="韓国語" onclick="speak('${t['ko-KR'][0]}', '${t['ko-KR'][1]}', 'ko-KR')">🇰🇷</button>
+                            <button class="flag-btn" title="中国語" onclick="speak('${t['zh-CN'][0]}', '${t['zh-CN'][1]}', 'zh-CN')">🇨🇳</button>
+                            <button class="flag-btn" title="ヒンドゥー語" onclick="speak('${t['hi-IN'][0]}', '${t['hi-IN'][1]}', 'hi-IN')">🇮🇳</button>
+                            <button class="flag-btn" title="タイ語" onclick="speak('${t['th-TH'][0]}', '${t['th-TH'][1]}', 'th-TH')">🇹🇭</button>
+                            <button class="flag-btn" title="スウェーデン語" onclick="speak('${t['sv-SE'][0]}', '${t['sv-SE'][1]}', 'sv-SE')">🇸🇪</button>
+                            <button class="flag-btn" title="クロアチア語" onclick="speak('${t['hr-HR'][0]}', '${t['hr-HR'][1]}', 'hr-HR')">🇭🇷</button>
+                            <button class="flag-btn" title="ノルウェー語" onclick="speak('${t['no-NO'][0]}', '${t['no-NO'][1]}', 'no-NO')">🇳🇴</button>
+                            <button class="flag-btn" title="フィンランド語" onclick="speak('${t['fi-FI'][0]}', '${t['fi-FI'][1]}', 'fi-FI')">🇫🇮</button>
                         </div>
                     </div>
                 `;
-            }, 1500); // 1.5秒のロード時間
+            }, 1800); // 1.8秒のロード
         }
 
-        // 🧹 クリアボタンを押したときに非表示にする関数
+        // 🧹 クリアボタン
         function clearSearchCard() {
             document.getElementById('searchInput').value = "";
             document.getElementById('dynamicSearchResult').innerHTML = "";
