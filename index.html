@@ -43,7 +43,7 @@
 
     <!-- 🔍 検索＆クリアボタンエリア -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: ありがとう）">
+        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: 楽しい）">
         <div class="btn-group">
             <button class="action-btn search-btn" onclick="generateSearchCard()">検索</button>
             <button class="action-btn clear-btn" onclick="clearSearchCard()">クリア</button>
@@ -138,7 +138,7 @@
             { id: 9, cat: "profile", jp: "私の名前はヒトミです", data: { 
                 "en-US": ["My name is Hitomi", "マイ ネーム イズ ヒトミ"], "es-ES": ["Me llamo Hitomi", "メ リャモ ヒトミ"], "it-IT": ["Mi chiamo Hitomi", "ミ キアーモ ヒトミ"], 
                 "fr-FR": ["Je m appelle Hitomi", "ジュ マペル ヒトミ"], "de-DE": ["Ich heiße Hitomi", "イッヒ ハイセ ヒトミ"], "pt-PT": ["Chamo me Hitomi", "シャモ メ ヒトミ"], 
-                "tr-TR": ["Benim adım Hitomi", "ベニム アドゥム ヒトミ"], "ko-KR": ["제 이름은 히토미입니다", "チェ イロムン ヒ토미イムニダ"], "zh-CN": ["我叫Hitomi", "ウォー ジァオ ヒトミ"], 
+                "tr-TR": ["Benim adım Hitomi", "ベニム アドゥム ヒトミ"], "ko-KR": ["제 이름은 히토미입니다", "チェ イロムン ヒ토미이ムニダ"], "zh-CN": ["我叫Hitomi", "ウォー ジァオ ヒトミ"], 
                 "hi-IN": ["Mera naam Hitomi hai", "メーラー ナーム ヒトミ"], "th-TH": ["ดิฉันชื่อฮิโตมิ", "ディチャン チュー ヒトミ"], "sv-SE": ["Jag heter Hitomi", "ヤーグ ヘーテル ヒトミ"], 
                 "hr-HR": ["Zovem se Hitomi", "ゾヴェム セ ヒトミ"], "no-NO": ["Jeg heter Hitomi", "イェイ ヘーテル ヒトミ"], "fi-FI": ["Nimeni on Hitomi", "ニメニ オン ヒトミ"], "id-ID": ["Nama saya Hitomi", "ナマ サヤ ヒトミ"] 
             } },
@@ -195,7 +195,7 @@
             } },
             { id: 17, cat: "food", jp: "お手洗いはどこですか？", data: { 
                 "en-US": ["Where is the restroom?", "ホウェア イズ ザ レストルーム？"], "es-ES": ["¿Dónde está el baño?", "ドンド エスタ エル バニョ？"], "it-IT": ["Dov'è il bagno?", "ドヴェ イル バニョ？"], 
-                "fr-FR": ["Ou sont les toilettes", "ウ ソン レ トワレット？"], "de-DE": ["Wo ist die Toilette?", "ヴォー イスト ディー トワレッテ？"], "pt-PT": ["Onde fica a casa de banho?", "オンド フィカ ア カザ デ バニョ？"], 
+                "fr-FR": ["Ou sont les toilettes", "ウ ソン レ トワレット？"], "de-DE": ["Wo ist die Toilette?", "ヴォー イスト ディー トワレッテ？"], "pt-PT": ["Onde fica a casa de banho?", "オンド フィカ A カザ デ バニョ？"], 
                 "tr-TR": ["Tuvalet nerede?", "トゥヴァレット ネレデ？"], "ko-KR": ["화장실이 어디예요?", "ファジャンシリ オディエヨ？"], "zh-CN": ["洗手间在哪里？", "シショウジェン ザイ ナリ？"], "hi-IN": ["Shauchalay kahan hai?", "ショウチャライ カハン ハイ？"], "th-TH": ["ห้องน้ำอยู่ที่ไหน", "ホーンナーム ユー ティーナイ"], "sv-SE": ["Var är toaletten?", "ヴァル アー トアレッテン？"], "hr-HR": ["Gdje je toalet?", "グデ ジェ トアレト？"], "no-NO": ["Hvor er toalettet?", "ヴォル アー トアレッテト？"], "fi-FI": ["Missä wc on?", "ミッサ ヴェーシー オン？"], "id-ID": ["Di mana toilet?", "ディ マナ トイレッ？"] 
             } },
             { id: 18, cat: "food", jp: "クレジットカードで払えますか。", data: { 
@@ -218,7 +218,7 @@
                 "hr-HR": ["Razumijem", "ラズミイェム"], "no-NO": ["Jeg forstår", "イェイ フォーストール"], "fi-FI": ["Ymmärrän", "ユンメラン"], "id-ID": ["Saya mengerti", "サヤ ムンゲルティ"] 
             } },
 
-            // --- 新規追加フレーズ (41〜43：食事・買い物カテゴリ) ---
+            // --- 食事・買い物・お出かけ (41〜43) ---
             { id: 41, cat: "food", jp: "おすすめを教えてください", data: { 
                 "en-US": ["What do you recommend?", "ホワット ドゥ ユー リコメンド？"], "es-ES": ["¿Qué me recomienda?", "ケ メ レコミンダ？"], "it-IT": ["Cosa mi consiglia?", "コサ ミ コンシリア？"], 
                 "fr-FR": ["Qu est ce que vous recommandez", "ケスク セ ヴ レコマンデ？"], "de-DE": ["Was empfehlen Sie?", "ヴァス エンプフェーレン ジー？"], "pt-PT": ["O que me recomenda?", "オ ケ メ レコメンダ？"], 
@@ -324,7 +324,7 @@
                 "hr-HR": ["Tisuću", "ティスチュ"], "no-NO": ["Tusen", "トゥーセン"], "fi-FI": ["Tuhat", "トゥハト"], "id-ID": ["Seribu", "セリブ"] 
             } },
 
-            // --- 単語 (33〜40) ---
+            // --- 単語 (33〜40 ＋ 新規6つ) ---
             { id: 33, cat: "word", jp: "食事", data: { 
                 "en-US": ["Meal / Food", "ミール / フード"], "es-ES": ["Comida", "コミダ"], "it-IT": ["Pasto", "パスト"], 
                 "fr-FR": ["Repas", "ルパ"], "de-DE": ["Essen", "エスセン"], "pt-PT": ["Refeição", "レフェイサン"], 
@@ -380,6 +380,49 @@
                 "tr-TR": ["Tren", "トレン"], "ko-KR": ["기차", "キチャ"], "zh-CN": ["火车", "ホウチェ"], 
                 "hi-IN": ["Train", "トレイン"], "th-TH": ["รถไฟ", "ロトファイ"], "sv-SE": ["Tåg", "トーグ"], 
                 "hr-HR": ["Vlak", "ヴラク"], "no-NO": ["Tog", "トグ"], "fi-FI": ["Juna", "ユナ"], "id-ID": ["Kereta", "クレタ"] 
+            },
+            // --- 新規追加の単語 (44〜49) ---
+            { id: 44, cat: "word", jp: "わたし", data: { 
+                "en-US": ["I", "アイ"], "es-ES": ["Yo", "ジョ"], "it-IT": ["Io", "イオ"], 
+                "fr-FR": ["Je", "ジュ"], "de-DE": ["Ich", "イッヒ"], "pt-PT": ["Eu", "エウ"], 
+                "tr-TR": ["Ben", "ベン"], "ko-KR": ["나 / 저", "ナ / チョ"], "zh-CN": ["我", "ウォー"], 
+                "hi-IN": ["Main", "メイン"], "th-TH": ["ฉัน / ผม", "チャン / ポム"], "sv-SE": ["Jag", "ヤーグ"], 
+                "hr-HR": ["Ja", "ヤ"], "no-NO": ["Jeg", "イェイ"], "fi-FI": ["Minä", "ミナ"], "id-ID": ["Saya / Aku", "サヤ / アク"] 
+            } },
+            { id: 45, cat: "word", jp: "あなた", data: { 
+                "en-US": ["You", "ユー"], "es-ES": ["Tú", "トゥ"], "it-IT": ["Tu", "トゥ"], 
+                "fr-FR": ["Tu / Vous", "チュ / ヴ"], "de-DE": ["Du", "ドゥ"], "pt-PT": ["Você", "ヴォセ"], 
+                "tr-TR": ["Sen", "セン"], "ko-KR": ["당신 / 너", "タンシン / ノ"], "zh-CN": ["你", "ニー"], 
+                "hi-IN": ["Aap", "アープ"], "th-TH": ["คุณ", "クン"], "sv-SE": ["Du", "デュー"], 
+                "hr-HR": ["Ti", "ティ"], "no-NO": ["Du", "デュー"], "fi-FI": ["Sinä", "シナ"], "id-ID": ["Anda / Kamu", "アンダ / カム"] 
+            } },
+            { id: 46, cat: "word", jp: "私たち", data: { 
+                "en-US": ["We", "ウィー"], "es-ES": ["Nosotros", "ノソトロス"], "it-IT": ["Noi", "ノイ"], 
+                "fr-FR": ["Nous", "ヌ"], "de-DE": ["Wir", "ヴィア"], "pt-PT": ["Nós", "ノス"], 
+                "tr-TR": ["Biz", "ビズ"], "ko-KR": ["우리", "ウリ"], "zh-CN": ["我们", "ウォーメン"], 
+                "hi-IN": ["Hum", "ハム"], "th-TH": ["พวกเรา", "プワックラオ"], "sv-SE": ["Vi", "ヴィー"], 
+                "hr-HR": ["Mi", "ミ"], "no-NO": ["Vi", "ヴィー"], "fi-FI": ["Me", "メ"], "id-ID": ["Kami / Kita", "カミ / キタ"] 
+            } },
+            { id: 47, cat: "word", jp: "日本人", data: { 
+                "en-US": ["Japanese", "ジャパニーズ"], "es-ES": ["Japonés", "ハポネス"], "it-IT": ["Giapponese", "ジャッポネーゼ"], 
+                "fr-FR": ["Japonais", "ジャポネ"], "de-DE": ["Japaner", "ヤーパナー"], "pt-PT": ["Japonês", "ジャポネス"], 
+                "tr-TR": ["Japon", "ジャポン"], "ko-KR": ["일본인", "イルボニン"], "zh-CN": ["日本人", "リーベンレン"], 
+                "hi-IN": ["Japanese", "ジャパニーズ"], "th-TH": ["คนญี่ปุ่น", "コン イープン"], "sv-SE": ["Japan", "ヤパン"], 
+                "hr-HR": ["Japanci", "ヤパンチ"], "no-NO": ["Japaner", "ヤパネル"], "fi-FI": ["Japanilainen", "ヤパニライネン"], "id-ID": ["Orang Jepang", "オラン ジェパン"] 
+            } },
+            { id: 48, cat: "word", jp: "初めて", data: { 
+                "en-US": ["First time", "ファースト タイム"], "es-ES": ["Primera vez", "プリメラ ベス"], "it-IT": ["La prima volta", "ラ プリマ ヴォルタ"], 
+                "fr-FR": ["Premiere fois", "プルミエール フォワ"], "de-DE": ["Das erste Mal", "ダス エルステ マル"], "pt-PT": ["Primeira vez", "プライメイラ ヴェス"], 
+                "tr-TR": ["İlk kez", "イルク ケズ"], "ko-KR": ["처음", "チョウム"], "zh-CN": ["第一次", "ディイーツィー"], 
+                "hi-IN": ["Pehli baar", "ペフリ バール"], "th-TH": ["ครั้งแรก", "クランラーク"], "sv-SE": ["Första gången", "フォルスタ ゴンゲン"], 
+                "hr-HR": ["Prvi put", "プリヴィ プト"], "no-NO": ["Første gang", "フォシュテ ガング"], "fi-FI": ["Ensimmäistä kertaa", "エンシマエスタイ ケルタア"], "id-ID": ["Pertama kali", "ペルタマ カリ"] 
+            } },
+            { id: 49, cat: "word", jp: "楽しい", data: { 
+                "en-US": ["Fun / Enjoyable", "ファン / エンジョイアブル"], "es-ES": ["Divertido", "ディベルティド"], "it-IT": ["Divertente", "ディヴェルテンテ"], 
+                "fr-FR": ["Amusant", "アミュゾン"], "de-DE": ["Lustig / Schön", "ルスティヒ / シェーン"], "pt-PT": ["Divertido", "ディヴェルティド"], 
+                "tr-TR": ["Eğlenceli", "エルレンジェリ"], "ko-KR": ["재미있다", "ジェミイッタ"], "zh-CN": ["有趣 / 好玩", "ヨウチュイ / ハオワン"], 
+                "hi-IN": ["Mazedaar", "マゼダール"], "th-TH": ["สนุก", "サヌック"], "sv-SE": ["Roligt", "ロールィクト"], 
+                "hr-HR": ["Zabavno", "ザバヴノ"], "no-NO": ["Morsomt", "モルソムト"], "fi-FI": ["Hauska", "ハウスカ"], "id-ID": ["Menyenangkan", "ムニナンカン"] 
             } }
         ];
 
@@ -483,7 +526,7 @@
                     container.innerHTML = `
                         <div class="card" style="text-align: center; padding: 20px; color: #d9534f; font-weight: bold; background-color: #fffdfd; border: 2px solid #d9534f;">
                             ⚠️ 「${query}」に一致するフレーズは見つかりませんでした。<br>
-                            <span style="font-size: 0.85rem; color: #666; font-weight: normal; margin-top: 5px; display: inline-block;">（「ありがとう」「1」「ホテル」などで検索してみてください）</span>
+                            <span style="font-size: 0.85rem; color: #666; font-weight: normal; margin-top: 5px; display: inline-block;">（「楽しい」「わたし」「ホテル」などで検索してみてください）</span>
                         </div>
                     `;
                     return;
