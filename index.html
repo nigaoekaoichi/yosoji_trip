@@ -43,7 +43,7 @@
 
     <!-- 🔍 検索＆クリアボタンエリア -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: 楽しい）">
+        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: 日本人）">
         <div class="btn-group">
             <button class="action-btn search-btn" onclick="generateSearchCard()">検索</button>
             <button class="action-btn clear-btn" onclick="clearSearchCard()">クリア</button>
@@ -76,7 +76,7 @@
     <!-- プログラム部分 -->
     <script>
         const phraseDatabase = [
-            // --- 挨拶・基本 (1〜6, 12, 13, 15, 16, 19, 20) ---
+            // --- 挨拶・基本 (1〜6, 12, 13, 15, 16, 19, 20 ＋ 新規挨拶50, 51) ---
             { id: 1, cat: "greeting", jp: "ありがとう", data: { 
                 "en-US": ["Thank you", "サンキュー"], "es-ES": ["Gracias", "グラシアス"], "it-IT": ["Grazie", "グラッツィエ"], 
                 "fr-FR": ["Merci", "メルスィ"], "de-DE": ["Danke", "ダンケ"], "pt-PT": ["Obrigado / Obrigada", "オブリガード（男性） / オブリガーダ（女性）"], 
@@ -152,7 +152,7 @@
                 "hr-HR": ["Ukusno je", "ウクスノ イェ"], "no-NO": ["Det er godt", "デ エア ゴット"], "fi-FI": ["Hyvää", "ヒュヴァー"], "id-ID": ["Enak sekali", "エナッ スカリ"] 
             } },
             { id: 11, cat: "food", jp: "お会計をお願いします", data: { 
-                "en-US": ["Check, please", "チェック プリーズ"], "es-ES": ["La cuenta, por favor", "ラ クエンタ ポル ファボル"], "it-IT": ["Il conto, per favore", "イル コント ペル ファヴォーレ"], 
+                "en-US": ["Check, please", "チェック プリーズ"], "es-ES": ["La cuenta, por favor", "ラ クエンタ ポル ファボル"], "it-IT": ["Il conto, per favore", "イル コント ペル フェヴォーレ"], 
                 "fr-FR": ["L addition s il vous plait", "ラディシオン シル ヴ プラエ"], "de-DE": ["Die Rechnung, bitte", "ディー レフヌング ビッテ"], "pt-PT": ["A conta, por favor", "ア コンタ ポル ファボール"], 
                 "tr-TR": ["Hesap lütfen", "ヘサプ リュトフェン"], "ko-KR": ["계산해주세요", "ケサネジュセヨ"], "zh-CN": ["买单", "マイダン"], 
                 "hi-IN": ["Bill kripya", "ビル クリパヤ"], "th-TH": ["เก็บเงินด้วย", "ゲップ ガイン ドゥアイ"], "sv-SE": ["Notan, tack", "ノータン タック"], 
@@ -173,7 +173,7 @@
                 "hr-HR": ["Pardon", "パルドン"], "no-NO": ["Beklager", "ベクラゲル"], "fi-FI": ["Anteeksi", "アンテエクスィ"], "id-ID": ["Maaf", "マアフ"] 
             } },
             { id: 14, cat: "food", jp: "これください", data: { 
-                "en-US": ["This one, please", "ディス ワン プリーズ"], "es-ES": ["Esto, por favor", "エスト ポル ファボル"], "it-IT": ["Questo, per favore", "クエスト ペル ファヴォーレ"], 
+                "en-US": ["This one, please", "ディス ワン プリーズ"], "es-ES": ["Esto, por favor", "エスト ポル ファボル"], "it-IT": ["Questo, per favore", "クエスト ペル フェヴォーレ"], 
                 "fr-FR": ["Ceci s il vous plait", "スシー シル ヴ プラエ"], "de-DE": ["Das bitte", "ダス ビッテ"], "pt-PT": ["Isto, por favor", "イスト ポル ファボール"], 
                 "tr-TR": ["Bunu lütfen", "ブヌ リュトフェン"], "ko-KR": ["이거 주세요", "イゴ ジュセヨ"], "zh-CN": ["我要这个", "ウォ ヤオ ジージェ"], 
                 "hi-IN": ["Yeh dijiye", "イェ ディジイェ"], "th-TH": ["เอาอันนี้", "アオ アンニー"], "sv-SE": ["Den här, tack", "デン ヘール タック"], 
@@ -195,7 +195,7 @@
             } },
             { id: 17, cat: "food", jp: "お手洗いはどこですか？", data: { 
                 "en-US": ["Where is the restroom?", "ホウェア イズ ザ レストルーム？"], "es-ES": ["¿Dónde está el baño?", "ドンド エスタ エル バニョ？"], "it-IT": ["Dov'è il bagno?", "ドヴェ イル バニョ？"], 
-                "fr-FR": ["Ou sont les toilettes", "ウ ソン レ トワレット？"], "de-DE": ["Wo ist die Toilette?", "ヴォー イスト ディー トワレッテ？"], "pt-PT": ["Onde fica a casa de banho?", "オンド フィカ A カザ デ バニョ？"], 
+                "fr-FR": ["Ou sont les toilettes", "ウ ソン レ トワレット？"], "de-DE": ["Wo ist die Toilette?", "ヴォー イスト ディー トワレッテ？"], "pt-PT": ["Onde fica a casa de banho?", "オンド フィカ ア カザ デ バニョ？"], 
                 "tr-TR": ["Tuvalet nerede?", "トゥヴァレット ネレデ？"], "ko-KR": ["화장실이 어디예요?", "ファジャンシリ オディエヨ？"], "zh-CN": ["洗手间在哪里？", "シショウジェン ザイ ナリ？"], "hi-IN": ["Shauchalay kahan hai?", "ショウチャライ カハン ハイ？"], "th-TH": ["ห้องน้ำอยู่ที่ไหน", "ホーンナーム ユー ティーナイ"], "sv-SE": ["Var är toaletten?", "ヴァル アー トアレッテン？"], "hr-HR": ["Gdje je toalet?", "グデ ジェ トアレト？"], "no-NO": ["Hvor er toalettet?", "ヴォル アー トアレッテト？"], "fi-FI": ["Missä wc on?", "ミッサ ヴェーシー オン？"], "id-ID": ["Di mana toilet?", "ディ マナ トイレッ？"] 
             } },
             { id: 18, cat: "food", jp: "クレジットカードで払えますか。", data: { 
@@ -217,6 +217,21 @@
                 "hi-IN": ["Main samaj gaya hoon", "メイン サムジャ ゲヤ フーン"], "th-TH": ["เข้าใจแล้ว", "カオジャイ レオウ"], "sv-SE": ["Jag förstår", "ヤーグ フォーストール"], 
                 "hr-HR": ["Razumijem", "ラズミイェム"], "no-NO": ["Jeg forstår", "イェイ フォーストール"], "fi-FI": ["Ymmärrän", "ユンメラン"], "id-ID": ["Saya mengerti", "サヤ ムンゲルティ"] 
             } },
+            // --- 新規追加の挨拶フレーズ (50, 51) ---
+            { id: 50, cat: "greeting", jp: "私は日本人です", data: { 
+                "en-US": ["I am Japanese", "アイ アム ジャパニーズ"], "es-ES": ["Soy japonés", "ソイ ハポネス"], "it-IT": ["Sono giapponese", "ソノ ジャッポネーゼ"], 
+                "fr-FR": ["Je suis japonais", "ジュ スイ ジャポネ"], "de-DE": ["Ich bin Japaner", "イッヒ ビン ヤーパナー"], "pt-PT": ["Sou japonês", "ソウ ジャポネス"], 
+                "tr-TR": ["Ben Japonum", "ベン ジャポヌム"], "ko-KR": ["저는 일본인입니다", "チョヌン イルボニンイムニダ"], "zh-CN": ["我是日本人", "ウォ シー リーベンレン"], 
+                "hi-IN": ["Main Japanese hoon", "メイン ジャパニーズ フーン"], "th-TH": ["ฉันเป็นคนญี่ปุ่น", "チャン ペン コン イープン"], "sv-SE": ["Jag är japan", "ヤーグ アー ヤパン"], 
+                "hr-HR": ["Ja sam Japanac", "ヤ サム ヤパナツ"], "no-NO": ["Jeg er japaner", "イェイ エア ジャパネル"], "fi-FI": ["Olen japanilainen", "オレン ヤパニライネン"], "id-ID": ["Saya orang Jepang", "サヤ オラン ジェパン"] 
+            } },
+            { id: 51, cat: "greeting", jp: "少しだけ話すことができます", data: { 
+                "en-US": ["I can speak a little", "アイ カン スピーク ア リトル"], "es-ES": ["Puedo hablar un poco", "プエド アブラル ウン ポコ"], "it-IT": ["Posso parlare un po'", "ポッソ パルラーレ ウン ポ"], 
+                "fr-FR": ["Je peux parler un peu", "ジュ プ パルレ アン プー"], "de-DE": ["Ich kann ein bisschen sprechen", "イッヒ カン アイン ビッシェン シュプレッヘン"], "pt-PT": ["Consigo falar um pouco", "コンシゴ ファラール ウン ポウコ"], 
+                "tr-TR": ["Biraz konuşabilirim", "ビラズ コヌシャビリリム"], "ko-KR": ["조금 말할 수 있어요", "チョグム マルハル ス イッソヨ"], "zh-CN": ["我会说一点点", "ウォ ホイ シュオ イーディエンディエン"], 
+                "hi-IN": ["Main thoda bol sakta hoon", "メイン トダ ボル サクタ フーン"], "th-TH": ["พูดได้นิดหน่อย", "プート ダイ ニットノイ"], "sv-SE": ["Jag kan tala lite", "ヤーグ カン ターラ リテ"], 
+                "hr-HR": ["Govorim malo", "ゴヴォリム マロ"], "no-NO": ["Jeg kan snakke litt", "イェイ カン スナッケ リット"], "fi-FI": ["Osaan puhua vähän", "オサーン プフア ヴァハン"], "id-ID": ["Saya bisa sedikit bicara", "サヤ ビサ スディキット ビチャラ"] 
+            } },
 
             // --- 食事・買い物・お出かけ (41〜43) ---
             { id: 41, cat: "food", jp: "おすすめを教えてください", data: { 
@@ -232,7 +247,7 @@
                 "tr-TR": ["Bu ne kadar?", "ブ ネ カダル？"], "ko-KR": ["이거 얼마예요?", "イゴ オルマエヨ？"], "zh-CN": ["这个多少钱？", "ジェゲ ドゥオシャオ チェン？"], "hi-IN": ["Yeh kitne ka hai?", "イェ キトネ カ ハイ？"], "th-TH": ["อันนี้ราคาเท่าไหร่", "アンニー ラーカー タオライ"], "sv-SE": ["Vad kostar den här?", "ヴァド コスタル デン ヘール？"], "hr-HR": ["Koliko košta ovo?", "コリコ コシュタ オヴォ？"], "no-NO": ["Hvor mye koster denne?", "ヴォル ミュケ コステル デンネ？"], "fi-FI": ["Paljonko tämä maksaa?", "パルヨンコ タマ マクサー？"], "id-ID": ["Berapa harga ini?", "ブラパ ハルガ イニ？"] 
             } },
             { id: 43, cat: "food", jp: "テイクアウトでお願いします", data: { 
-                "en-US": ["To go, please", "トゥ ゴー プリーズ"], "es-ES": ["Para llevar, por favor", "パラ ジェバール ポル ファボル"], "it-IT": ["Da asporto, per favore", "ダ アポルト ペル ファヴォーレ"], 
+                "en-US": ["To go, please", "トゥ ゴー プリーズ"], "es-ES": ["Para llevar, por favor", "パラ ジェバール ポル ファボル"], "it-IT": ["Da asporto, per favore", "ダ アポルト ペル フェヴォーレ"], 
                 "fr-FR": ["A emporter s il vous plait", "ア オンポルテ シル ヴ プラエ"], "de-DE": ["Zum Mitnehmen, bitte", "ツム ミットネーメン ビッテ"], "pt-PT": ["Para levar, por favor", "パラ レヴァール ポル ファボール"], 
                 "tr-TR": ["Paket lütfen", "パケット リュトフェン"], "ko-KR": ["포장해주세요", "ポジャンヘジュセヨ"], "zh-CN": ["请打包", "チン ダバオ"], 
                 "hi-IN": ["Pack kar dijiye", "パック カル ディジイェ"], "th-TH": ["ใส่กล่องกลับบ้านครับ", "サイ グロング ガップバーン"], "sv-SE": ["För avhämtning, tack", "フール アヴヘムトニング タック"], "hr-HR": ["Za van, molim", "ザ ヴァン モリム"], "no-NO": ["Ta med, takk", "タ メド タック"], "fi-FI": ["Mukaan kiitos", "ムカアン キイトス"], "id-ID": ["Dibungkus ya", "ディブンクス ヤ"] 
@@ -324,7 +339,7 @@
                 "hr-HR": ["Tisuću", "ティスチュ"], "no-NO": ["Tusen", "トゥーセン"], "fi-FI": ["Tuhat", "トゥハト"], "id-ID": ["Seribu", "セリブ"] 
             } },
 
-            // --- 単語 (33〜40 ＋ 新規6つ) ---
+            // --- 単語 (33〜40 ＋ 44〜49) ---
             { id: 33, cat: "word", jp: "食事", data: { 
                 "en-US": ["Meal / Food", "ミール / フード"], "es-ES": ["Comida", "コミダ"], "it-IT": ["Pasto", "パスト"], 
                 "fr-FR": ["Repas", "ルパ"], "de-DE": ["Essen", "エスセン"], "pt-PT": ["Refeição", "レフェイサン"], 
@@ -380,8 +395,7 @@
                 "tr-TR": ["Tren", "トレン"], "ko-KR": ["기차", "キチャ"], "zh-CN": ["火车", "ホウチェ"], 
                 "hi-IN": ["Train", "トレイン"], "th-TH": ["รถไฟ", "ロトファイ"], "sv-SE": ["Tåg", "トーグ"], 
                 "hr-HR": ["Vlak", "ヴラク"], "no-NO": ["Tog", "トグ"], "fi-FI": ["Juna", "ユナ"], "id-ID": ["Kereta", "クレタ"] 
-            },
-            // --- 新規追加の単語 (44〜49) ---
+            } },
             { id: 44, cat: "word", jp: "わたし", data: { 
                 "en-US": ["I", "アイ"], "es-ES": ["Yo", "ジョ"], "it-IT": ["Io", "イオ"], 
                 "fr-FR": ["Je", "ジュ"], "de-DE": ["Ich", "イッヒ"], "pt-PT": ["Eu", "エウ"], 
@@ -526,7 +540,7 @@
                     container.innerHTML = `
                         <div class="card" style="text-align: center; padding: 20px; color: #d9534f; font-weight: bold; background-color: #fffdfd; border: 2px solid #d9534f;">
                             ⚠️ 「${query}」に一致するフレーズは見つかりませんでした。<br>
-                            <span style="font-size: 0.85rem; color: #666; font-weight: normal; margin-top: 5px; display: inline-block;">（「楽しい」「わたし」「ホテル」などで検索してみてください）</span>
+                            <span style="font-size: 0.85rem; color: #666; font-weight: normal; margin-top: 5px; display: inline-block;">（「日本人」「話す」「ありがとう」などで検索してみてください）</span>
                         </div>
                     `;
                     return;
