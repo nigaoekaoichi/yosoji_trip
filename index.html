@@ -43,7 +43,7 @@
 
     <!-- 🔍 検索＆クリアボタンエリア -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: ありがとう）">
+        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: おすすめ）">
         <div class="btn-group">
             <button class="action-btn search-btn" onclick="generateSearchCard()">検索</button>
             <button class="action-btn clear-btn" onclick="clearSearchCard()">クリア</button>
@@ -76,7 +76,7 @@
     <!-- プログラム部分 -->
     <script>
         const phraseDatabase = [
-            // --- 挨拶・基本 (1〜6) ---
+            // --- 挨拶・基本 (1〜6, 12, 13, 15, 16, 19, 20) ---
             { id: 1, cat: "greeting", jp: "ありがとう", data: { 
                 "en-US": ["Thank you", "サンキュー"], "es-ES": ["Gracias", "グラシアス"], "it-IT": ["Grazie", "グラッツィエ"], 
                 "fr-FR": ["Merci", "メルスィ"], "de-DE": ["Danke", "ダンケ"], "pt-PT": ["Obrigado / Obrigada", "オブリガード（男性） / オブリガーダ（女性）"], 
@@ -138,12 +138,12 @@
             { id: 9, cat: "profile", jp: "私の名前はヒトミです", data: { 
                 "en-US": ["My name is Hitomi", "マイ ネーム イズ ヒトミ"], "es-ES": ["Me llamo Hitomi", "メ リャモ ヒトミ"], "it-IT": ["Mi chiamo Hitomi", "ミ キアーモ ヒトミ"], 
                 "fr-FR": ["Je m appelle Hitomi", "ジュ マペル ヒトミ"], "de-DE": ["Ich heiße Hitomi", "イッヒ ハイセ ヒトミ"], "pt-PT": ["Chamo me Hitomi", "シャモ メ ヒトミ"], 
-                "tr-TR": ["Benim adım Hitomi", "ベニム アドゥム ヒトミ"], "ko-KR": ["제 이름은 히토미입니다", "チェ イロムン ヒトミイムニダ"], "zh-CN": ["我叫Hitomi", "ウォー ジァオ ヒトミ"], 
+                "tr-TR": ["Benim adım Hitomi", "ベニム アドゥム ヒトミ"], "ko-KR": ["제 이름은 히토미입니다", "チェ イロムン ヒ토미イムニダ"], "zh-CN": ["我叫Hitomi", "ウォー ジァオ ヒトミ"], 
                 "hi-IN": ["Mera naam Hitomi hai", "メーラー ナーム ヒトミ"], "th-TH": ["ดิฉันชื่อฮิโตมิ", "ディチャン チュー ヒトミ"], "sv-SE": ["Jag heter Hitomi", "ヤーグ ヘーテル ヒトミ"], 
                 "hr-HR": ["Zovem se Hitomi", "ゾヴェム セ ヒトミ"], "no-NO": ["Jeg heter Hitomi", "イェイ ヘーテル ヒトミ"], "fi-FI": ["Nimeni on Hitomi", "ニメニ オン ヒトミ"], "id-ID": ["Nama saya Hitomi", "ナマ サヤ ヒトミ"] 
             } },
 
-            // --- 食事・買い物・お出かけ (10, 11, 14, 17, 18) ---
+            // --- 食事・買い物・お出かけ (10, 11, 14, 17, 18 ＋ 新規3つ) ---
             { id: 10, cat: "food", jp: "美味しいです", data: { 
                 "en-US": ["It is delicious", "イット イズ ディリシャス"], "es-ES": ["Está muy rico", "エスタ ムイ リコ"], "it-IT": ["È delizioso", "エ デリツィオーゾ"], 
                 "fr-FR": ["C est delicieux", "セ デリシユー"], "de-DE": ["Es ist lecker", "エス イスト レッカー"], "pt-PT": ["Está delicioso", "エスタ デリシオゾ"], 
@@ -218,6 +218,26 @@
                 "hr-HR": ["Razumijem", "ラズミイェム"], "no-NO": ["Jeg forstår", "イェイ フォーストール"], "fi-FI": ["Ymmärrän", "ユンメラン"], "id-ID": ["Saya mengerti", "サヤ ムンゲルティ"] 
             } },
 
+            // --- 新規追加フレーズ (41〜43：食事・買い物カテゴリ) ---
+            { id: 41, cat: "food", jp: "おすすめを教えてください", data: { 
+                "en-US": ["What do you recommend?", "ホワット ドゥ ユー リコメンド？"], "es-ES": ["¿Qué me recomienda?", "ケ メ レコミンダ？"], "it-IT": ["Cosa mi consiglia?", "コサ ミ コンシリア？"], 
+                "fr-FR": ["Qu est ce que vous recommandez", "ケスク セ ヴ レコマンデ？"], "de-DE": ["Was empfehlen Sie?", "ヴァス エンプフェーレン ジー？"], "pt-PT": ["O que me recomenda?", "オ ケ メ レコメンダ？"], 
+                "tr-TR": ["Ne önerirsiniz?", "ネ オネルィルシニス？"], "ko-KR": ["추천해주세요", "チュチョンヘジュセヨ"], "zh-CN": ["有什么推荐的吗？", "ヨウ シェンモ トゥイジアン デ マ？"], 
+                "hi-IN": ["Aap kya salah denge?", "アプ キヤ サラー デンゲ？"], "th-TH": ["มีอะไรแนะนำบ้าง", "ミー アライ ナムナム バーン"], "sv-SE": ["Vad rekommenderar du?", "ヴァド レコメンダール デュー？"], 
+                "hr-HR": ["Što mi preporučujete?", "シュト ミ プレポルチュイェテ？"], "no-NO": ["Hva anbefaler du?", "ヴォル アンベハレル デュー？"], "fi-FI": ["Mitä suosittelet?", "ミタ スオシッテレト？"], "id-ID": ["Apa yang Anda rekomendasikan?", "アパ ヤン アンダ レコマンダシカン？"] 
+            } },
+            { id: 42, cat: "food", jp: "これはいくらですか？", data: { 
+                "en-US": ["How much is this?", "ハウ マッチ イズ ディス？"], "es-ES": ["¿Cuánto cuesta esto?", "クアント クエスタ エスト？"], "it-IT": ["Quanto costa questo?", "クアント コスタ クエスト？"], 
+                "fr-FR": ["Combien coute ceci", "コンビアン クート スシー？"], "de-DE": ["Was kostet das?", "ヴァス コステット ダス？"], "pt-PT": ["Quanto custa isto?", "クアント クスタ イスト？"], 
+                "tr-TR": ["Bu ne kadar?", "ブ ネ カダル？"], "ko-KR": ["이거 얼마예요?", "イゴ オルマエヨ？"], "zh-CN": ["这个多少钱？", "ジェゲ ドゥオシャオ チェン？"], "hi-IN": ["Yeh kitne ka hai?", "イェ キトネ カ ハイ？"], "th-TH": ["อันนี้ราคาเท่าไหร่", "アンニー ラーカー タオライ"], "sv-SE": ["Vad kostar den här?", "ヴァド コスタル デン ヘール？"], "hr-HR": ["Koliko košta ovo?", "コリコ コシュタ オヴォ？"], "no-NO": ["Hvor mye koster denne?", "ヴォル ミュケ コステル デンネ？"], "fi-FI": ["Paljonko tämä maksaa?", "パルヨンコ タマ マクサー？"], "id-ID": ["Berapa harga ini?", "ブラパ ハルガ イニ？"] 
+            } },
+            { id: 43, cat: "food", jp: "テイクアウトでお願いします", data: { 
+                "en-US": ["To go, please", "トゥ ゴー プリーズ"], "es-ES": ["Para llevar, por favor", "パラ ジェバール ポル ファボル"], "it-IT": ["Da asporto, per favore", "ダ アポルト ペル ファヴォーレ"], 
+                "fr-FR": ["A emporter s il vous plait", "ア オンポルテ シル ヴ プラエ"], "de-DE": ["Zum Mitnehmen, bitte", "ツム ミットネーメン ビッテ"], "pt-PT": ["Para levar, por favor", "パラ レヴァール ポル ファボール"], 
+                "tr-TR": ["Paket lütfen", "パケット リュトフェン"], "ko-KR": ["포장해주세요", "ポジャンヘジュセヨ"], "zh-CN": ["请打包", "チン ダバオ"], 
+                "hi-IN": ["Pack kar dijiye", "パック カル ディジイェ"], "th-TH": ["ใส่กล่องกลับบ้านครับ", "サイ グロング ガップバーン"], "sv-SE": ["För avhämtning, tack", "フール アヴヘムトニング タック"], "hr-HR": ["Za van, molim", "ザ ヴァン モリム"], "no-NO": ["Ta med, takk", "タ メド タック"], "fi-FI": ["Mukaan kiitos", "ムカアン キイトス"], "id-ID": ["Dibungkus ya", "ディブンクス ヤ"] 
+            } },
+
             // --- 数字 (21〜32) ---
             { id: 21, cat: "number", jp: "1", data: { 
                 "en-US": ["One", "ワン"], "es-ES": ["Uno", "ウノ"], "it-IT": ["Uno", "ウノ"], 
@@ -250,7 +270,7 @@
             { id: 25, cat: "number", jp: "5", data: { 
                 "en-US": ["Five", "ファイブ"], "es-ES": ["Cinco", "シンコ"], "it-IT": ["Cinque", "チンクウェ"], 
                 "fr-FR": ["Cinq", "サンク"], "de-DE": ["Fünf", "フュンフ"], "pt-PT": ["Cinco", "シンコ"], 
-                "tr-TR": ["Beş", "ベシュ"], "ko-KR": ["오", "オ"], "zh-CN": ["五", "ウー"], 
+                "tr-TR": ["Beş", "ベシュ"], "ko-KR": ["오", "오"], "zh-CN": ["五", "ウー"], 
                 "hi-IN": ["Paanch", "パンチ"], "th-TH": ["ห้า", "ハー"], "sv-SE": ["Fem", "フェム"], 
                 "hr-HR": ["Pet", "ペット"], "no-NO": ["Fem", "フェム"], "fi-FI": ["Viisi", "ヴィーシ"], "id-ID": ["Lima", "リマ"] 
             } },
@@ -463,7 +483,7 @@
                     container.innerHTML = `
                         <div class="card" style="text-align: center; padding: 20px; color: #d9534f; font-weight: bold; background-color: #fffdfd; border: 2px solid #d9534f;">
                             ⚠️ 「${query}」に一致するフレーズは見つかりませんでした。<br>
-                            <span style="font-size: 0.85rem; color: #666; font-weight: normal; margin-top: 5px; display: inline-block;">（「ありがとう」「1」「ホテル」などで検索してみてください）</span>
+                            <span style="font-size: 0.85rem; color: #666; font-weight: normal; margin-top: 5px; display: inline-block;">（「おすすめ」「いくら」「テイクアウト」などで検索してみてください）</span>
                         </div>
                     `;
                     return;
@@ -490,7 +510,7 @@
                                 <button class="flag-btn" title="クロアチア語" onclick="speak('${foundItem.data['hr-HR'][0]}', '${foundItem.data['hr-HR'][1]}', 'hr-HR')">🇭🇷</button>
                                 <button class="flag-btn" title="ノルウェー語" onclick="speak('${foundItem.data['no-NO'][0]}', '${foundItem.data['no-NO'][1]}', 'no-NO')">🇳🇴</button>
                                 <button class="flag-btn" title="フィンランド語" onclick="speak('${foundItem.data['fi-FI'][0]}', '${foundItem.data['fi-FI'][1]}', 'fi-FI')">🇫🇮</button>
-                                <button class="flag-btn" title="インドネシア語" onclick="speak('${foundItem.data['id-ID'][0]}', '${foundItem.data['id-ID'][1]}', 'id-ID')">🇮🇩</label>
+                                <button class="flag-btn" title="インドネシア語" onclick="speak('${foundItem.data['id-ID'][0]}', '${foundItem.data['id-ID'][1]}', 'id-ID')">🇮🇩</button>
                             </div>
                         </div>
                     `;
