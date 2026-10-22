@@ -43,7 +43,7 @@
 
     <!-- 🔍 検索＆クリアボタンエリア -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: おすすめ）">
+        <input type="text" id="searchInput" class="search-box" placeholder="日本語を入力（例: ありがとう）">
         <div class="btn-group">
             <button class="action-btn search-btn" onclick="generateSearchCard()">検索</button>
             <button class="action-btn clear-btn" onclick="clearSearchCard()">クリア</button>
@@ -80,8 +80,8 @@
             { id: 1, cat: "greeting", jp: "ありがとう", data: { 
                 "en-US": ["Thank you", "サンキュー"], "es-ES": ["Gracias", "グラシアス"], "it-IT": ["Grazie", "グラッツィエ"], 
                 "fr-FR": ["Merci", "メルスィ"], "de-DE": ["Danke", "ダンケ"], "pt-PT": ["Obrigado / Obrigada", "オブリガード（男性） / オブリガーダ（女性）"], 
-                "tr-TR": ["Teşekkürler", "テシェッキュルレル"], "ko-KR": ["감사합니다", "カムサハムニダ"], "zh-CN": ["谢谢", "シエシエ"], 
-                "hi-IN": ["धन्यवाद", "ダンニャワード"], "th-TH": ["ขอบคุณ", "コープクン"], "sv-SE": ["Tack", "タック"], 
+                "tr-TR": ["Teşekkür ederim", "テシェキュル エデリム"], "ko-KR": ["감사합니다", "カムサハムニダ"], "zh-CN": ["谢谢", "シエシエ"], 
+                "hi-IN": ["धन्यवाद", "ダンニャワード"], "th-TH": ["男性：ขอบคุณครับ / 女性：ขอบคุณค่ะ", "男性：コープクン クラプ / 女性：コープクン カ"], "sv-SE": ["Tack", "タック"], 
                 "hr-HR": ["Hvala", "ファラ"], "no-NO": ["Takk", "タック"], "fi-FI": ["Kiitos", "キイトス"], "id-ID": ["Terima kasih", "テリマ カシ"] 
             } },
             { id: 2, cat: "greeting", jp: "こんにちわ", data: { 
@@ -483,7 +483,7 @@
                     container.innerHTML = `
                         <div class="card" style="text-align: center; padding: 20px; color: #d9534f; font-weight: bold; background-color: #fffdfd; border: 2px solid #d9534f;">
                             ⚠️ 「${query}」に一致するフレーズは見つかりませんでした。<br>
-                            <span style="font-size: 0.85rem; color: #666; font-weight: normal; margin-top: 5px; display: inline-block;">（「おすすめ」「いくら」「テイクアウト」などで検索してみてください）</span>
+                            <span style="font-size: 0.85rem; color: #666; font-weight: normal; margin-top: 5px; display: inline-block;">（「ありがとう」「1」「ホテル」などで検索してみてください）</span>
                         </div>
                     `;
                     return;
