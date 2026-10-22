@@ -48,7 +48,7 @@
             <button class="action-btn search-btn" onclick="generateSearchCard()">検索</button>
             <button class="action-btn clear-btn" onclick="clearSearchCard()">クリア</button>
         </div>
-        <div class="search-hint">💡キーワードの一部でも検索できます</div>
+        <div class="search-hint">💡 部分一致に対応！キーワードの一部でも検索できます。</div>
     </div>
 
     <!-- 🔍 検索結果が表示される専用エリア -->
@@ -76,7 +76,7 @@
     <!-- プログラム部分 -->
     <script>
         const phraseDatabase = [
-            // --- 挨拶・基本 (1〜6, 12, 13, 15, 16, 19, 20) ---
+            // --- 挨拶・基本 (1〜6) ---
             { id: 1, cat: "greeting", jp: "ありがとう", data: { 
                 "en-US": ["Thank you", "サンキュー"], "es-ES": ["Gracias", "グラシアス"], "it-IT": ["Grazie", "グラッツィエ"], 
                 "fr-FR": ["Merci", "メルスィ"], "de-DE": ["Danke", "ダンケ"], "pt-PT": ["Obrigado / Obrigada", "オブリガード（男性） / オブリガーダ（女性）"], 
@@ -84,12 +84,12 @@
                 "hi-IN": ["धन्यवाद", "ダンニャワード"], "th-TH": ["ขอบคุณ", "コープクン"], "sv-SE": ["Tack", "タック"], 
                 "hr-HR": ["Hvala", "ファラ"], "no-NO": ["Takk", "タック"], "fi-FI": ["Kiitos", "キイトス"], "id-ID": ["Terima kasih", "テリマ カシ"] 
             } },
-            { id: 2, cat: "greeting", jp: "はじめまして", data: { 
-                "en-US": ["Nice to meet you", "ナイス トゥ ミート ユー"], "es-ES": ["Mucho gusto", "ムーチョ グスト"], "it-IT": ["Piacere", "ピアチェーレ"], 
-                "fr-FR": ["Enchante", "アンシャンテ"], "de-DE": ["Freut mich", "フロイト ミッヒ"], "pt-PT": ["Prazer", "プラゼール"], 
-                "tr-TR": ["Memnun oldum", "メムヌン オルドゥム"], "ko-KR": ["처음 뵙겠습니다", "チョウム ペプケッスムニダ"], "zh-CN": ["很高兴认识你", "ヘン ガオシン"], 
-                "hi-IN": ["नमस्ते", "ナマステ"], "th-TH": ["ยินดีที่ได้รู้จัก", "インディー"], "sv-SE": ["Trevligt", "トレーヴリクト"], 
-                "hr-HR": ["Drago mi je", "ドラゴ ミ イェ"], "no-NO": ["Hyggelig", "ヒュゲリグ"], "fi-FI": ["Hauska", "ハウスカ"], "id-ID": ["Salam kenal", "サラム クナル"] 
+            { id: 2, cat: "greeting", jp: "こんにちわ", data: { 
+                "en-US": ["Hello", "ハロー"], "es-ES": ["Hola", "オラ"], "it-IT": ["Buongiorno", "ブオンジョルノ"], 
+                "fr-FR": ["Bonjour", "ボンジュール"], "de-DE": ["Guten Tag", "グーテン ターク"], "pt-PT": ["Olá", "オラ"], 
+                "tr-TR": ["Merhaba", "メルハバ"], "ko-KR": ["안녕하세요", "アンニョンハセヨ"], "zh-CN": ["你好", "ニーハオ"], 
+                "hi-IN": ["नमस्ते", "ナマステ"], "th-TH": ["สวัสดี", "サワッディー"], "sv-SE": ["Hej", "ヘイ"], 
+                "hr-HR": ["Dobar dan", "ドバル ダン"], "no-NO": ["Hallo", "ハロー"], "fi-FI": ["Hei", "ヘイ"], "id-ID": ["Selamat siang", "スラマッ シアン"] 
             } },
             { id: 3, cat: "greeting", jp: "さようなら", data: { 
                 "en-US": ["Goodbye", "グッドバイ"], "es-ES": ["Adiós", "アディオス"], "it-IT": ["Arrivederci", "アッリヴェデルチ"], 
@@ -112,12 +112,12 @@
                 "hi-IN": ["नहीं", "ナヒーン"], "th-TH": ["ไม่ใช่", "マイ チャイ"], "sv-SE": ["Nej", "ネイ"], 
                 "hr-HR": ["Ne", "ネ"], "no-NO": ["Nei", "ネイ"], "fi-FI": ["Ei", "エイ"], "id-ID": ["Tidak", "ティダック"] 
             } },
-            { id: 6, cat: "greeting", jp: "こんにちわ", data: { 
-                "en-US": ["Hello", "ハロー"], "es-ES": ["Hola", "オラ"], "it-IT": ["Buongiorno", "ブオンジョルノ"], 
-                "fr-FR": ["Bonjour", "ボンジュール"], "de-DE": ["Guten Tag", "グーテン ターク"], "pt-PT": ["Olá", "オラ"], 
-                "tr-TR": ["Merhaba", "メルハバ"], "ko-KR": ["안녕하세요", "アンニョンハセヨ"], "zh-CN": ["你好", "ニーハオ"], 
-                "hi-IN": ["नमस्ते", "ナマステ"], "th-TH": ["สวัสดี", "サワッディー"], "sv-SE": ["Hej", "ヘイ"], 
-                "hr-HR": ["Dobar dan", "ドバル ダン"], "no-NO": ["Hallo", "ハロー"], "fi-FI": ["Hei", "ヘイ"], "id-ID": ["Selamat siang", "スラマッ シアン"] 
+            { id: 6, cat: "greeting", jp: "はじめまして", data: { 
+                "en-US": ["Nice to meet you", "ナイス トゥ ミート ユー"], "es-ES": ["Mucho gusto", "ムーチョ グスト"], "it-IT": ["Piacere", "ピアチェーレ"], 
+                "fr-FR": ["Enchante", "アンシャンテ"], "de-DE": ["Freut mich", "フロイト ミッヒ"], "pt-PT": ["Prazer", "プラゼール"], 
+                "tr-TR": ["Memnun oldum", "メムヌン オルドゥム"], "ko-KR": ["처음 뵙겠습니다", "チョウム ペプケッスムニダ"], "zh-CN": ["很高兴认识你", "ヘン ガオシン"], 
+                "hi-IN": ["नमस्ते", "ナマステ"], "th-TH": ["ยินดีที่ได้รู้จัก", "インディー"], "sv-SE": ["Trevligt", "トレーヴリクト"], 
+                "hr-HR": ["Drago mi je", "ドラゴ ミ イェ"], "no-NO": ["Hyggelig", "ヒュゲリグ"], "fi-FI": ["Hauska", "ハウスカ"], "id-ID": ["Salam kenal", "サラム クナル"] 
             } },
             
             // --- 自己紹介 (7〜9) ---
@@ -125,21 +125,21 @@
                 "en-US": ["I'm from Japan", "アイム フロム ジャパン"], "es-ES": ["Soy de Japón", "ソイ デ ハポン"], "it-IT": ["Vengo dal Giappone", "ヴェンゴ ダル ジャッポーネ"], 
                 "fr-FR": ["Je viens du Japon", "ジュ ヴィアン デュ ジャポン"], "de-DE": ["Ich komme aus Japan", "イッヒ コメ アウス ヤーパン"], "pt-PT": ["Sou do Japão", "ソウ デ ジャパォン"], 
                 "tr-TR": ["Japonya'dan geliyorum", "ジャポンヤダン ゲリヨルム"], "ko-KR": ["저는 일본에서 왔어요", "チョヌン イルボネソ ワッソヨ"], "zh-CN": ["我来自日本", "ウォー ライズー リーベン"], 
-                "hi-IN": ["मैं जापान से हूँ", "男性：アーヤー フーン / 女性：アーイー フーン"], "th-TH": ["มาจากญี่ปุ่น", "男性：ポム マー / 女性：チャン マー ジャーク イープン"], "sv-SE": ["Jag kommer från Japan", "コンメル フロン ヤーパン"], 
+                "hi-IN": ["Main Japan se hoon", "男性：アーヤー フーン / 女性：アーイー フーン"], "th-TH": ["มาจากญี่ปุ่น", "男性：ポム マー / 女性：チャン マー ジャーク イープン"], "sv-SE": ["Jag kommer från Japan", "コンメル フロン ヤーパン"], 
                 "hr-HR": ["Dolazim iz Japana", "ドラジム イズ ジャパナ"], "no-NO": ["Jeg kommer fra Japan", "コンメル フラ ヤーパン"], "fi-FI": ["Olen kotoisin Japanista", "オレン コトイシン"], "id-ID": ["Saya dari Jepang", "サヤ ダリ ジェパン"] 
             } },
             { id: 8, cat: "profile", jp: "私の名前はサトシです", data: { 
                 "en-US": ["My name is Satoshi", "マイ ネーム イズ サトシ"], "es-ES": ["Me llamo Satoshi", "メ リャモ サトシ"], "it-IT": ["Mi chiamo Satoshi", "ミ キアーモ サトシ"], 
                 "fr-FR": ["Je m appelle Satoshi", "ジュ マペル サトシ"], "de-DE": ["Ich heiße Satoshi", "イッヒ ハイセ サトシ"], "pt-PT": ["Chamo me Satoshi", "シャモ メ サトシ"], 
                 "tr-TR": ["Benim adım Satoshi", "ベニム アドゥム サトシ"], "ko-KR": ["제 이름은 사토시입니다", "チェ イロムン サトシイムニダ"], "zh-CN": ["我叫Satoshi", "ウォー ジァオ サトシ"], 
-                "hi-IN": ["मेरा नाम सातोशी है", "メーラー ナーム サトシ"], "th-TH": ["ผมชื่อซาโตชิ", "ポム チュー サトシ"], "sv-SE": ["Jag heter Satoshi", "ヤーグ ヘーテル サトシ"], 
+                "hi-IN": ["Mera naam Satoshi hai", "メーラー ナーム サトシ"], "th-TH": ["ผมชื่อซาโตชิ", "ポム チュー サトシ"], "sv-SE": ["Jag heter Satoshi", "ヤーグ ヘーテル サトシ"], 
                 "hr-HR": ["Zovem se Satoshi", "ゾヴェム セ サトシ"], "no-NO": ["Jeg heter Satoshi", "イェイ ヘーテル サトシ"], "fi-FI": ["Nimeni on Satoshi", "ニメニ オン サトシ"], "id-ID": ["Nama saya Satoshi", "ナマ サヤ サトシ"] 
             } },
             { id: 9, cat: "profile", jp: "私の名前はヒトミです", data: { 
                 "en-US": ["My name is Hitomi", "マイ ネーム イズ ヒトミ"], "es-ES": ["Me llamo Hitomi", "メ リャモ ヒトミ"], "it-IT": ["Mi chiamo Hitomi", "ミ キアーモ ヒトミ"], 
                 "fr-FR": ["Je m appelle Hitomi", "ジュ マペル ヒトミ"], "de-DE": ["Ich heiße Hitomi", "イッヒ ハイセ ヒトミ"], "pt-PT": ["Chamo me Hitomi", "シャモ メ ヒトミ"], 
-                "tr-TR": ["Benim adım Hitomi", "ベニム アドゥム ヒトミ"], "ko-KR": ["제 이름은 히토미입니다", "チェ イロムン ヒ토미イムニダ"], "zh-CN": ["我叫Hitomi", "ウォー ジァオ ヒトミ"], 
-                "hi-IN": ["मेरा नाम हितomi है", "メーラー ナーム ヒトミ"], "th-TH": ["ดิฉันชื่อฮิโตมิ", "ディチャン チュー ヒトミ"], "sv-SE": ["Jag heter Hitomi", "ヤーグ ヘーテル ヒトミ"], 
+                "tr-TR": ["Benim adım Hitomi", "ベニム アドゥム ヒトミ"], "ko-KR": ["제 이름은 히토미입니다", "チェ イロムン ヒトミイムニダ"], "zh-CN": ["我叫Hitomi", "ウォー ジァオ ヒトミ"], 
+                "hi-IN": ["Mera naam Hitomi hai", "メーラー ナーム ヒトミ"], "th-TH": ["ดิฉันชื่อฮิโตมิ", "ディチャン チュー ヒトミ"], "sv-SE": ["Jag heter Hitomi", "ヤーグ ヘーテル ヒトミ"], 
                 "hr-HR": ["Zovem se Hitomi", "ゾヴェム セ ヒトミ"], "no-NO": ["Jeg heter Hitomi", "イェイ ヘーテル ヒトミ"], "fi-FI": ["Nimeni on Hitomi", "ニメニ オン ヒトミ"], "id-ID": ["Nama saya Hitomi", "ナマ サヤ ヒトミ"] 
             } },
 
@@ -148,73 +148,73 @@
                 "en-US": ["It is delicious", "イット イズ ディリシャス"], "es-ES": ["Está muy rico", "エスタ ムイ リコ"], "it-IT": ["È delizioso", "エ デリツィオーゾ"], 
                 "fr-FR": ["C est delicieux", "セ デリシユー"], "de-DE": ["Es ist lecker", "エス イスト レッカー"], "pt-PT": ["Está delicioso", "エスタ デリシオゾ"], 
                 "tr-TR": ["Çok lezzetli", "チョク レッツェッティ"], "ko-KR": ["맛있어요", "マシッソヨ"], "zh-CN": ["很好吃", "ヘン ハオ チー"], 
-                "hi-IN": ["यह स्वादिष्ट है", "यह स्वादिष्ट है"], "th-TH": ["อร่อยมาก", "アロイ マーク"], "sv-SE": ["Det är gott", "デ アー ゴット"], 
+                "hi-IN": ["Yeh swadisht hai", "イェ スワディシュト ハイ"], "th-TH": ["อร่อยมาก", "アロイ マーク"], "sv-SE": ["Det är gott", "デ アー ゴット"], 
                 "hr-HR": ["Ukusno je", "ウクスノ イェ"], "no-NO": ["Det er godt", "デ エア ゴット"], "fi-FI": ["Hyvää", "ヒュヴァー"], "id-ID": ["Enak sekali", "エナッ スカリ"] 
             } },
             { id: 11, cat: "food", jp: "お会計をお願いします", data: { 
                 "en-US": ["Check, please", "チェック プリーズ"], "es-ES": ["La cuenta, por favor", "ラ クエンタ ポル ファボル"], "it-IT": ["Il conto, per favore", "イル コント ペル ファヴォーレ"], 
                 "fr-FR": ["L addition s il vous plait", "ラディシオン シル ヴ プラエ"], "de-DE": ["Die Rechnung, bitte", "ディー レフヌング ビッテ"], "pt-PT": ["A conta, por favor", "ア コンタ ポル ファボール"], 
                 "tr-TR": ["Hesap lütfen", "ヘサプ リュトフェン"], "ko-KR": ["계산해주세요", "ケサネジュセヨ"], "zh-CN": ["买单", "マイダン"], 
-                "hi-IN": ["बिल कृपया", "ビル クパヤ"], "th-TH": ["เก็บเงินด้วย", "ゲップ ガイン ドゥアイ"], "sv-SE": ["Notan, tack", "ノータン タック"], 
+                "hi-IN": ["Bill kripya", "ビル クリパヤ"], "th-TH": ["เก็บเงินด้วย", "ゲップ ガイン ドゥアイ"], "sv-SE": ["Notan, tack", "ノータン タック"], 
                 "hr-HR": ["Račun, molim", "ラチュン モリム"], "no-NO": ["Regningen, takk", "レイニンゲン タック"], "fi-FI": ["Lasku kiitos", "ラスク キイトス"], "id-ID": ["Tolong minta bon", "トロン ミンタ ボン"] 
             } },
             { id: 12, cat: "greeting", jp: "良い1日を", data: { 
                 "en-US": ["Have a nice day", "ハヴ ア ナイス デー"], "es-ES": ["Que tenga un buen dia", "ケ テンガ ウン ブエン ディア"], "it-IT": ["Buona giornata", "ブオナ ジョルナータ"], 
                 "fr-FR": ["Bonne journee", "ボン ジョルネ"], "de-DE": ["Schönen Tag noch", "ショーネン ターク ノッホ"], "pt-PT": ["Tenha um bom dia", "テニャ ウン ボン ディア"], 
                 "tr-TR": ["İyi günler", "イイ ギュンレル"], "ko-KR": ["좋은 하루 보내세요", "ジョウン ハル ボネセヨ"], "zh-CN": ["祝你有个好的一天", "ジュ ニ ヨウ ゲ ハオ デ ティエン"], 
-                "hi-IN": ["आपका दिन शुभ हो", "アプカ 딘 슈브 ホ"], "th-TH": ["ขอให้เป็นวันที่ดี", "コー ハイ ペン ワン ティ ディー"], "sv-SE": ["Ha en bra dag", "ハー エン ブラ ダーグ"], 
+                "hi-IN": ["Aapka din shubh ho", "アプカ ジン シュブ ホ"], "th-TH": ["ขอให้เป็นวันที่ดี", "コー ハイ ペン ワン ティ ディー"], "sv-SE": ["Ha en bra dag", "ハー エン ブラ ダーグ"], 
                 "hr-HR": ["Ugodan dan", "ウゴダン ダン"], "no-NO": ["Ha en fin dag", "ハー エン フィン ダーグ"], "fi-FI": ["Hyvää päivänjatkoa", "ヒュヴァー パイヴァンジャトコア"], "id-ID": ["Semoga harimu menyenangkan", "スモガ ハリム ムニナンカン"] 
             } },
             { id: 13, cat: "greeting", jp: "すみません（ぶつかって謝る時など）", data: { 
                 "en-US": ["Pardon me / Sorry", "パードン ミー / ソリー"], "es-ES": ["Perdón", "ペルドン"], "it-IT": ["Mi scusi", "ミ スクージ"], 
                 "fr-FR": ["Pardon", "パルドン"], "de-DE": ["Entschuldigung", "エントシュルディグング"], "pt-PT": ["Desculpa", "デスクルパ"], 
                 "tr-TR": ["Pardon", "パルドン"], "ko-KR": ["죄송합니다", "チェソンハムニダ"], "zh-CN": ["对不起", "ドゥイブチ"], 
-                "hi-IN": ["माफ कीजिए", "マフ キジイェ"], "th-TH": ["ขอโทษครับ", "コートーク"], "sv-SE": ["Ursäkta", "ウーシェクタ"], 
+                "hi-IN": ["Maaf kijiye", "マアフ キジイェ"], "th-TH": ["ขอโทษครับ", "コートーク"], "sv-SE": ["Ursäkta", "ウーシェクタ"], 
                 "hr-HR": ["Pardon", "パルドン"], "no-NO": ["Beklager", "ベクラゲル"], "fi-FI": ["Anteeksi", "アンテエクスィ"], "id-ID": ["Maaf", "マアフ"] 
             } },
             { id: 14, cat: "food", jp: "これください", data: { 
                 "en-US": ["This one, please", "ディス ワン プリーズ"], "es-ES": ["Esto, por favor", "エスト ポル ファボル"], "it-IT": ["Questo, per favore", "クエスト ペル ファヴォーレ"], 
                 "fr-FR": ["Ceci s il vous plait", "スシー シル ヴ プラエ"], "de-DE": ["Das bitte", "ダス ビッテ"], "pt-PT": ["Isto, por favor", "イスト ポル ファボール"], 
                 "tr-TR": ["Bunu lütfen", "ブヌ リュトフェン"], "ko-KR": ["이거 주세요", "イゴ ジュセヨ"], "zh-CN": ["我要这个", "ウォ ヤオ ジージェ"], 
-                "hi-IN": ["यह दीजिए", "यह दीजिये"], "th-TH": ["เอาอันนี้", "アオ アンニー"], "sv-SE": ["Den här, tack", "デン ヘール タック"], 
+                "hi-IN": ["Yeh dijiye", "イェ ディジイェ"], "th-TH": ["เอาอันนี้", "アオ アンニー"], "sv-SE": ["Den här, tack", "デン ヘール タック"], 
                 "hr-HR": ["Ovo, molim", "オヴォ モリム"], "no-NO": ["Denne, takk", "デンネ タック"], "fi-FI": ["Tämä kiitos", "タマ キイトス"], "id-ID": ["Tolong ini", "トロン イニ"] 
             } },
             { id: 15, cat: "greeting", jp: "どういたしまして", data: { 
                 "en-US": ["You're welcome", "ユア ウェルカム"], "es-ES": ["De nada", "デ ナダ"], "it-IT": ["Prego", "プレゴ"], 
                 "fr-FR": ["De rien", "ドゥ リヤン"], "de-DE": ["Bitte schön", "ビッテ シェーン"], "pt-PT": ["De nada", "デ ナダ"], 
                 "tr-TR": ["Bir şey değil", "ビル シェイ デイル"], "ko-KR": ["천만에요", "チョンマネヨ"], "zh-CN": ["不客气", "ブー ケチ"], 
-                "hi-IN": ["कोई बात नहीं", "コイ バート ナヒーン"], "th-TH": ["ด้วยความยินดี", "ドゥアイ クワーム インディー"], "sv-SE": ["Ingen orsak", "インゲン オルサーク"], 
+                "hi-IN": ["Koi baat nahi", "コイ バート ナヒーン"], "th-TH": ["ด้วยความยินดี", "ドゥアイ クワーム インディー"], "sv-SE": ["Ingen orsak", "インゲン オルサーク"], 
                 "hr-HR": ["Nema na čemu", "ネマ ナ チェム"], "no-NO": ["Bare hyggelig", "バレ ヒュゲリグ"], "fi-FI": ["Eipä kestä", "エイパ ケスタ"], "id-ID": ["Sama-sama", "サマ サマ"] 
             } },
             { id: 16, cat: "greeting", jp: "こんばんは", data: { 
                 "en-US": ["Good evening", "グッド イブニング"], "es-ES": ["Buenas noches", "ブエナス ノチェス"], "it-IT": ["Buonasera", "ブオナセーラ"], 
                 "fr-FR": ["Bonsoir", "ボンソワール"], "de-DE": ["Guten Abend", "グーテン アーベント"], "pt-PT": ["Boa noite", "ボア ノイト"], 
                 "tr-TR": ["İyi akşamlar", "イイ アクシャムラル"], "ko-KR": ["안녕하세요 (저녁)", "アンニョンハセヨ"], "zh-CN": ["晚上好", "ワンシャン ハオ"], 
-                "hi-IN": ["शुभ संध्या", "शुभ संध्या"], "th-TH": ["สวัสดีตอนเย็น", "サワッディー トーンイェン"], "sv-SE": ["God kväll", "ゴド クヴェッル"], 
+                "hi-IN": ["Shubh sandhya", "シュブ サンドヒャ"], "th-TH": ["สวัสดีตอนเย็น", "サワッディー トーンイェン"], "sv-SE": ["God kväll", "ゴド クヴェッル"], 
                 "hr-HR": ["Dobra večer", "ドブラ ヴェチェル"], "no-NO": ["God kveld", "ゴド クヴェル"], "fi-FI": ["Hyvää iltaa", "ヒュヴァー イルタア"], "id-ID": ["Selamat malam", "スラマッ マラム"] 
             } },
             { id: 17, cat: "food", jp: "お手洗いはどこですか？", data: { 
                 "en-US": ["Where is the restroom?", "ホウェア イズ ザ レストルーム？"], "es-ES": ["¿Dónde está el baño?", "ドンド エスタ エル バニョ？"], "it-IT": ["Dov'è il bagno?", "ドヴェ イル バニョ？"], 
                 "fr-FR": ["Ou sont les toilettes", "ウ ソン レ トワレット？"], "de-DE": ["Wo ist die Toilette?", "ヴォー イスト ディー トワレッテ？"], "pt-PT": ["Onde fica a casa de banho?", "オンド フィカ ア カザ デ バニョ？"], 
-                "tr-TR": ["Tuvalet nerede?", "トゥヴァレット ネレデ？"], "ko-KR": ["화장실이 어디예요?", "ファジャンシリ オディエヨ？"], "zh-CN": ["洗手间在哪里？", "シショウジェン ザイ ナリ？"], "hi-IN": ["शौचालय कहां है?", "शौचालय カハン ハイ？"], "th-TH": ["ห้องน้ำอยู่ที่ไหน", "ホーンナーム ユー ティーナイ"], "sv-SE": ["Var är toaletten?", "ヴァル アー トアレッテン？"], "hr-HR": ["Gdje je toalet?", "グデ ジェ トアレト？"], "no-NO": ["Hvor er toalettet?", "ヴォル アー トアレッテト？"], "fi-FI": ["Missä wc on?", "ミッサ ヴェーシー オン？"], "id-ID": ["Di mana toilet?", "ディ マナ トイレッ？"] 
+                "tr-TR": ["Tuvalet nerede?", "トゥヴァレット ネレデ？"], "ko-KR": ["화장실이 어디예요?", "ファジャンシリ オディエヨ？"], "zh-CN": ["洗手间在哪里？", "シショウジェン ザイ ナリ？"], "hi-IN": ["Shauchalay kahan hai?", "ショウチャライ カハン ハイ？"], "th-TH": ["ห้องน้ำอยู่ที่ไหน", "ホーンナーム ユー ティーナイ"], "sv-SE": ["Var är toaletten?", "ヴァル アー トアレッテン？"], "hr-HR": ["Gdje je toalet?", "グデ ジェ トアレト？"], "no-NO": ["Hvor er toalettet?", "ヴォル アー トアレッテト？"], "fi-FI": ["Missä wc on?", "ミッサ ヴェーシー オン？"], "id-ID": ["Di mana toilet?", "ディ マナ トイレッ？"] 
             } },
             { id: 18, cat: "food", jp: "クレジットカードで払えますか。", data: { 
                 "en-US": ["Can I pay by credit card?", "キャン アイ ペイ バイ クレジット カード？"], "es-ES": ["¿Puedo pagar con tarjeta?", "プエド パガル コン タジェータ？"], "it-IT": ["Posso pagare con carta?", "ポッソ パガーレ コン カルタ？"], 
                 "fr-FR": ["Puis je payer par carte", "ピュイ ジュ ペール パール カルト？"], "de-DE": ["Kann ich mit Karte bezahlen?", "カン イッヒ ミット カルト ベツァーレン？"], "pt-PT": ["Posso pagar com cartão?", "ポッソ パガール コン カルトゥアン？"], 
-                "tr-TR": ["Kredi kartı ile ödeyebilir miyim?", "クレディ カルト イレ オデエビル ミイム？"], "ko-KR": ["신용카드로 결제할 수 있나요?", "シニョンカドロ キョルジェハル ス インナヨ？"], "zh-CN": ["可以用信用卡付款吗？", "ケ イヨン シンヨンカ フクアン マ？"], "hi-IN": ["क्या मैं क्रेडिट कार्ड से भुगतान कर सकता हूँ?", "क्रेडिट कार्ड से भुगतान"], "th-TH": ["จ่ายด้วยบัตรเครดิตได้ไหม", "ジャイ ドゥアイ バット クレディット ダイ マイ"], "sv-SE": ["Kan man betala med kort?", "カン マン ベターラ メド コルト？"], "hr-HR": ["Mogu li platiti karticom?", "モグ リ プラティティ カルティコム？"], "no-NO": ["Kan jeg betale med kort?", "カン イェイ ベターレ メド コルト？"], "fi-FI": ["Voinko maksaa kortilla?", "ヴォインコ マクサー コルティラ？"], "id-ID": ["Bisa bayar pakai kartu kredit?", "ビサ バヤル パカイ カルト クレディット？"] 
+                "tr-TR": ["Kredi kartı ile ödeyebilir miyim?", "クレディ カルト イレ オデエビル ミイム？"], "ko-KR": ["신용카드로 결제할 수 있나요?", "シニョンカドロ キョルジェハル ス インナヨ？"], "zh-CN": ["可以用信用卡付款吗？", "ケ イヨン シンヨンカ フクアン マ？"], "hi-IN": ["Kya main credit card se bhugtan kar sakta hoon?", "キヤ メイン クレジット カード セ ブグタン カル サクタ フーン"], "th-TH": ["จ่ายด้วยบัตรเครดิตได้ไหม", "ジャイ ドゥアイ バット クレディット ダイ マイ"], "sv-SE": ["Kan man betala med kort?", "カン マン ベターラ メド コルト？"], "hr-HR": ["Mogu li platiti karticom?", "モグ リ プラティティ カルティコム？"], "no-NO": ["Kan jeg betale med kort?", "カン イェイ ベターレ メド コルト？"], "fi-FI": ["Voinko maksaa kortilla?", "ヴォインコ マクサー コルティラ？"], "id-ID": ["Bisa bayar pakai kartu kredit?", "ビサ バヤル パカイ カルト クレディット？"] 
             } },
             { id: 19, cat: "greeting", jp: "わかりません", data: { 
                 "en-US": ["I don't understand", "アイ ドント アンダースタンド"], "es-ES": ["No entiendo", "ノ エンティエンド"], "it-IT": ["Non capisco", "ノン カピスコ"], 
                 "fr-FR": ["Je ne comprends pas", "ジュ ヌ コンプラン パ"], "de-DE": ["Ich verstehe nicht", "イッヒ フェアシュテー ニヒト"], "pt-PT": ["Não percebo", "ナウン ペルセボ"], 
                 "tr-TR": ["Anlamıyorum", "アンラミヨルム"], "ko-KR": ["모르겠습니다", "モルゲッスムニダ"], "zh-CN": ["我不懂", "ウォ ブ ドン"], 
-                "hi-IN": ["मैं नहीं समझता", "メイン ナヒーン サムジャタ"], "th-TH": ["ไม่เข้าใจ", "マイ カオジャイ"], "sv-SE": ["Jag förstår inte", "ヤーグ フォーストール インテ"], 
+                "hi-IN": ["Main nahi samajhta hoon", "メイン ナヒーン サムジャタ フーン"], "th-TH": ["ไม่เข้าใจ", "マイ カオジャイ"], "sv-SE": ["Jag förstår inte", "ヤーグ フォーストール インテ"], 
                 "hr-HR": ["Ne razumijem", "ネ ラズミイェム"], "no-NO": ["Jeg forstår ikke", "イェイ フォーストール イッケ"], "fi-FI": ["En ymmärrä", "エン ユンメラ"], "id-ID": ["Saya tidak mengerti", "サヤ ティダック ムンゲルティ"] 
             } },
             { id: 20, cat: "greeting", jp: "わかりました", data: { 
                 "en-US": ["I understand", "アイ アンダースタンド"], "es-ES": ["Entendido", "エンテンディド"], "it-IT": ["Ho capito", "オ カピート"], 
                 "fr-FR": ["J ai compris", "ジ コンプリ"], "de-DE": ["Ich verstehe", "イッヒ フェアシュテー"], "pt-PT": ["Percebi", "ペルセビ"], 
                 "tr-TR": ["Anladım", "アンラドゥム"], "ko-KR": ["알겠습니다", "アルゲッスムニダ"], "zh-CN": ["明白了", "ミンバイラ"], 
-                "hi-IN": ["मैं समझ गया", "メイン サムジャ ゲヤ"], "th-TH": ["เข้าใจแล้ว", "カオジャイ レオウ"], "sv-SE": ["Jag förstår", "ヤーグ フォーストール"], 
+                "hi-IN": ["Main samaj gaya hoon", "メイン サムジャ ゲヤ フーン"], "th-TH": ["เข้าใจแล้ว", "カオジャイ レオウ"], "sv-SE": ["Jag förstår", "ヤーグ フォーストール"], 
                 "hr-HR": ["Razumijem", "ラズミイェム"], "no-NO": ["Jeg forstår", "イェイ フォーストール"], "fi-FI": ["Ymmärrän", "ユンメラン"], "id-ID": ["Saya mengerti", "サヤ ムンゲルティ"] 
             } },
 
@@ -223,84 +223,84 @@
                 "en-US": ["One", "ワン"], "es-ES": ["Uno", "ウノ"], "it-IT": ["Uno", "ウノ"], 
                 "fr-FR": ["Un", "アン"], "de-DE": ["Eins", "アインス"], "pt-PT": ["Um", "ウン"], 
                 "tr-TR": ["Bir", "ビル"], "ko-KR": ["일", "イル"], "zh-CN": ["一", "イー"], 
-                "hi-IN": ["एक", "エーク"], "th-TH": ["หนึ่ง", "ヌング"], "sv-SE": ["En", "エーン"], 
+                "hi-IN": ["Ek", "エーク"], "th-TH": ["หนึ่ง", "ヌング"], "sv-SE": ["En", "エーン"], 
                 "hr-HR": ["Jedan", "イェダン"], "no-NO": ["En", "エン"], "fi-FI": ["Yksi", "ユクシ"], "id-ID": ["Satu", "サトゥ"] 
             } },
             { id: 22, cat: "number", jp: "2", data: { 
                 "en-US": ["Two", "トゥー"], "es-ES": ["Dos", "ドス"], "it-IT": ["Due", "ドゥーエ"], 
                 "fr-FR": ["Deux", "ドゥー"], "de-DE": ["Zwei", "ツヴァイ"], "pt-PT": ["Dois", "ドイス"], 
                 "tr-TR": ["İki", "イキ"], "ko-KR": ["이", "イ"], "zh-CN": ["二", "アル"], 
-                "hi-IN": ["दो", "ドー"], "th-TH": ["สอง", "ソング"], "sv-SE": ["Två", "トヴォー"], 
+                "hi-IN": ["Do", "ドー"], "th-TH": ["สอง", "ソング"], "sv-SE": ["Två", "トヴォー"], 
                 "hr-HR": ["Dva", "ドヴァ"], "no-NO": ["To", "トゥー"], "fi-FI": ["Kaksi", "カクシ"], "id-ID": ["Dua", "ドゥア"] 
             } },
             { id: 23, cat: "number", jp: "3", data: { 
                 "en-US": ["Three", "スリー"], "es-ES": ["Tres", "トレス"], "it-IT": ["Tre", "トレ"], 
                 "fr-FR": ["Trois", "トロワ"], "de-DE": ["Drei", "ドライ"], "pt-PT": ["Três", "トレシュ"], 
                 "tr-TR": ["Üç", "ウチュ"], "ko-KR": ["삼", "サム"], "zh-CN": ["三", "サン"], 
-                "hi-IN": ["तीन", "ティーン"], "th-TH": ["สาม", "サーム"], "sv-SE": ["Tre", "トレ"], 
+                "hi-IN": ["Teen", "ティーン"], "th-TH": ["สาม", "サーム"], "sv-SE": ["Tre", "トレ"], 
                 "hr-HR": ["Tri", "トリ"], "no-NO": ["Tre", "トレ"], "fi-FI": ["Kolme", "コルメ"], "id-ID": ["Tiga", "ティガ"] 
             } },
             { id: 24, cat: "number", jp: "4", data: { 
                 "en-US": ["Four", "フォー"], "es-ES": ["Cuatro", "クアトロ"], "it-IT": ["Quattro", "クアトロ"], 
                 "fr-FR": ["Quatre", "カトル"], "de-DE": ["Vier", "フィア"], "pt-PT": ["Quatro", "クアトロ"], 
                 "tr-TR": ["Dört", "ドルト"], "ko-KR": ["사", "サ"], "zh-CN": ["四", "スー"], 
-                "hi-IN": ["चार", "チャール"], "th-TH": ["สี่", "シー"], "sv-SE": ["Fyra", "フュラ"], 
+                "hi-IN": ["Chaar", "チャール"], "th-TH": ["สี่", "シー"], "sv-SE": ["Fyra", "フュラ"], 
                 "hr-HR": ["Četiri", "チェティリ"], "no-NO": ["Fire", "フィレ"], "fi-FI": ["Neljä", "ネルヤ"], "id-ID": ["Empat", "エムパット"] 
             } },
             { id: 25, cat: "number", jp: "5", data: { 
                 "en-US": ["Five", "ファイブ"], "es-ES": ["Cinco", "シンコ"], "it-IT": ["Cinque", "チンクウェ"], 
                 "fr-FR": ["Cinq", "サンク"], "de-DE": ["Fünf", "フュンフ"], "pt-PT": ["Cinco", "シンコ"], 
                 "tr-TR": ["Beş", "ベシュ"], "ko-KR": ["오", "オ"], "zh-CN": ["五", "ウー"], 
-                "hi-IN": ["पाँच", "పాंच"], "th-TH": ["ห้า", "ハー"], "sv-SE": ["Fem", "フェム"], 
+                "hi-IN": ["Paanch", "パンチ"], "th-TH": ["ห้า", "ハー"], "sv-SE": ["Fem", "フェム"], 
                 "hr-HR": ["Pet", "ペット"], "no-NO": ["Fem", "フェム"], "fi-FI": ["Viisi", "ヴィーシ"], "id-ID": ["Lima", "リマ"] 
             } },
             { id: 26, cat: "number", jp: "6", data: { 
                 "en-US": ["Six", "シックス"], "es-ES": ["Seis", "セイス"], "it-IT": ["Sei", "セイ"], 
                 "fr-FR": ["Six", "シス"], "de-DE": ["Sechs", "ゼックス"], "pt-PT": ["Seis", "セイス"], 
                 "tr-TR": ["Altı", "アルトゥ"], "ko-KR": ["육", "ユク"], "zh-CN": ["六", "リウ"], 
-                "hi-IN": ["छह", "छह"], "th-TH": ["หก", "ホク"], "sv-SE": ["Sex", "セックス"], 
+                "hi-IN": ["Chhah", "チャハ"], "th-TH": ["หก", "ホク"], "sv-SE": ["Sex", "セックス"], 
                 "hr-HR": ["Šest", "シェスト"], "no-NO": ["Seks", "セックス"], "fi-FI": ["Kuusi", "クーシ"], "id-ID": ["Enam", "エナム"] 
             } },
             { id: 27, cat: "number", jp: "7", data: { 
                 "en-US": ["Seven", "セブン"], "es-ES": ["Siete", "シエテ"], "it-IT": ["Sette", "セットー"], 
                 "fr-FR": ["Sept", "セット"], "de-DE": ["Sieben", "ズィーベン"], "pt-PT": ["Sete", "セチ"], 
                 "tr-TR": ["Yedi", "イェディ"], "ko-KR": ["칠", "チル"], "zh-CN": ["七", "チー"], 
-                "hi-IN": ["सात", "सात"], "th-TH": ["เจ็ด", "ジェット"], "sv-SE": ["Sju", "シュー"], 
+                "hi-IN": ["Saat", "サート"], "th-TH": ["เจ็ด", "ジェット"], "sv-SE": ["Sju", "シュー"], 
                 "hr-HR": ["Sedam", "セダム"], "no-NO": ["Sju", "シュー"], "fi-FI": ["Seitsemän", "セイツェマン"], "id-ID": ["Tujuh", "トゥジュｈ"] 
             } },
             { id: 28, cat: "number", jp: "8", data: { 
                 "en-US": ["Eight", "エイト"], "es-ES": ["Ocho", "オチョ"], "it-IT": ["Otto", "オットー"], 
                 "fr-FR": ["Huit", "ユイット"], "de-DE": ["Acht", "アハト"], "pt-PT": ["Oito", "オイト"], 
                 "tr-TR": ["Sekiz", "セキズ"], "ko-KR": ["팔", "パル"], "zh-CN": ["八", "パー"], 
-                "hi-IN": ["आठ", "आठ"], "th-TH": ["แปด", "パエト"], "sv-SE": ["Åtta", "オッタ"], 
+                "hi-IN": ["Aath", "アート"], "th-TH": ["แปด", "パエト"], "sv-SE": ["Åtta", "オッタ"], 
                 "hr-HR": ["Osam", "オサム"], "no-NO": ["Åtte", "オッテ"], "fi-FI": ["Kahdeksan", "カフデサン"], "id-ID": ["Delapan", "デラパン"] 
             } },
             { id: 29, cat: "number", jp: "9", data: { 
                 "en-US": ["Nine", "ナイン"], "es-ES": ["Nueve", "ヌエベ"], "it-IT": ["Nove", "ノーヴェ"], 
                 "fr-FR": ["Neuf", "ヌフ"], "de-DE": ["Neun", "ノイン"], "pt-PT": ["Nove", "ノヴィ"], 
                 "tr-TR": ["Dokuz", "ドクズ"], "ko-KR": ["구", "ク"], "zh-CN": ["九", "ジウ"], 
-                "hi-IN": ["नौ", "नौ"], "th-TH": ["เก้า", "ガオ"], "sv-SE": ["Nio", "ニオ"], 
+                "hi-IN": ["Nau", "ナウ"], "th-TH": ["เก้า", "ガオ"], "sv-SE": ["Nio", "ニオ"], 
                 "hr-HR": ["Devet", "デヴェト"], "no-NO": ["Ni", "ニ"], "fi-FI": ["Yhdeksän", "ユフデサン"], "id-ID": ["Sembilan", "スンビラン"] 
             } },
             { id: 30, cat: "number", jp: "10", data: { 
                 "en-US": ["Ten", "テン"], "es-ES": ["Diez", "ディエス"], "it-IT": ["Dieci", "ディエチ"], 
                 "fr-FR": ["Dix", "ディス"], "de-DE": ["Zehn", "ツェーン"], "pt-PT": ["Dez", "デズ"], 
                 "tr-TR": ["On", "オン"], "ko-KR": ["십", "シプ"], "zh-CN": ["十", "シー"], 
-                "hi-IN": ["दस", "दस"], "th-TH": ["สิบ", "シップ"], "sv-SE": ["Tio", "ティオ"], 
+                "hi-IN": ["Das", "ダス"], "th-TH": ["สิบ", "シップ"], "sv-SE": ["Tio", "ティオ"], 
                 "hr-HR": ["Deset", "デセット"], "no-NO": ["Ti", "ティ"], "fi-FI": ["Kymmenen", "キュンメネン"], "id-ID": ["Sepuluh", "セプルヒ"] 
             } },
             { id: 31, cat: "number", jp: "100", data: { 
                 "en-US": ["One hundred", "ワン ハンドレッド"], "es-ES": ["Cien", "シエン"], "it-IT": ["Cento", "チェント"], 
                 "fr-FR": ["Cent", "サン"], "de-DE": ["Hundert", "フンダールト"], "pt-PT": ["Cem", "セン"], 
                 "tr-TR": ["Yüz", "ユズ"], "ko-KR": ["백", "ペク"], "zh-CN": ["一百", "イーバイ"], 
-                "hi-IN": ["सौ", "सौ"], "th-TH": ["หนึ่งร้อย", "ヌング ロイ"], "sv-SE": ["Hundra", "フンドラ"], 
+                "hi-IN": ["Sau", "サウ"], "th-TH": ["หนึ่งร้อย", "ヌング ロイ"], "sv-SE": ["Hundra", "フンドラ"], 
                 "hr-HR": ["Sto", "スト"], "no-NO": ["Hundre", "フンドレ"], "fi-FI": ["Sata", "サタ"], "id-ID": ["Seratus", "セラトゥス"] 
             } },
             { id: 32, cat: "number", jp: "1000", data: { 
                 "en-US": ["One thousand", "ワン サウザンド"], "es-ES": ["Mil", "ミル"], "it-IT": ["Mille", "ミッレ"], 
                 "fr-FR": ["Mille", "ミル"], "de-DE": ["Tausend", "タウゼント"], "pt-PT": ["Mil", "ミル"], 
                 "tr-TR": ["Bin", "ビン"], "ko-KR": ["천", "チョン"], "zh-CN": ["一千", "イーチエン"], 
-                "hi-IN": ["एक हजार", "एक हजार"], "th-TH": ["หนึ่งพัน", "ヌング パン"], "sv-SE": ["Tusen", "トゥーセン"], 
+                "hi-IN": ["Ek hazaar", "エーク ハザール"], "th-TH": ["หนึ่งพัน", "ヌング パン"], "sv-SE": ["Tusen", "トゥーセン"], 
                 "hr-HR": ["Tisuću", "ティスチュ"], "no-NO": ["Tusen", "トゥーセン"], "fi-FI": ["Tuhat", "トゥハト"], "id-ID": ["Seribu", "セリブ"] 
             } },
 
@@ -309,56 +309,56 @@
                 "en-US": ["Meal / Food", "ミール / フード"], "es-ES": ["Comida", "コミダ"], "it-IT": ["Pasto", "パスト"], 
                 "fr-FR": ["Repas", "ルパ"], "de-DE": ["Essen", "エスセン"], "pt-PT": ["Refeição", "レフェイサン"], 
                 "tr-TR": ["Yemek", "イェメク"], "ko-KR": ["식사", "シクサ"], "zh-CN": ["吃饭", "チファン"], 
-                "hi-IN": ["खाना", "खाना"], "th-TH": ["อาหาร", "アーハーン"], "sv-SE": ["Mat", "マト"], 
+                "hi-IN": ["Khana", "カーナ"], "th-TH": ["อาหาร", "アーハーン"], "sv-SE": ["Mat", "マト"], 
                 "hr-HR": ["Obrok", "オブロク"], "no-NO": ["Mat", "マト"], "fi-FI": ["Ateria", "アテリア"], "id-ID": ["Makanan", "マカナン"] 
             } },
             { id: 34, cat: "word", jp: "空港", data: { 
                 "en-US": ["Airport", "エアポート"], "es-ES": ["Aeropuerto", "エアプエルト"], "it-IT": ["Aeroporto", "アエロポルト"], 
                 "fr-FR": ["Aeroport", "エアポール"], "de-DE": ["Flughafen", "フルークハーフェン"], "pt-PT": ["Aeroporto", "アエロポルト"], 
                 "tr-TR": ["Havalimanı", "ハヴァリマヌ"], "ko-KR": ["공항", "コンハン"], "zh-CN": ["机场", "ジチャン"], 
-                "hi-IN": ["हवाई अड्डा", "हवाई अड्डा"], "th-TH": ["สนามบิน", "サナームビン"], "sv-SE": ["Flygplats", "フリュグプラツ"], 
+                "hi-IN": ["Hawai adda", "ハワイ アッダ"], "th-TH": ["สนามบิน", "サナームビン"], "sv-SE": ["Flygplats", "フリュグプラツ"], 
                 "hr-HR": ["Zračna luka", "ズラチュナ ルカ"], "no-NO": ["Flyplass", "フリュプラス"], "fi-FI": ["Lentokenttä", "レントケンタト"], "id-ID": ["Bandara", "バンドラ"] 
             } },
             { id: 35, cat: "word", jp: "ホテル", data: { 
                 "en-US": ["Hotel", "ホテル"], "es-ES": ["Hotel", "ホテル"], "it-IT": ["Hotel", "ホテル"], 
                 "fr-FR": ["Hotel", "オテル"], "de-DE": ["Hotel", "ホテル"], "pt-PT": ["Hotel", "ホテル"], 
                 "tr-TR": ["Otel", "オテル"], "ko-KR": ["호텔", "ホテル"], "zh-CN": ["酒店", "ジウディアン"], 
-                "hi-IN": ["होटल", "होटल"], "th-TH": ["โรงแรม", "ロンプラム"], "sv-SE": ["Hotell", "ホテル"], 
+                "hi-IN": ["Hotel", "ホテル"], "th-TH": ["โรงแรม", "ロンプラム"], "sv-SE": ["Hotell", "ホテル"], 
                 "hr-HR": ["Hotel", "ホテル"], "no-NO": ["Hotell", "ホテル"], "fi-FI": ["Hotelli", "ホテリ"], "id-ID": ["Hotel", "ホテル"] 
             } },
             { id: 36, cat: "word", jp: "駅", data: { 
                 "en-US": ["Station", "ステーション"], "es-ES": ["Estación", "エストラシオン"], "it-IT": ["Stazione", "スタツィオーネ"], 
                 "fr-FR": ["Gare", "ガール"], "de-DE": ["Bahnhof", "バーンホーフ"], "pt-PT": ["Estação", "エスタソン"], 
                 "tr-TR": ["İstasyon", "イスタション"], "ko-KR": ["역", "ヨク"], "zh-CN": ["车站", "チェジャン"], 
-                "hi-IN": ["स्टेशन", "स्टेशन"], "th-TH": ["สถานี", "サターニー"], "sv-SE": ["Station", "スターション"], 
+                "hi-IN": ["Station", "ステーション"], "th-TH": ["สถานี", "サターニー"], "sv-SE": ["Station", "スターション"], 
                 "hr-HR": ["Kolodvor", "コロドヴォル"], "no-NO": ["Stasjon", "スタション"], "fi-FI": ["Asema", "アセマ"], "id-ID": ["Stasiun", "スタシウン"] 
             } },
             { id: 37, cat: "word", jp: "レストラン", data: { 
                 "en-US": ["Restaurant", "レストラン"], "es-ES": ["Restaurante", "レストランテ"], "it-IT": ["Ristorante", "リストランテ"], 
                 "fr-FR": ["Restaurant", "レストラン"], "de-DE": ["Restaurant", "レストラン"], "pt-PT": ["Restaurante", "レストランテ"], 
                 "tr-TR": ["Restoran", "レストラン"], "ko-KR": ["식당", "シクダン"], "zh-CN": ["餐厅", "ツァンティン"], 
-                "hi-IN": ["रेस्तरां", "रेस्तरां"], "th-TH": ["ร้านอาหาร", "ラーン アーハーン"], "sv-SE": ["Restaurang", "レストラン"], 
+                "hi-IN": ["Restoran", "レストラン"], "th-TH": ["ร้านอาหาร", "ラーン アーハーン"], "sv-SE": ["Restaurang", "レストラン"], 
                 "hr-HR": ["Restoran", "レストラン"], "no-NO": ["Restaurant", "レストラン"], "fi-FI": ["Ravintola", "ラヴィントラ"], "id-ID": ["Restoran", "レストラン"] 
             } },
             { id: 38, cat: "word", jp: "メニュー", data: { 
                 "en-US": ["Menu", "メニュー"], "es-ES": ["Menú", "メヌ"], "it-IT": ["Menu", "メヌ"], 
                 "fr-FR": ["Menu", "メニュ"], "de-DE": ["Speisekarte", "シュパイゼカルテ"], "pt-PT": ["Menu", "メヌ"], 
                 "tr-TR": ["Menü", "メニュ"], "ko-KR": ["메뉴", "メニュー"], "zh-CN": ["菜单", "ツァイダン"], 
-                "hi-IN": ["मेनू", "मेनू"], "th-TH": ["เมนู", "メヌー"], "sv-SE": ["Meny", "メニュ"], 
+                "hi-IN": ["Menu", "メニュー"], "th-TH": ["เมนู", "メヌー"], "sv-SE": ["Meny", "メニュ"], 
                 "hr-HR": ["Jelovnik", "イェロヴニク"], "no-NO": ["Meny", "メニュ"], "fi-FI": ["Ruokalista", "ルオカリスッタ"], "id-ID": ["Menu", "メニュー"] 
             } },
             { id: 39, cat: "word", jp: "トイレ", data: { 
                 "en-US": ["Toilet / Restroom", "トワレ / レストルーム"], "es-ES": ["Baño", "バニョ"], "it-IT": ["Bagno", "バニョ"], 
                 "fr-FR": ["Toilettes", "トワレット"], "de-DE": ["Toilette", "トワレッテ"], "pt-PT": ["Casa de banho", "カザ デ バニョ"], 
                 "tr-TR": ["Tuvalet", "トゥヴァレット"], "ko-KR": ["화장실", "ファジャンシル"], "zh-CN": ["洗手间", "シショウジェン"], 
-                "hi-IN": ["शौचालय", "शौचालय"], "th-TH": ["ห้องน้ำ", "ホーンナーム"], "sv-SE": ["Toalett", "トアレト"], 
+                "hi-IN": ["Shauchalay", "ショウチャライ"], "th-TH": ["ห้องน้ำ", "ホーンナーム"], "sv-SE": ["Toalett", "トアレト"], 
                 "hr-HR": ["Toalet", "トアレト"], "no-NO": ["Toalett", "トアレト"], "fi-FI": ["Vessa", "ヴェッサ"], "id-ID": ["Toilet", "トイレ"] 
             } },
             { id: 40, cat: "word", jp: "電車", data: { 
                 "en-US": ["Train", "トレイン"], "es-ES": ["Tren", "トレイン"], "it-IT": ["Treno", "トレノ"], 
                 "fr-FR": ["Train", "トラン"], "de-DE": ["Zug", "ツーク"], "pt-PT": ["Comboio", "コンボイオ"], 
                 "tr-TR": ["Tren", "トレン"], "ko-KR": ["기차", "キチャ"], "zh-CN": ["火车", "ホウチェ"], 
-                "hi-IN": ["ट्रेन", "ट्रेन"], "th-TH": ["รถไฟ", "ロトファイ"], "sv-SE": ["Tåg", "トーグ"], 
+                "hi-IN": ["Train", "トレイン"], "th-TH": ["รถไฟ", "ロトファイ"], "sv-SE": ["Tåg", "トーグ"], 
                 "hr-HR": ["Vlak", "ヴラク"], "no-NO": ["Tog", "トグ"], "fi-FI": ["Juna", "ユナ"], "id-ID": ["Kereta", "クレタ"] 
             } }
         ];
@@ -490,7 +490,7 @@
                                 <button class="flag-btn" title="クロアチア語" onclick="speak('${foundItem.data['hr-HR'][0]}', '${foundItem.data['hr-HR'][1]}', 'hr-HR')">🇭🇷</button>
                                 <button class="flag-btn" title="ノルウェー語" onclick="speak('${foundItem.data['no-NO'][0]}', '${foundItem.data['no-NO'][1]}', 'no-NO')">🇳🇴</button>
                                 <button class="flag-btn" title="フィンランド語" onclick="speak('${foundItem.data['fi-FI'][0]}', '${foundItem.data['fi-FI'][1]}', 'fi-FI')">🇫🇮</button>
-                                <button class="flag-btn" title="インドネシア語" onclick="speak('${foundItem.data['id-ID'][0]}', '${foundItem.data['id-ID'][1]}', 'id-ID')">🇮🇩</button>
+                                <button class="flag-btn" title="インドネシア語" onclick="speak('${foundItem.data['id-ID'][0]}', '${foundItem.data['id-ID'][1]}', 'id-ID')">🇮🇩</label>
                             </div>
                         </div>
                     `;
